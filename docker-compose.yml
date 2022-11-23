@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  mysqldb:
+    image: mysql/mysql-server:latest
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+    container_name: mysql_patient
+    restart: always
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DB: db_patient
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+
+  patient:
+    depends_on:
+      - mysqldb
+    image: ms_patient-0.0.1
+    ports:
+      - "8081:8081"
+    container_name: ms_patient
+#    restart: always
+    build:
+      context: ./ms_patient
+    links:
+      - mysqldb
+
+
+
