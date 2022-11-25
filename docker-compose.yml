@@ -1,32 +1,38 @@
-version: '3'
-
-services:
-  mysqldb:
-    image: mysql/mysql-server:latest
-    ports:
-      - "3307:3306"
-    volumes:
-      - ./data:/var/lib/mysql
-    container_name: mysql_patient
-    restart: always
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_DB: db_patient
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-
-  patient:
-    depends_on:
-      - mysqldb
-    image: ms_patient-0.0.1
-    ports:
-      - "8081:8081"
-    container_name: ms_patient
-#    restart: always
-    build:
-      context: ./ms_patient
-    links:
-      - mysqldb
-
-
-
+#version: '3'
+#
+#services:
+#  mysqldb:
+#    image: mysql/mysql-server:latest
+#    ports:
+#      - "3308:3306"
+#    volumes:
+#      - ./data:/var/lib/mysql
+#    container_name: mysql_patient
+##    restart: always
+#    environment:
+#      MYSQL_HOST: mysqldbpatient
+#      MYSQL_DB: patientdb
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD: root
+#
+#  patient:
+#    depends_on:
+#      - mysqldb
+#    image: ms_patient-0.0.1
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldbpatient/patientdb
+#      SPRING_DATASOURCE_USERNAME: root
+#      SPRING_DATASOURCE_PASSWORD: root
+#      SPRING_DATABASE_PORT: 3306
+#    ports:
+#      - "8081:8081"
+#    container_name: ms_patient
+##    restart: always
+#    build:
+#      context: ms_patient
+#      dockerfile: Dockerfile
+#    links:
+#      - mysqldb
+#
+#
+#

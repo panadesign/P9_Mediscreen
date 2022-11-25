@@ -1,9 +1,11 @@
 package com.mediScreen.ms_patient.service;
 
-import com.mediScreen.ms_patient.web.dao.PatientDao;
-import com.mediScreen.ms_patient.web.model.Patient;
+import com.mediScreen.ms_patient.dao.PatientDao;
+import com.mediScreen.ms_patient.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PatientService {
