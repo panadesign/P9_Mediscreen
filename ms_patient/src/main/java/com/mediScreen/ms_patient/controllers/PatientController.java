@@ -13,8 +13,8 @@ public class PatientController {
     PatientService patientService;
 
     @GetMapping("/patients")
-        public Iterable<Patient> allPatients() {
-            return patientService.getPatients();
-        }
+    public Iterable<Patient> allPatients() {
+        return patientService.getPatients();
+    }
 
 }
