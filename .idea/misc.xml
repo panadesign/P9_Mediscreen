@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/ms_patient/pom.xml" />
+        <option value="$PROJECT_DIR$/ms_clientui/pom.xml" />
       </list>
     </option>
   </component>
