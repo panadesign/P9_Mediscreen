@@ -11,9 +11,9 @@ import java.util.List;
 public class PatientService {
 
     @Autowired
-    PatientDao patientDao;
+    private PatientDao patientDao;
 
-    public Iterable<Patient> getPatients() {
+    public List<Patient> getPatients() {
         return patientDao.findAll();
     }
 

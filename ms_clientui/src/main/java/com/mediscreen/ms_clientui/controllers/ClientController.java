@@ -5,7 +5,6 @@ import com.mediscreen.ms_clientui.proxies.MicroServicePatientProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class ClientController {
 
     @RequestMapping("/")
     public String accueil(Model model) {
-        Iterable<PatientBean> patients = microServicePatientProxy.allPatients();
+        List<PatientBean> patients = microServicePatientProxy.allPatients();
         model.addAttribute("patients", patients);
         return "accueil";
     }
