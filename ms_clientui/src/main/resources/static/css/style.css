@@ -3,3 +3,16 @@
     padding: 20px;
     margin : 10px 10px 0 0;
 }
+
+header ul {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+header ul li {
+    padding: 20px;
+    background-color: #e9ecef;
+    text-decoration: none;
+    display: inline-block;
+}

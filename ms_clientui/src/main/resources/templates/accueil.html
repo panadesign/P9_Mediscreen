@@ -8,17 +8,27 @@
 <body>
 
 <div class="container">
-    <h1>Application MediScreen</h1>
+    <header>
+        <ul>
+            <li>
+                <a href="/patients">Liste des patients</a>
+            </li>
+            <li>
+                <a href="/patients/add">Ajouter un patient</a>
+            </li>
+        </ul>
+    </header>
+    <h1>Mediscreen</h1>
     <div class="row">
-        <div th:each="patient : ${patients}" class="col-md-4 my-1 blocPatient">
+        <div th:each="patient : ${patients}" class="col-md-12 my-1 blocPatient">
             <div class="patient">
                 <p>
-                    <strong>Family: </strong>
-                    <span th:text="${patient.family}"></span>
+                    <strong>Lastname: </strong>
+                    <span th:text="${patient.lastname}"></span>
                 </p>
                 <p>
-                    <strong>Given: </strong>
-                    <span th:text="${patient.given}"></span>
+                    <strong>Firstname: </strong>
+                    <span th:text="${patient.firstname}"></span>
                 </p>
                 <p>
                     <strong>Birthdate: </strong>
@@ -36,6 +46,7 @@
                     <strong>Phone number</strong>
                     <span th:text="${patient.phone}"></span>
                 </p>
+                <a th:href="@{/patients/update/{id}(id=${patient.getId})}" th:method="get" class="btn btn-primary">Mettre à jour</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <title>Mediscreen | Mise à jour</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.2.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+
+<div class="container">
+    <h1>Fiche patient</h1>
+    <div class="row">
+        <div class="row">
+            <form action="#" th:action="@{/patients/update/{id}(id=${patient.getId})}" th:object="${patient}" method="post" class="form-horizontal" style="width: 100%">
+                <label for="patientLastname">
+                    <input id="patientLastname" class="form-control" th:field="*{lastname}" type="text" name="lastname" placeholder="Patient's lastname">
+                </label>
+                <label for="patientFirstname">
+                    <input id="patientFirstname" class="form-control" th:field="*{firstname}" type="text" name="firstname" placeholder="Patient's firstname">
+                </label>
+                <label for="patientBirthDate">
+                    <input id="patientBirthDate" class="form-control" th:field="*{birth}" type="text" name="birth" placeholder="Patient's birthdate">
+                </label>
+                <label for="patientGender">
+                    <input id="patientGender" class="form-control" th:field="*{gender}" type="text" name="gender" placeholder="Patient's gender">
+                </label>
+                <label for="patientAddress">
+                    <input id="patientAddress" class="form-control" th:field="*{address}" type="text" name="address" placeholder="Patient's address">
+                </label>
+                <label for="patientPhone">
+                    <input id="patientPhone" class="form-control" th:field="*{phone}" type="text" name="phone" placeholder="Patient's phone">
+                </label>
+                <button class="btn btn-danger" type="submit" value="Cancel"><a th:href="@{/patients/}" th:method="get">Annuler</a></button>
+                <button class="btn btn-primary" type="submit" value="Update">>Mettre à jour</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="webjars/bootstrap/5.2.2/js/bootstrap.min.js"></script>
+</body>
+</html>
