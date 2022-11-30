@@ -13,23 +13,26 @@ import java.util.Optional;
 @RestController
 public class PatientController {
 
+    private final PatientService patientService;
     private final PatientDao patientDao;
-    public PatientController(PatientDao patientDao) {
+    public PatientController(PatientService patientService, PatientDao patientDao) {
+        this.patientService = patientService;
         this.patientDao = patientDao;
     }
 
+    @GetMapping("/")
+    public String accueil() {
+        return "accueil";
+    }
+
     @GetMapping("/patients")
+    @ResponseBody
     public List<Patient> allPatients() {
-        return patientDao.findAll();
+        return patientService.getPatients();
     }
 
-    @GetMapping("/patients/{lastname}")
-    public List<Patient> patientsByLastname(@PathVariable("lastname") String lastname) {
-        return patientDao.findByLastname(lastname);
-    }
-
-    @GetMapping("/patients/update/{id}")
-    public Optional<Patient> updateFormPatient(@PathVariable("id") Integer id) {
+    @GetMapping("patients/{id}/edit")
+    public Optional<Patient> updateFormPatient(@RequestParam("id") Integer id) {
         return patientDao.findById(id);
     }
 }

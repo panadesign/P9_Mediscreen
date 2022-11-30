@@ -19,37 +19,6 @@
         </ul>
     </header>
     <h1>Mediscreen</h1>
-    <div class="row">
-        <div th:each="patient : ${patients}" class="col-md-12 my-1 blocPatient">
-            <div class="patient">
-                <p>
-                    <strong>Lastname: </strong>
-                    <span th:text="${patient.lastname}"></span>
-                </p>
-                <p>
-                    <strong>Firstname: </strong>
-                    <span th:text="${patient.firstname}"></span>
-                </p>
-                <p>
-                    <strong>Birthdate: </strong>
-                    <span th:text="${patient.birth}"></span>
-                </p>
-                <p>
-                    <strong>Gender: </strong>
-                    <span th:text="${patient.gender}"></span>
-                </p>
-                <p>
-                    <strong>Address</strong>
-                    <span th:text="${patient.address}"></span>
-                </p>
-                <p>
-                    <strong>Phone number</strong>
-                    <span th:text="${patient.phone}"></span>
-                </p>
-                <a th:href="@{/patients/update/{id}(id=${patient.getId})}" th:method="get" class="btn btn-primary">Mettre à jour</a>
-            </div>
-        </div>
-    </div>
 </div>
 <script type="text/javascript" src="webjars/bootstrap/5.2.2/js/bootstrap.min.js"></script>
 </body>

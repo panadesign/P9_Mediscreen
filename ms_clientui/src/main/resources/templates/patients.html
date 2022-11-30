@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"><head>
     <meta charset="UTF-8">
-    <title>Mediscreen | Liste des patients</title>
+    <title>Mediscreen</title>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.2.2/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
@@ -18,7 +18,7 @@
             </li>
         </ul>
     </header>
-    <h1>Fiche patient</h1>
+    <h1>Mediscreen</h1>
     <div class="row">
         <div th:each="patient : ${patients}" class="col-md-12 my-1 blocPatient">
             <div class="patient">
@@ -27,7 +27,7 @@
                     <span th:text="${patient.lastname}"></span>
                 </p>
                 <p>
-                    <strong>FirstName: </strong>
+                    <strong>Firstname: </strong>
                     <span th:text="${patient.firstname}"></span>
                 </p>
                 <p>
@@ -46,7 +46,7 @@
                     <strong>Phone number</strong>
                     <span th:text="${patient.phone}"></span>
                 </p>
-                <td><a th:href="@{/patients/update/{id}(id=${patient.getId})}" th:method="get" class="update">Mettre à jour</a>
+                <a th:href="@{/patients/update/{id}(id=${patient.getId})}" th:method="get" class="btn btn-primary">Mettre à jour</a>
             </div>
         </div>
     </div>

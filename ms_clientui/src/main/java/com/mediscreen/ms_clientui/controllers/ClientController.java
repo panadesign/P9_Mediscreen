@@ -5,12 +5,10 @@ import com.mediscreen.ms_clientui.proxies.MicroServicePatientProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 public class ClientController {
@@ -21,27 +19,24 @@ public class ClientController {
         this.microServicePatientProxy = microServicePatientProxy;
     }
 
-    @RequestMapping("/patients")
-    public String accueil(Model model) {
-        List<PatientBean> patients = microServicePatientProxy.allPatients();
-        model.addAttribute("patients", patients);
+    @RequestMapping("/")
+    public String accueil() {
         return "accueil";
     }
 
-
-    @RequestMapping("/patients/{lastname}")
-    public String patient(Model model, @PathVariable("lastname") String lastname) {
-        List<PatientBean> patients = microServicePatientProxy.patientsByLastname(lastname);
+    @RequestMapping("/patients")
+    public String patients(Model model) {
+        List<PatientBean> patients = microServicePatientProxy.allPatients();
         model.addAttribute("patients", patients);
-        return "patient";
+        return "patients";
     }
 
-    @RequestMapping("/patients/update/{id}")
-    public String updateFormPatient(Model model, @PathVariable("id") Integer id) {
-        PatientBean patientBean = microServicePatientProxy.updateFormPatient(id).get();
-        model.addAttribute("patient", patientBean);
-        return "patientUpdate";
-    }
+//    @RequestMapping("/patient/{id}/edit")
+//    public String updatePatient(Model model, RequestParam Integer id) {
+//        PatientBean patientBean = microServicePatientProxy.getPatient(id).get();
+//        model.addAttribute("patient", patientBean);
+//        return "patientUpdate";
+//    }
 
 
 
