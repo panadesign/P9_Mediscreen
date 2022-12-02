@@ -6,7 +6,6 @@ import com.mediScreen.ms_patient.service.PatientService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class PatientController {
@@ -30,6 +29,12 @@ public class PatientController {
     @GetMapping("/patients/edit")
     public Patient formUpdatePatient(@RequestParam Integer id) {
        return patientService.findById(id);
+    }
+
+    @PutMapping("/patients/edit")
+    public String updatePatient(@RequestParam Integer id, @RequestBody Patient patient) {
+        patientService.updatePatient(id, patient);
+        return "redirect:patients";
     }
 
 }

@@ -25,7 +25,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     public void updatePatient(Integer id, Patient patient) {
-        Patient patientToUpdate = findById(id);
+        Patient patientToUpdate = patientDao.findById(id).orElseThrow(() -> new RessourceNotExistingException("Patient with id: " + id + " doesn't exist"));
 
         patientToUpdate.setLastname(patient.getLastname());
         patientToUpdate.setFirstname(patient.getFirstname());
@@ -34,7 +34,7 @@ public class PatientServiceImpl implements PatientService {
         patientToUpdate.setAddress(patient.getAddress());
         patientToUpdate.setPhone(patient.getPhone());
 
-        patientDao.save(patientToUpdate);
+        patientDao.save(patient);
     }
 
 }

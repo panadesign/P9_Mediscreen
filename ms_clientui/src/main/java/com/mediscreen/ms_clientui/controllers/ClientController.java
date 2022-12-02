@@ -4,9 +4,7 @@ import com.mediscreen.ms_clientui.beans.PatientBean;
 import com.mediscreen.ms_clientui.proxies.MicroServicePatientProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,12 +30,18 @@ public class ClientController {
     }
 
     @RequestMapping("/patients/edit")
-    public String updatePatient(Model model, @RequestParam Integer id) {
+    public String formUpdatePatient(Model model, @RequestParam Integer id) {
         PatientBean patientBean = microServicePatientProxy.formUpdatePatient(id).get();
-        model.addAttribute("patient",patientBean);
+        model.addAttribute("patient", patientBean);
         return "patientUpdate";
     }
 
+    @PutMapping("patients/edit")
+    public String updatePatient(Model model, @RequestParam Integer id, @RequestBody PatientBean patientBean) {
+        microServicePatientProxy.updatePatient(id, patientBean);
+        model.addAttribute("patient", patientBean);
+        return "redirect:patients";
+    }
 
 
 }
