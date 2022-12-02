@@ -8,5 +8,5 @@ import java.util.List;
 public interface PatientService {
     List<Patient> getPatients();
     Patient findById(Integer id);
-    void updatePatient(Patient patient);
+    void updatePatient(Integer id, Patient patient);
 }

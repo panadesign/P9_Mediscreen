@@ -46,7 +46,7 @@
                     <strong>Phone number</strong>
                     <span th:text="${patient.phone}"></span>
                 </p>
-                <a th:href="@{/patients/update/{id}(id=${patient.getId})}" th:method="get" class="btn btn-primary">Mettre à jour</a>
+                <a th:href="@{/patients/edit?id={id}(id=${patient.getId})}" th:method="get" class="btn btn-primary">Mettre à jour</a>
             </div>
         </div>
     </div>

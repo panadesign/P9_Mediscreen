@@ -24,14 +24,16 @@ public class PatientServiceImpl implements PatientService {
         return patientDao.findById(id).orElseThrow(()-> new RessourceNotExistingException("Patient with id " + id + " doesn't exist."));
     }
 
-    public void updatePatient(Patient patient) {
-        Patient patientToUpdate = findById(patient.getId());
+    public void updatePatient(Integer id, Patient patient) {
+        Patient patientToUpdate = findById(id);
+
         patientToUpdate.setLastname(patient.getLastname());
         patientToUpdate.setFirstname(patient.getFirstname());
         patientToUpdate.setBirth(patient.getBirth());
         patientToUpdate.setGender(patient.getGender());
         patientToUpdate.setAddress(patient.getAddress());
         patientToUpdate.setPhone(patient.getPhone());
+
         patientDao.save(patientToUpdate);
     }
 

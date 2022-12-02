@@ -31,12 +31,12 @@ public class ClientController {
         return "patients";
     }
 
-//    @RequestMapping("/patient/{id}/edit")
-//    public String updatePatient(Model model, RequestParam Integer id) {
-//        PatientBean patientBean = microServicePatientProxy.getPatient(id).get();
-//        model.addAttribute("patient", patientBean);
-//        return "patientUpdate";
-//    }
+    @RequestMapping("/patients/edit")
+    public String updatePatient(Model model, @RequestParam Integer id) {
+        PatientBean patientBean = microServicePatientProxy.formUpdatePatient(id).get();
+        model.addAttribute("patient",patientBean);
+        return "patientUpdate";
+    }
 
 
 
