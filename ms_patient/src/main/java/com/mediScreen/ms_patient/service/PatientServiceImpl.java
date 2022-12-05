@@ -3,11 +3,13 @@ package com.mediScreen.ms_patient.service;
 import com.mediScreen.ms_patient.dao.PatientDao;
 import com.mediScreen.ms_patient.exceptions.RessourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Log4j2
 public class PatientServiceImpl implements PatientService {
 
     private final PatientDao patientDao;
@@ -25,7 +27,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     public void updatePatient(Integer id, Patient patient) {
-        Patient patientToUpdate = patientDao.findById(id).orElseThrow(() -> new RessourceNotExistingException("Patient with id: " + id + " doesn't exist"));
+        Patient patientToUpdate = findById(id);
 
         patientToUpdate.setLastname(patient.getLastname());
         patientToUpdate.setFirstname(patient.getFirstname());
@@ -34,7 +36,8 @@ public class PatientServiceImpl implements PatientService {
         patientToUpdate.setAddress(patient.getAddress());
         patientToUpdate.setPhone(patient.getPhone());
 
-        patientDao.save(patient);
+        patientDao.save(patientToUpdate);
+
     }
 
 }

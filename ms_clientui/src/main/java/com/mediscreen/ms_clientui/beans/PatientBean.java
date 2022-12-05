@@ -1,9 +1,12 @@
 package com.mediscreen.ms_clientui.beans;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.text.SimpleDateFormat;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -11,18 +14,18 @@ import java.util.Date;
 @NoArgsConstructor
 public class PatientBean {
     private Integer id;
-    @NonNull
+    @NotNull
     private String lastname;
-    @NonNull
+    @NotNull
     private String firstname;
-    @NonNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private Date birth;
-    @NonNull
+    @NotNull
     private String gender;
-    @NonNull
+    @NotNull
     private String address;
-    @NonNull
+    @NotNull
     private String phone;
 
 }

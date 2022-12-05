@@ -2,6 +2,7 @@ package com.mediscreen.ms_clientui.controllers;
 
 import com.mediscreen.ms_clientui.beans.PatientBean;
 import com.mediscreen.ms_clientui.proxies.MicroServicePatientProxy;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@Log4j2
 public class ClientController {
 
     private final MicroServicePatientProxy microServicePatientProxy;
-
     public ClientController(MicroServicePatientProxy microServicePatientProxy) {
         this.microServicePatientProxy = microServicePatientProxy;
     }
@@ -33,14 +34,17 @@ public class ClientController {
     public String formUpdatePatient(Model model, @RequestParam Integer id) {
         PatientBean patientBean = microServicePatientProxy.formUpdatePatient(id).get();
         model.addAttribute("patient", patientBean);
+        log.debug("Access to patient update form");
         return "patientUpdate";
     }
 
-    @PutMapping("patients/edit")
-    public String updatePatient(Model model, @RequestParam Integer id, @RequestBody PatientBean patientBean) {
+    @PostMapping("patients/edit")
+    public String updatePatient(Model model, @RequestParam Integer id, PatientBean patientBean) {
         microServicePatientProxy.updatePatient(id, patientBean);
-        model.addAttribute("patient", patientBean);
-        return "redirect:patients";
+        model.addAttribute("patients", patientBean);
+        log.debug("Patient : " + patientBean.getLastname() + " " + patientBean.getFirstname() + " is updated.");
+        log.debug("Patient is updated");
+        return "patients";
     }
 
 
