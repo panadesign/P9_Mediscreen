@@ -18,7 +18,13 @@ public interface MicroServicePatientProxy {
     @GetMapping("/patients/edit")
     Optional<PatientBean> formUpdatePatient(@RequestParam Integer id);
 
-    @PostMapping("/patients/edit")
-    void updatePatient(@RequestParam Integer id, PatientBean patientBean);
+    @PutMapping("/patients/edit")
+    PatientBean updatePatient(@RequestParam Integer id, @RequestBody PatientBean patientBean);
+
+    @GetMapping("/patients/add")
+    PatientBean addPatientForm(PatientBean patientBean);
+
+    @PostMapping("/patients/validate")
+    void addPatient(PatientBean patientBean);
 
 }

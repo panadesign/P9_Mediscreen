@@ -21,9 +21,8 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = PatientController.class)
 class PatientServiceImplTest {
-    @Autowired
+
     private PatientService patientServiceImpl;
     @MockBean
     private PatientDao mockPatientDao;

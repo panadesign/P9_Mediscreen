@@ -1,50 +1,30 @@
 package com.mediScreen.ms_patient.controllers;
 
-import com.mediScreen.ms_patient.model.Patient;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
-import javax.transaction.Transactional;
-
-import java.time.Instant;
-import java.util.Date;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@Transactional
+@AutoConfigureMockMvc
 class PatientControllerTest {
 
-//    private MockMvc mockMvc;
-//    private final WebApplicationContext webApplicationContext;
+    @Autowired
+    private MockMvc mockMvc;
 
-//    public PatientControllerTest(MockMvc mockMvc, WebApplicationContext webApplicationContext) {
-//        this.mockMvc = mockMvc;
-//        this.webApplicationContext = webApplicationContext;
-//    }
-//
-//    @BeforeEach
-//    public void init() {
-//        mockMvc = MockMvcBuilders
-//                .webAppContextSetup(webApplicationContext)
-//                .build();
-//    }
-//
-//    @Test
-//    void allPatients() throws Exception {
-//        mockMvc.perform(get("/patients")
-//                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    void allPatients() throws Exception {
+        mockMvc.perform(get("/patients")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
 //
 //    @Test
 //    void patientsByLastname() throws Exception {

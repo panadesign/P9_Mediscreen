@@ -6,31 +6,32 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table
+@Table(name = "patient")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Patient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull
+    @NotEmpty(message = "Lastname cannot be empty")
     private String lastname;
-    @NotNull
+    @NotEmpty(message = "Firstname cannot be empty")
     private String firstname;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     private Date birth;
-    @NotNull
+    @NotEmpty(message = "Gender cannot be empty")
     private String gender;
-    @NotNull
+    @NotEmpty(message = "Address cannot be empty")
     private String address;
-    @NotNull
+    @NotEmpty(message = "Phone number cannot be empty")
     private String phone;
 
 }
