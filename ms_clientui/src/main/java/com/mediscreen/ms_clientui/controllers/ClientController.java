@@ -21,8 +21,8 @@ public class ClientController {
     }
 
     @GetMapping("/")
-    public String accueil() {
-        return "accueil";
+    public String home() {
+        return "home";
     }
 
     @GetMapping("/patients")
@@ -82,7 +82,7 @@ public class ClientController {
         }
 
         microServicePatientProxy.addPatient(patientBean);
-        model.addAttribute("patients", microServicePatientProxy.allPatients());
+        model.addAttribute("patients", microServicePatientProxy.getAllPatients());
 
         return "patients";
     }
