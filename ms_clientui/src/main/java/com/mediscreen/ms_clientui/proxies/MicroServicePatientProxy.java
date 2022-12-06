@@ -9,22 +9,19 @@ import java.util.Optional;
 
 @FeignClient(name = "microservice-patients", url = "localhost:8081")
 public interface MicroServicePatientProxy {
+
     @GetMapping(value = "/patients")
     List<PatientBean> allPatients();
 
-    @GetMapping("/patients")
-    PatientBean patient(@RequestParam Integer id);
+    @GetMapping("/patients/{id}")
+    PatientBean getPatientById(@PathVariable("id") Integer id);
 
-    @GetMapping("/patients/edit")
-    Optional<PatientBean> formUpdatePatient(@RequestParam Integer id);
 
-    @PutMapping("/patients/edit")
-    PatientBean updatePatient(@RequestParam Integer id, @RequestBody PatientBean patientBean);
+    @PutMapping("/patients/{id}")
+    PatientBean updatePatient(@PathVariable("id") Integer id, @RequestBody PatientBean patientBean);
 
-    @GetMapping("/patients/add")
-    PatientBean addPatientForm(PatientBean patientBean);
 
-    @PostMapping("/patients/validate")
+    @PostMapping("/patients/")
     void addPatient(PatientBean patientBean);
 
 }

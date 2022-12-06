@@ -1,7 +1,7 @@
 package com.mediScreen.ms_patient.service;
 
 import com.mediScreen.ms_patient.dao.PatientDao;
-import com.mediScreen.ms_patient.exceptions.RessourceNotExistingException;
+import com.mediScreen.ms_patient.exceptions.ResourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     public Patient findById(Integer id) {
-        return patientDao.findById(id).orElseThrow(() -> new RessourceNotExistingException("Patient with id " + id + " doesn't exist."));
+        return patientDao.findById(id).orElseThrow(() -> new ResourceNotExistingException("Patient with id " + id + " doesn't exist."));
     }
 
     public Patient update(Integer id, Patient patient) {

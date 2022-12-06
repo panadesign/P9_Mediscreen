@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/patients")
 @Log4j2
 public class PatientController {
 
@@ -19,41 +20,26 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping("/")
-    public String accueil() {
-        return "accueil";
-    }
-
-    @GetMapping("/patients")
-    public List<Patient> allPatients() {
+    @GetMapping()
+    public List<Patient> getAllPatients() {
         log.debug("Get all patients");
         return patientService.getPatients();
     }
 
-    @GetMapping("/patients/edit")
-    public Patient formUpdatePatient(@RequestParam Integer id) {
+    @GetMapping("/{id}")
+    public Patient getPatientById(@PathVariable("id") Integer id) {
         log.debug("Access to update form for patient with id: " + id);
         return patientService.findById(id);
     }
 
-    @PutMapping("/patients/edit")
-    public Patient updatePatient(@RequestParam Integer id, @RequestBody Patient patient) {
+    @PutMapping("/{id}")
+    public Patient updatePatient(@PathVariable("id")  Integer id, @RequestBody Patient patient) {
         log.debug("Patient : " + patient.getLastname() + " " + patient.getFirstname() + " is updated.");
         return patientService.update(id, patient);
     }
 
-    @GetMapping("/patients/add")
-    public String addPatientForm(Patient patient) {
-        log.debug("Get add patient form");
-        return "patientAdd";
+    @PostMapping()
+    public Patient addPatient(@RequestBody @Valid Patient patient) {
+        return patientService.add(patient);
     }
-
-    @PostMapping("/patients/validate")
-    public String addPatient(@RequestBody @Valid Patient patient) {
-        patientService.add(patient);
-        return "redirect:patients";
-    }
-
-
-
 }
