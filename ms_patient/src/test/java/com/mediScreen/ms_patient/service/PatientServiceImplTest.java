@@ -17,7 +17,9 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -49,21 +51,42 @@ class PatientServiceImplTest {
     }
 
 
-//    @Test
-//    void updatePatient() {
-//        //GIVEN
-//        Patient patient = new Patient(1, "Lastname", "Firstname", Date.from(Instant.now()), "M", "Address", "12345");
-//
-//        //WHEN
-//        when(mockPatientDao.findById(patient.getId())).thenReturn(Optional.of(patient));
-//
-//        patient.setAddress("Address modified");
-//
-//        Patient patientUpdated = patientServiceImpl.updatePatient(patient);
-//
-//        //THEN
-//        Assertions.assertEquals("Address modified", patientUpdated.getAddress());
-//
-//
-//    }
+    @Test
+    void updatePatient() {
+        //GIVEN
+        Patient patient = new Patient(1, "Lastname", "Firstname", Date.from(Instant.now()), "M", "Address", "12345");
+
+        //WHEN
+        when(mockPatientDao.findById(patient.getId())).thenReturn(Optional.of(patient));
+
+        patient.setAddress("Address updated");
+
+        patientServiceImpl.update(patient.getId(), patient);
+
+        //THEN
+        Assertions.assertEquals("Address updated", patient.getAddress());
+    }
+
+    @Test
+    void addNewPatient() {
+        //GIVEN
+        Patient patient = new Patient(1, "Lastname", "Firstname", Date.from(Instant.now()), "M", "Address", "12345");
+
+        //WHEN
+        when(mockPatientDao.save(patient)).thenAnswer(p -> p.getArguments()[0]);
+        Patient patientToAdd = patientServiceImpl.add(patient);
+
+        //THEN
+        assertThat(patientToAdd)
+                .satisfies(p -> {
+                            assertThat(patient.getId()).hasToString("1");
+                            assertThat(patient.getLastname()).hasToString("Lastname");
+                            assertThat(patient.getFirstname()).hasToString("Firstname");
+                            assertThat(patient.getGender()).hasToString("M");
+                            assertThat(patient.getAddress()).hasToString("Address");
+                            assertThat(patient.getPhone()).hasToString("12345");
+                        }
+                );
+
+    }
 }

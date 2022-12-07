@@ -50,7 +50,7 @@ public class ClientController {
 
         var patient = microServicePatientProxy.getPatientById(id);
         model.addAttribute("patient", patient);
-        return "redirect:/patients/"+id;
+        return "patientUpdate";
     }
 
     @PostMapping("/patients/{id}/edit")

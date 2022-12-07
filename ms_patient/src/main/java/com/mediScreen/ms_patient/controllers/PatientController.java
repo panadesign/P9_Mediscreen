@@ -4,6 +4,7 @@ import com.mediScreen.ms_patient.model.Patient;
 import com.mediScreen.ms_patient.service.PatientService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -39,6 +40,7 @@ public class PatientController {
     }
 
     @PostMapping()
+    @ResponseStatus(code = HttpStatus.CREATED, reason = "OK")
     public Patient addPatient(@RequestBody @Valid Patient patient) {
         return patientService.add(patient);
     }
