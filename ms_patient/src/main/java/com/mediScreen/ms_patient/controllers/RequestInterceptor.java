@@ -41,17 +41,19 @@ public class RequestInterceptor implements HandlerInterceptor {
     }
 
     private String getParameters(HttpServletRequest request) {
-        StringBuffer posted = new StringBuffer();
+        StringBuilder posted = new StringBuilder();
         Enumeration<?> e = request.getParameterNames();
         if (e != null) {
             posted.append("?");
         }
-        while (e.hasMoreElements()) {
+        while (true) {
+            assert e != null;
+            if (!e.hasMoreElements()) break;
             if (posted.length() > 1) {
                 posted.append("&");
             }
             String curr = (String) e.nextElement();
-            posted.append(curr + "=");
+            posted.append(curr).append("=");
             if (curr.contains("password")
                     || curr.contains("pass")
                     || curr.contains("pwd")) {
@@ -63,7 +65,7 @@ public class RequestInterceptor implements HandlerInterceptor {
         String ip = request.getHeader("X-FORWARDED-FOR");
         String ipAddr = (ip == null) ? getRemoteAddr(request) : ip;
         if (ipAddr!=null && !ipAddr.equals("")) {
-            posted.append("&_psip=" + ipAddr);
+            posted.append("&_psip=").append(ipAddr);
         }
         return posted.toString();
     }

@@ -63,7 +63,6 @@ public class ClientController {
 
         microServicePatientProxy.updatePatient(id, patientBean);
 
-//        model.addAttribute("patients", microServicePatientProxy.allPatients());
         log.debug("Patient : " + patientBean.getLastname() + " " + patientBean.getFirstname() + " is updated.");
         return "redirect:/patients";
     }
@@ -78,7 +77,7 @@ public class ClientController {
     public String addPatient(Model model, @Valid PatientBean patientBean, BindingResult result) {
         if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());
-            return "patients/add";
+            return "redirect:patients";
         }
 
         microServicePatientProxy.addPatient(patientBean);

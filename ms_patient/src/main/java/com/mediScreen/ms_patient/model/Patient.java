@@ -25,7 +25,6 @@ public class Patient {
     @NotEmpty(message = "Firstname cannot be empty")
     private String firstname;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
     private Date birth;
     @NotEmpty(message = "Gender cannot be empty")
     private String gender;

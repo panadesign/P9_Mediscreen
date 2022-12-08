@@ -1,10 +1,10 @@
 package com.mediscreen.ms_clientui.beans;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -12,20 +12,22 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class PatientBean {
     private Integer id;
-    @NotEmpty(message = "Lastname cannot be empty")
+    @NotBlank(message = "Lastname cannot be empty")
     private String lastname;
-    @NotEmpty(message = "Lastname cannot be empty")
+    @NotBlank(message = "Firstname cannot be empty")
     private String firstname;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Lastname cannot be empty")
     private Date birth;
-    @NotEmpty(message = "Lastname cannot be empty")
+    @NotBlank(message = "Gender cannot be empty")
     private String gender;
-    @NotEmpty(message = "Lastname cannot be empty")
+    @NotBlank(message = "Address cannot be empty")
     private String address;
-    @NotEmpty(message = "Lastname cannot be empty")
+    @NotBlank(message = "Phone number cannot be empty")
     private String phone;
 
 }
