@@ -1,5 +1,7 @@
 package com.mediScreen.ms_patient.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -17,7 +18,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Patient {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -27,7 +27,7 @@ public class Patient {
     private String firstname;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
-    private LocalDate birth;
+    private Date birth;
     @NotEmpty(message = "Gender cannot be empty")
     private String gender;
     @NotEmpty(message = "Address cannot be empty")

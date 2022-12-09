@@ -58,7 +58,7 @@ public class ClientController {
 
         if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());
-            return "patientUpdate";
+            return "redirect:/patients/{id}/edit";
         }
 
         microServicePatientProxy.updatePatient(id, patientBean);

@@ -1,7 +1,7 @@
 package com.mediScreen.ms_patient.service;
 
-import com.mediScreen.ms_patient.controllers.PatientController;
 import com.mediScreen.ms_patient.dao.PatientDao;
+import com.mediScreen.ms_patient.exceptions.ResourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,28 +9,27 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 class PatientServiceImplTest {
 
-    private PatientService patientServiceImpl;
-    @MockBean
+    private PatientServiceImpl patientServiceImpl;
+    @Mock
     private PatientDao mockPatientDao;
 
     @BeforeEach
-    public void init() {
+    void init() {
         patientServiceImpl = new PatientServiceImpl(mockPatientDao);
     }
 
@@ -39,8 +38,8 @@ class PatientServiceImplTest {
         //GIVEN
         List<Patient> allPatients = new ArrayList<>();
 
-        allPatients.add(new Patient(1, "Lastname", "Firstname", Date.from(Instant.now()), "M", "Address", "12345"));
-        allPatients.add(new Patient(2, "Lastname2", "Firstname2", Date.from(Instant.now()), "F", "Address2", "67890"));
+        allPatients.add(new Patient(1, "Lastname", "Firstname", new Date(), "M", "Address", "12345"));
+        allPatients.add(new Patient(2, "Lastname2", "Firstname2", new Date(), "F", "Address2", "67890"));
 
         //WHEN
         when(mockPatientDao.findAll()).thenReturn(allPatients);
@@ -50,11 +49,31 @@ class PatientServiceImplTest {
         Assertions.assertEquals(2, patients.size());
     }
 
+    @Test
+    void getPatientById() {
+        List<Patient> allPatients = new ArrayList<>();
+
+        Patient patient1 = new Patient(1, "Lastname", "Firstname", new Date(), "M", "Address", "12345");
+        allPatients.add(patient1);
+
+        when(mockPatientDao.findById(1)).thenReturn(Optional.of(patient1));
+
+        Patient patient = patientServiceImpl.findById(patient1.getId());
+
+        Assertions.assertEquals("Lastname", patient.getLastname());
+    }
+
+    @Test
+    void getPatientByIdNotExisting() {
+        int idNotExisting = 99;
+        Assertions.assertThrows(ResourceNotExistingException.class, () -> patientServiceImpl.findById(idNotExisting));
+    }
+
 
     @Test
     void updatePatient() {
         //GIVEN
-        Patient patient = new Patient(1, "Lastname", "Firstname", Date.from(Instant.now()), "M", "Address", "12345");
+        Patient patient = new Patient(1, "Lastname", "Firstname", new Date(), "M", "Address", "12345");
 
         //WHEN
         when(mockPatientDao.findById(patient.getId())).thenReturn(Optional.of(patient));
@@ -70,7 +89,7 @@ class PatientServiceImplTest {
     @Test
     void addNewPatient() {
         //GIVEN
-        Patient patient = new Patient(1, "Lastname", "Firstname", Date.from(Instant.now()), "M", "Address", "12345");
+        Patient patient = new Patient(1, "Lastname", "Firstname", new Date(), "M", "Address", "12345");
 
         //WHEN
         when(mockPatientDao.save(patient)).thenAnswer(p -> p.getArguments()[0]);
