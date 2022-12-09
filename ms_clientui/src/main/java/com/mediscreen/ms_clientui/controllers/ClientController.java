@@ -37,7 +37,7 @@ public class ClientController {
 
         log.debug("Access update form to patient with id = " + id);
 
-        var patient = microServicePatientProxy.getPatientById(id);
+        PatientBean patient = microServicePatientProxy.getPatientById(id);
         model.addAttribute("patient", patient);
 
         return "patient";
@@ -48,7 +48,7 @@ public class ClientController {
 
         log.debug("Access update form to patient with id = " + id);
 
-        var patient = microServicePatientProxy.getPatientById(id);
+        PatientBean patient = microServicePatientProxy.getPatientById(id);
         model.addAttribute("patient", patient);
         return "patientUpdate";
     }
@@ -56,12 +56,13 @@ public class ClientController {
     @PostMapping("/patients/{id}/edit")
     public String updatePatient(Model model, @PathVariable("id") Integer id, @Valid PatientBean patientBean, BindingResult result) {
 
-        if (result.hasErrors()) {
+        if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());
             return "patientUpdate";
         }
 
         microServicePatientProxy.updatePatient(id, patientBean);
+        model.addAttribute("patient", microServicePatientProxy.getAllPatients());
 
         log.debug("Patient : " + patientBean.getLastname() + " " + patientBean.getFirstname() + " is updated.");
         return "redirect:/patients";
@@ -77,13 +78,14 @@ public class ClientController {
     public String addPatient(Model model, @Valid PatientBean patientBean, BindingResult result) {
         if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());
-            return "redirect:patients";
+            return "patientAdd";
         }
 
         microServicePatientProxy.addPatient(patientBean);
         model.addAttribute("patients", microServicePatientProxy.getAllPatients());
 
-        return "patients";
+        log.debug("Patient : " + patientBean.getLastname() + patientBean.getFirstname() + " is created.");
+        return "redirect:/patients";
     }
 
 

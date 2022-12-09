@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Mediscreen | Error</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-</head>
-<body>
-<h1>Une erreur est apparue ! Nous en sommes désolés.</h1>
-<button class="btn btn-primary" value="Return"><a th:href="@{/}" th:method="get">Accueil</a></button>
-<script type="text/javascript" src="/webjars/bootstrap/5.2.2/js/bootstrap.min.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Mediscreen | Error</title>
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    </head>
+    <body>
+        <h1>Une erreur est apparue ! Nous en sommes désolés.</h1>
+        <p class="error" th:text="${status}"></p>
+        <p class="error_message" th:text="${message}"></p>
+        <button class="btn btn-primary" value="Return"><a th:href="@{/}" th:method="get">Accueil</a></button>
+        <script type="text/javascript" src="/webjars/bootstrap/5.2.2/js/bootstrap.min.js"></script>
+    </body>
 </html>
