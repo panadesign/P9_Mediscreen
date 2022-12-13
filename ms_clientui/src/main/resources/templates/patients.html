@@ -33,7 +33,7 @@
                 </p>
                 <p>
                     <strong>Birthdate: </strong>
-                    <span th:text="${patient.birth}"></span>
+                    <span th:text="${#dates.format(patient.birth, 'dd/MM/yyyy')}"></span>
                 </p>
                 <p>
                     <strong>Gender: </strong>
