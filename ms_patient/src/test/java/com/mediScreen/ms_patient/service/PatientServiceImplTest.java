@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,9 +39,10 @@ class PatientServiceImplTest {
     void getPatients() {
         //GIVEN
         List<Patient> allPatients = new ArrayList<>();
+        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
 
-        allPatients.add(new Patient(1, "Lastname", "Firstname", new Date(), "M", "Address", "12345"));
-        allPatients.add(new Patient(2, "Lastname2", "Firstname2", new Date(), "F", "Address2", "67890"));
+        allPatients.add(new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345"));
+        allPatients.add(new Patient(2, "Lastname2", "Firstname2", dateTime, "F", "Address2", "67890"));
 
         //WHEN
         when(mockPatientDao.findAll()).thenReturn(allPatients);
@@ -52,8 +55,9 @@ class PatientServiceImplTest {
     @Test
     void getPatientById() {
         List<Patient> allPatients = new ArrayList<>();
+        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
 
-        Patient patient1 = new Patient(1, "Lastname", "Firstname", new Date(), "M", "Address", "12345");
+        Patient patient1 = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
         allPatients.add(patient1);
 
         when(mockPatientDao.findById(1)).thenReturn(Optional.of(patient1));
@@ -73,7 +77,8 @@ class PatientServiceImplTest {
     @Test
     void updatePatient() {
         //GIVEN
-        Patient patient = new Patient(1, "Lastname", "Firstname", new Date(), "M", "Address", "12345");
+        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN
         when(mockPatientDao.findById(patient.getId())).thenReturn(Optional.of(patient));
@@ -89,7 +94,8 @@ class PatientServiceImplTest {
     @Test
     void addNewPatient() {
         //GIVEN
-        Patient patient = new Patient(1, "Lastname", "Firstname", new Date(), "M", "Address", "12345");
+        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN
         when(mockPatientDao.save(patient)).thenAnswer(p -> p.getArguments()[0]);

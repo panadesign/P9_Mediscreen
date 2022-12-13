@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Entity
@@ -25,9 +26,8 @@ public class Patient {
     private String lastname;
     @NotEmpty(message = "Firstname cannot be empty")
     private String firstname;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
-    private Date birth;
+    private ZonedDateTime birth;
     @NotEmpty(message = "Gender cannot be empty")
     private String gender;
     @NotEmpty(message = "Address cannot be empty")

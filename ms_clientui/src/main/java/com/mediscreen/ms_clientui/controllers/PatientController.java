@@ -13,10 +13,11 @@ import java.util.List;
 
 @Controller
 @Log4j2
-public class ClientController {
+public class PatientController {
 
     private final MicroServicePatientProxy microServicePatientProxy;
-    public ClientController(MicroServicePatientProxy microServicePatientProxy) {
+
+    public PatientController(MicroServicePatientProxy microServicePatientProxy) {
         this.microServicePatientProxy = microServicePatientProxy;
     }
 

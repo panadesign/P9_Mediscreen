@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mediScreen.ms_patient.model.Patient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,7 +42,9 @@ class PatientControllerTest {
     }
 
     protected String mapToJson(Object obj) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonMapper.builder()
+                .addModule(new JavaTimeModule())
+                .build();
         return objectMapper.writeValueAsString(obj);
     }
 
@@ -53,7 +58,8 @@ class PatientControllerTest {
 
     @Test
     void patientById() throws Exception {
-        Patient patient = new Patient(1, "Lastname", "Firstname", Date.from(Instant.now()), "M", "Address", "12345");
+        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         mockMvc.perform(get("/patients/{id}", patient.getId())
                 .contentType(MediaType.APPLICATION_JSON))
@@ -63,7 +69,8 @@ class PatientControllerTest {
     @Test
     void updatePatient() throws Exception {
         String uri = "/patients/3";
-        Patient patient = new Patient(3, "Lastname", "Firstname", Date.from(Instant.now()), "M", "Address", "12345");
+        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+        Patient patient = new Patient(3, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         patient.setPhone("0000");
         String inputJson = mapToJson(patient);
@@ -77,12 +84,13 @@ class PatientControllerTest {
 
     @Test
     void addPatient() throws Exception {
+        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
         String uri = "/patients";
         Patient patient = new Patient();
         patient.setId(2);
         patient.setLastname("lastNameTest");
         patient.setFirstname("firstNameTest");
-        patient.setBirth(Date.from(Instant.now()));
+        patient.setBirth(dateTime);
         patient.setGender("F");
         patient.setAddress("addressTest");
         patient.setPhone("phoneTest");
