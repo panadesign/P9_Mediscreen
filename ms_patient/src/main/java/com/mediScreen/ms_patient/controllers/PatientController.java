@@ -29,7 +29,7 @@ public class PatientController {
 
     @GetMapping("/{id}")
     public Patient getPatientById(@PathVariable("id") Integer id) {
-        log.debug("Access to update form for patient with id: " + id);
+        log.debug("Access to patient with id: " + id);
         return patientService.findById(id);
     }
 

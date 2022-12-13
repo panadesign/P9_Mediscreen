@@ -5,6 +5,8 @@
       <list>
         <option value="$PROJECT_DIR$/ms_patient/pom.xml" />
         <option value="$PROJECT_DIR$/ms_clientui/pom.xml" />
+        <option value="$PROJECT_DIR$/ms_history/pom.xml" />
+        <option value="$PROJECT_DIR$/ms_observation/pom.xml" />
       </list>
     </option>
   </component>
