@@ -5,7 +5,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @FeignClient(name = "microservice-patients", url = "localhost:8081")
 public interface MicroServicePatientProxy {

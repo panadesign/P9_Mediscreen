@@ -45,4 +45,9 @@ public class PatientServiceImpl implements PatientService {
         return patientDao.save(patient);
     }
 
+    public boolean patientExist(Integer id) {
+
+        return true;
+    }
+
 }

@@ -16,7 +16,13 @@ public class HistoryServiceImpl implements HistoryService{
         this.historyRepository = historyRepository;
     }
 
-    public History getHistoryById(String id) {
+    public History getHistoryById(Integer id) {
         return historyRepository.findById(id).orElseThrow(() -> new ResourceNotExistingException("Patient's history with id " + id + " doesn't exist."));
+    }
+
+    public History addObservation(Integer id, String note) {
+
+        return historyRepository.save(new History());
+
     }
 }
