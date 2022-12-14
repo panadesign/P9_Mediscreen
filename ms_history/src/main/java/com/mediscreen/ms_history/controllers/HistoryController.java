@@ -23,4 +23,21 @@ public class HistoryController {
         return historyService.getHistoryById(id);
     }
 
+
+//    http://localhost:8082/patHistory/add?patId=66666&e=Patient_Note
+
+//    @PostMapping("/add")
+//    public History add(@RequestParam("id") Integer id,
+//                       @RequestParam("e") String note) {
+//
+//        microServicePatientProxy.getPatientById(id);
+//
+//        //Vérifier que le patient existe
+//        return historyService.addObservation(id, note);
+//
+//        PatientBean patientBean = microServicePatientProxy.getPatientById(id);
+//        patientBean.addObservation(note);
+//
+//    }
+
 }

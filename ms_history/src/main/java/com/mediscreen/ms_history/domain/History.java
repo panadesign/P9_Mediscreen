@@ -6,15 +6,32 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("history")
+import java.time.ZonedDateTime;
+import java.util.List;
+
 @Data
+@Document("history")
 @AllArgsConstructor
 @NoArgsConstructor
 public class History {
 
     @Id
-    private String patId;
-    private String Patient;
-    private String observations;
+    private Integer patientId;
+    private List<Observation> observations;
 
+    public History addObservation(String note) {
+        observations.add(new Observation(note));
+        return this;
+    }
+
+    @Data
+    static class Observation {
+        private String note;
+        private ZonedDateTime dateTime;
+
+        public Observation(String note) {
+            this.note = note;
+            dateTime = ZonedDateTime.now();
+        }
+    }
 }
