@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -27,11 +29,11 @@ public class History {
     @Data
     static class Observation {
         private String note;
-        private ZonedDateTime dateTime;
+        private LocalDateTime dateTime;
 
         public Observation(String note) {
             this.note = note;
-            dateTime = ZonedDateTime.now();
+            dateTime = LocalDateTime.now();
         }
     }
 }

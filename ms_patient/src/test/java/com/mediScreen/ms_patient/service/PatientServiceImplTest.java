@@ -1,26 +1,21 @@
 package com.mediScreen.ms_patient.service;
 
-import com.mediScreen.ms_patient.dao.PatientDao;
 import com.mediScreen.ms_patient.exceptions.ResourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
+import com.mediScreen.ms_patient.repository.PatientRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -28,11 +23,11 @@ class PatientServiceImplTest {
 
     private PatientServiceImpl patientServiceImpl;
     @Mock
-    private PatientDao mockPatientDao;
+    private PatientRepository mockPatientRepository;
 
     @BeforeEach
     void init() {
-        patientServiceImpl = new PatientServiceImpl(mockPatientDao);
+        patientServiceImpl = new PatientServiceImpl(mockPatientRepository);
     }
 
     @Test
@@ -45,7 +40,7 @@ class PatientServiceImplTest {
         allPatients.add(new Patient(2, "Lastname2", "Firstname2", dateTime, "F", "Address2", "67890"));
 
         //WHEN
-        when(mockPatientDao.findAll()).thenReturn(allPatients);
+        when(mockPatientRepository.findAll()).thenReturn(allPatients);
         List<Patient> patients = patientServiceImpl.getPatients();
 
         //THEN
@@ -60,7 +55,7 @@ class PatientServiceImplTest {
         Patient patient1 = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
         allPatients.add(patient1);
 
-        when(mockPatientDao.findById(1)).thenReturn(Optional.of(patient1));
+        when(mockPatientRepository.findById(1)).thenReturn(Optional.of(patient1));
 
         Patient patient = patientServiceImpl.findById(patient1.getId());
 
@@ -81,7 +76,7 @@ class PatientServiceImplTest {
         Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN
-        when(mockPatientDao.findById(patient.getId())).thenReturn(Optional.of(patient));
+        when(mockPatientRepository.findById(patient.getId())).thenReturn(Optional.of(patient));
 
         patient.setAddress("Address updated");
 
@@ -98,7 +93,7 @@ class PatientServiceImplTest {
         Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN
-        when(mockPatientDao.save(patient)).thenAnswer(p -> p.getArguments()[0]);
+        when(mockPatientRepository.save(patient)).thenAnswer(p -> p.getArguments()[0]);
         Patient patientToAdd = patientServiceImpl.add(patient);
 
         //THEN

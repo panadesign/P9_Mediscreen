@@ -1,6 +1,6 @@
 package com.mediScreen.ms_patient.service;
 
-import com.mediScreen.ms_patient.dao.PatientDao;
+import com.mediScreen.ms_patient.repository.PatientRepository;
 import com.mediScreen.ms_patient.exceptions.ResourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
 import lombok.extern.log4j.Log4j2;
@@ -12,18 +12,18 @@ import java.util.List;
 @Log4j2
 public class PatientServiceImpl implements PatientService {
 
-    private final PatientDao patientDao;
+    private final PatientRepository patientRepository;
 
-    public PatientServiceImpl(PatientDao patientDao) {
-        this.patientDao = patientDao;
+    public PatientServiceImpl(PatientRepository patientRepository) {
+        this.patientRepository = patientRepository;
     }
 
     public List<Patient> getPatients() {
-        return patientDao.findAll();
+        return patientRepository.findAll();
     }
 
     public Patient findById(Integer id) {
-        return patientDao.findById(id).orElseThrow(() -> new ResourceNotExistingException("Patient with id " + id + " doesn't exist."));
+        return patientRepository.findById(id).orElseThrow(() -> new ResourceNotExistingException("Patient with id " + id + " doesn't exist."));
     }
 
     public Patient update(Integer id, Patient patient) {
@@ -36,18 +36,14 @@ public class PatientServiceImpl implements PatientService {
         patientToUpdate.setAddress(patient.getAddress());
         patientToUpdate.setPhone(patient.getPhone());
 
-        return patientDao.save(patientToUpdate);
+        return patientRepository.save(patientToUpdate);
 
     }
 
     public Patient add(Patient patient) {
         log.debug("Create a new patient with id: " + patient.getId());
-        return patientDao.save(patient);
+        return patientRepository.save(patient);
     }
 
-    public boolean patientExist(Integer id) {
-
-        return true;
-    }
 
 }
