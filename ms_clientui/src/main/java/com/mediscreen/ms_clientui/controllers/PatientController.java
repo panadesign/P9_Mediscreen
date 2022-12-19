@@ -11,19 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
 @Log4j2
+@Controller
 public class PatientController {
 
     private final MicroServicePatientProxy microServicePatientProxy;
 
     public PatientController(MicroServicePatientProxy microServicePatientProxy) {
         this.microServicePatientProxy = microServicePatientProxy;
-    }
-
-    @GetMapping("/")
-    public String home() {
-        return "home";
     }
 
     @GetMapping("/patients")

@@ -16,3 +16,7 @@ header ul li {
     text-decoration: none;
     display: inline-block;
 }
+
+.date {
+    font-weight: 700;
+}

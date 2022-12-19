@@ -21,20 +21,15 @@ public class HistoryController {
     }
 
     @GetMapping("/patHistory")
-    public History get(@PathVariable Integer id) {
+    public History get(@RequestParam Integer id) {
         return historyService.getHistoryById(id);
     }
-
-
-//    http://localhost:8082/patHistory/add?patId=66666&e=Patient_Note
 
     @PostMapping("/patHistory/add")
     public History add(@RequestParam("id") Integer patId,
                        @RequestParam("e") String note) {
 
-        //Vérifier que le patient existe
         return historyService.addObservation(patId, note);
-
     }
 
 }

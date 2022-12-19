@@ -1,30 +1,29 @@
-package com.mediscreen.ms_history.domain;
+package com.mediscreen.ms_clientui.beans;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@Document("history")
 @AllArgsConstructor
 @NoArgsConstructor
-public class History {
-
-    @Id
+@Getter
+@Setter
+public class HistoryBean {
     private Integer patientId;
     private List<Observation> observations;
 
-    public History addObservation(String note) {
+    public HistoryBean addObservation(String note) {
         observations.add(new Observation(note));
         return this;
     }
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
+    @Setter
     static class Observation {
         private String note;
         private LocalDateTime dateTime;

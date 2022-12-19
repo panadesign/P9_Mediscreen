@@ -26,7 +26,6 @@ public class HistoryServiceImpl implements HistoryService{
     }
 
     public History addObservation(Integer id, String note) {
-        microServicePatientProxy.getPatientById(id);
 
         if(historyRepository.findById(id).isPresent()) {
             History history = getHistoryById(id);
