@@ -43,10 +43,12 @@ public class HistoryController {
     @PostMapping("/patHistory/add")
     public String add(Model model, @RequestParam("id") Integer patId, @RequestParam("e") String note, BindingResult result) {
         log.debug("Add note for patient with id " + patId);
+
         if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());
             return "history/historyAdd";
         }
+
         HistoryBean history = microServiceHistoryProxy.add(patId, note);
         model.addAttribute("history", history);
 

@@ -11,14 +11,14 @@
     <h1>Ajouter une note</h1>
     <div class="row">
         <div class="row">
-            <form action="#" th:action="@{/patHistory/add}" th:object="${history}" method="POST" class="form-horizontal" style="width: 100%">
-                <label for="note">
-                    <input id="note" class="form-control" th:field="*{note}" type="text" name="note" placeholder="note">
-                    <p class="text-danger" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p>
-                </label>
+            <form action="#" th:action="@{/patHistory/add?id={id}(id=${patId})}" method="POST" class="form-horizontal" style="width: 100%">
+<!--                <label for="note">-->
+<!--                    <input id="note" class="form-control" th:field="${note}" type="text" name="note" placeholder="note">-->
+<!--                    <p class="text-danger" th:if="${#fields.hasErrors('note')}" th:errors="*{history.note}"></p>-->
+<!--                </label>-->
 
-                <button class="btn btn-danger" value="Cancel"><a th:href="@{/patHistory}" th:method="get">Annuler</a></button>
-<!--                <button class="btn btn-primary" type="submit" value="Create">Ajouter un patient</button>-->
+<!--                <button class="btn btn-danger" value="Cancel"><a th:href="@{/patients?id={id}(id=${patId})}" th:method="get">Annuler</a></button>-->
+                <button class="btn btn-primary" type="submit" value="Create">Ajouter un patient</button>
             </form>
         </div>
     </div>
