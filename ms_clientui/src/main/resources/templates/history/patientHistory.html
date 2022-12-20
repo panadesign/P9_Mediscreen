@@ -10,15 +10,14 @@
 <div class="container">
     <h1>Historique du patient</h1>
     <div class="row">
-        <div class="row">
+        <div class="col-md-12 my-1">
             <div class="blocPatient" th:each="history: ${history.observations}">
                 <div>
                     <h4>Date : </h4>
-<!--                    <p th:text="${history.dateTime}"></p>-->
                     <span th:text="${#temporals.format(history.dateTime, 'yyyy/MM/dd HH:mm:ss')}"></span>
 
                     <h4>Note : </h4>
-                    <p th:text="${history.note}"></p>
+                    <span th:text="${history.note}"></span>
                 </div>
             </div>
         </div>

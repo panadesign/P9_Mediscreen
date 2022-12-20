@@ -11,37 +11,15 @@
     <h1>Ajouter une note</h1>
     <div class="row">
         <div class="row">
-            <p>Coucou</p>
-<!--            <form action="#" th:action="@{/patients/validate}" th:object="${patientBean}" method="POST" class="form-horizontal" style="width: 100%">-->
-<!--                <label for="lastname">-->
-<!--                    <input id="lastname" class="form-control" th:field="*{lastname}" type="text" name="lastname" placeholder="Patient's lastname">-->
-<!--                    <p class="text-danger" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></p>-->
-<!--                </label>-->
-<!--                <label for="firstname">-->
-<!--                    <input id="firstname" class="form-control" th:field="*{firstname}" type="text" name="firstname" placeholder="Patient's firstname">-->
-<!--                    <p class="text-danger" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></p>-->
-<!--                </label>-->
-<!--                <label for="birth">-->
-<!--                    <input id="birth" class="form-control" th:field="*{birth}" type="date" name="birth" placeholder="Patient's birthdate">-->
-<!--                    <p class="text-danger" th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}"></p>-->
-<!--                </label>-->
-<!--                <label for="gender">-->
-<!--                    <input id="gender" class="form-control" th:field="*{gender}" type="text" name="gender" placeholder="Patient's gender">-->
-<!--                    <p class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>-->
-<!--                </label>-->
-<!--                <label for="address">-->
-<!--                    <input id="address" class="form-control" th:field="*{address}" type="text" name="address" placeholder="Patient's address">-->
-<!--                    <p class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address cannot be empty</p>-->
+            <form action="#" th:action="@{/patHistory/add}" th:object="${history}" method="POST" class="form-horizontal" style="width: 100%">
+                <label for="note">
+                    <input id="note" class="form-control" th:field="*{note}" type="text" name="note" placeholder="note">
+                    <p class="text-danger" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p>
+                </label>
 
-<!--                </label>-->
-<!--                <label for="phone">-->
-<!--                    <input id="phone" class="form-control" th:field="*{phone}" type="text" name="phone" placeholder="Patient's phone">-->
-<!--                    <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>-->
-<!--                </label>-->
-<!--                <button class="btn btn-danger" value="Cancel"><a th:href="@{/patients}" th:method="get">Annuler</a></button>-->
+                <button class="btn btn-danger" value="Cancel"><a th:href="@{/patHistory}" th:method="get">Annuler</a></button>
 <!--                <button class="btn btn-primary" type="submit" value="Create">Ajouter un patient</button>-->
-<!--                <button class="btn btn-primary" type="reset" value="Reset">Reset</button>-->
-<!--            </form>-->
+            </form>
         </div>
     </div>
 </div>

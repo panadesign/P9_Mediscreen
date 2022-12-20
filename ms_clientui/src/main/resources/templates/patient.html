@@ -8,38 +8,38 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>Fiche patient</h1>
-            <div class="patient">
-                <p>
-                    <strong>Lastname: </strong>
-                    <span th:text="${patient.lastname}"></span>
-                </p>
-                <p>
-                    <strong>Firstname: </strong>
-                    <span th:text="${patient.firstname}"></span>
-                </p>
-                <p>
-                    <strong>Birthdate: </strong>
-                    <span th:text="${#dates.format(patient.birth, 'dd/MM/yyyy')}"></span>
-                </p>
-                <p>
-                    <strong>Gender: </strong>
-                    <span th:text="${patient.gender}"></span>
-                </p>
-                <p>
-                    <strong>Address</strong>
-                    <span th:text="${patient.address}"></span>
-                </p>
-                <p>
-                    <strong>Phone number</strong>
-                    <span th:text="${patient.phone}"></span>
-                </p>
-                <a th:href="@{/patHistory?id={id}(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Accéder aux notes</a>
-                <a th:href="@{/patHistory/add?id={id}(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Ajouter une note</a>
-                <a th:href="@{/patients}" th:method="get" class="btn btn-secondary">Retour</a>
-            </div>
-</div>
-<script type="text/javascript" src="/webjars/bootstrap/5.2.2/js/bootstrap.min.js"></script>
+    <div class="container">
+        <h1>Fiche patient</h1>
+        <div class="patient">
+            <p>
+                <strong>Lastname: </strong>
+                <span th:text="${patient.lastname}"></span>
+            </p>
+            <p>
+                <strong>Firstname: </strong>
+                <span th:text="${patient.firstname}"></span>
+            </p>
+            <p>
+                <strong>Birthdate: </strong>
+                <span th:text="${#dates.format(patient.birth, 'dd/MM/yyyy')}"></span>
+            </p>
+            <p>
+                <strong>Gender: </strong>
+                <span th:text="${patient.gender}"></span>
+            </p>
+            <p>
+                <strong>Address</strong>
+                <span th:text="${patient.address}"></span>
+            </p>
+            <p>
+                <strong>Phone number</strong>
+                <span th:text="${patient.phone}"></span>
+            </p>
+            <a th:href="@{/patHistory?id={id}(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Accéder aux notes</a>
+            <a th:href="@{/patHistory/add?id={id}(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Ajouter une note</a>
+            <a th:href="@{/patients}" th:method="get" class="btn btn-secondary">Retour</a>
+        </div>
+    </div>
+    <script type="text/javascript" src="/webjars/bootstrap/5.2.2/js/bootstrap.min.js"></script>
 </body>
 </html>
