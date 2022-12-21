@@ -5,10 +5,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Optional;
+
 @FeignClient(name = "microservice-patients", url = "localhost:8081")
 public interface MicroServicePatientProxy {
 
     @GetMapping("/patients/{id}")
-    PatientBean getPatientById(@PathVariable("id") Integer id); // Todo <- Optional
+    Optional<PatientBean> getPatientById(@PathVariable("id") Integer id); // Todo <- Optional
 
 }

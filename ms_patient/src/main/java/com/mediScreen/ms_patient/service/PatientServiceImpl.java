@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -22,21 +23,21 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findAll();
     }
 
-    public Patient findById(Integer id) {
-        return patientRepository.findById(id).orElseThrow(() -> new ResourceNotExistingException("Patient with id " + id + " doesn't exist."));
+    public Optional<Patient> findById(Integer id) {
+        return patientRepository.findById(id);
     }
 
     public Patient update(Integer id, Patient patient) {
-        Patient patientToUpdate = findById(id);
+        Optional<Patient> patientToUpdate = findById(id);
 
-        patientToUpdate.setLastname(patient.getLastname());
-        patientToUpdate.setFirstname(patient.getFirstname());
-        patientToUpdate.setBirth(patient.getBirth());
-        patientToUpdate.setGender(patient.getGender());
-        patientToUpdate.setAddress(patient.getAddress());
-        patientToUpdate.setPhone(patient.getPhone());
+        patientToUpdate.get().setLastname(patient.getLastname());
+        patientToUpdate.get().setFirstname(patient.getFirstname());
+        patientToUpdate.get().setBirth(patient.getBirth());
+        patientToUpdate.get().setGender(patient.getGender());
+        patientToUpdate.get().setAddress(patient.getAddress());
+        patientToUpdate.get().setPhone(patient.getPhone());
 
-        return patientRepository.save(patientToUpdate);
+        return patientRepository.save(patientToUpdate.get());
 
     }
 

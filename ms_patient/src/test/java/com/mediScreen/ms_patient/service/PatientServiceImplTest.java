@@ -57,17 +57,10 @@ class PatientServiceImplTest {
 
         when(mockPatientRepository.findById(1)).thenReturn(Optional.of(patient1));
 
-        Patient patient = patientServiceImpl.findById(patient1.getId());
+        Optional<Patient> patient = patientServiceImpl.findById(patient1.getId());
 
-        Assertions.assertEquals("Lastname", patient.getLastname());
+        Assertions.assertEquals("Lastname", patient.get().getLastname());
     }
-
-    @Test
-    void getPatientByIdNotExisting() {
-        int idNotExisting = 99;
-        Assertions.assertThrows(ResourceNotExistingException.class, () -> patientServiceImpl.findById(idNotExisting));
-    }
-
 
     @Test
     void updatePatient() {

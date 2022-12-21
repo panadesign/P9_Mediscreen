@@ -38,7 +38,7 @@
                         <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
                     </label>
                     <button class="btn btn-danger" value="Cancel"><a th:href="@{/patients}" th:method="get">Annuler</a></button>
-                    <button class="btn btn-primary" type="submit" value="Create">Ajouter un patient</button>
+                    <button class="btn btn-primary" type="submit" value="Create">Valider</button>
                     <button class="btn btn-primary" type="reset" value="Reset">Reset</button>
                 </form>
             </div>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/patients")
@@ -27,7 +28,7 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public Patient getPatientById(@PathVariable("id") Integer id) {
+    public Optional<Patient> getPatientById(@PathVariable("id") Integer id) {
         log.debug("Access to patient with id: " + id);
         return patientService.findById(id);
     }
