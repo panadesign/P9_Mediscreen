@@ -1,38 +1,47 @@
-#version: '3'
-#
-#services:
-#  mysqldb:
-#    image: mysql/mysql-server:latest
-#    ports:
-#      - "3308:3306"
-#    volumes:
-#      - ./data:/var/lib/mysql
+version: '3.9'
+
+services:
+  mysqldb:
+    image: mysql/mysql-server:latest
+    ports:
+      - "3308:3306"
 #    container_name: mysql_patient
-##    restart: always
-#    environment:
-#      MYSQL_HOST: mysqldbpatient
-#      MYSQL_DB: patientdb
+    environment:
+#      MYSQL_HOST: mysqlPatient
+      MYSQL_DATABASE: patientLocale
 #      MYSQL_USER: root
 #      MYSQL_PASSWORD: root
-#
-#  patient:
-#    depends_on:
-#      - mysqldb
-#    image: ms_patient-0.0.1
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - patient-network
+#    healthcheck:
+#      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-proot" ]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 20
+
+  patient:
+    depends_on:
+      - mysqldb
+    image: ms_patient-0.0.1
 #    environment:
-#      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldbpatient/patientdb
+##      SPRING_DATASOURCE_URL: jdbc:mysql://patientLocale/patient
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3308/patientLocale?autoReconnect=true&useSSL=false
 #      SPRING_DATASOURCE_USERNAME: root
 #      SPRING_DATASOURCE_PASSWORD: root
 #      SPRING_DATABASE_PORT: 3306
-#    ports:
-#      - "8081:8081"
+    ports:
+      - "8081:8081"
 #    container_name: ms_patient
-##    restart: always
 #    build:
 #      context: ms_patient
 #      dockerfile: Dockerfile
+    networks:
+      - patient-network
 #    links:
 #      - mysqldb
-#
-#
-#
+networks:
+  patient-network:
+    driver: bridge
+
+

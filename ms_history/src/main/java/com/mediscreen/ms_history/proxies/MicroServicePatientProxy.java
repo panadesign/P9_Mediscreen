@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface MicroServicePatientProxy {
 
     @GetMapping("/patients/{id}")
-    Optional<PatientBean> getPatientById(@PathVariable("id") Integer id); // Todo <- Optional
+    Optional<PatientBean> getPatientById(@PathVariable("id") Integer id);
 
 }
