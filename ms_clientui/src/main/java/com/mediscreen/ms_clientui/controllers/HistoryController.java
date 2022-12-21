@@ -46,6 +46,7 @@ public class HistoryController {
     }
 
 
+    // @PostMapping("/patients/{id}/history/add")
     @PostMapping("/patHistory/add")
     public String add(Model model, @RequestParam("id") Integer id, @Valid NoteBean note, BindingResult result) {
         log.debug("Add note for patient with id " + id);
