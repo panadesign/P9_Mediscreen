@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,6 +19,10 @@ public class History {
     @Id
     private Integer patientId;
     private List<Observation> observations;
+
+    public History(Integer id) {
+        this(id, new ArrayList<>());
+    }
 
     public History addObservation(String note) {
         observations.add(new Observation(note));

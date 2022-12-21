@@ -1,6 +1,7 @@
 package com.mediscreen.ms_clientui.controllers;
 
 import com.mediscreen.ms_clientui.beans.HistoryBean;
+import com.mediscreen.ms_clientui.beans.NoteBean;
 import com.mediscreen.ms_clientui.beans.PatientBean;
 import com.mediscreen.ms_clientui.proxies.MicroServiceHistoryProxy;
 import lombok.extern.log4j.Log4j2;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
@@ -23,6 +25,8 @@ public class HistoryController {
         this.microServiceHistoryProxy = microServiceHistoryProxy;
     }
 
+
+    // @GetMapping("/patients/{id}/history")
     @GetMapping("/patHistory")
     public String get(Model model, @RequestParam("id") Integer id) {
         log.debug("Access to patient's all notes");
@@ -32,27 +36,29 @@ public class HistoryController {
         return "history/patientHistory";
     }
 
+    // @GetMapping("/patients/{id}/history/add")
     @GetMapping("/patHistory/add")
-    public String addForm(@RequestParam("id") Integer id) {
+    public String addForm(Model model, @RequestParam("id") Integer id) {
         log.debug("Access to adding form for a new note");
-        microServiceHistoryProxy.get(id);
+        model.addAttribute("id", id);
+        model.addAttribute("noteBean", new NoteBean());
         return "history/historyAdd";
     }
 
 
     @PostMapping("/patHistory/add")
-    public String add(Model model, @RequestParam("id") Integer patId, @RequestParam("e") String note, BindingResult result) {
-        log.debug("Add note for patient with id " + patId);
+    public String add(Model model, @RequestParam("id") Integer id, @Valid NoteBean note, BindingResult result) {
+        log.debug("Add note for patient with id " + id);
 
         if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());
             return "history/historyAdd";
         }
 
-        HistoryBean history = microServiceHistoryProxy.add(patId, note);
+        HistoryBean history = microServiceHistoryProxy.add(id, note.getNote());
         model.addAttribute("history", history);
 
-        return "redirect:/history/patientHistory";
+        return "redirect:/patHistory?id=" + id;
     }
 }
 

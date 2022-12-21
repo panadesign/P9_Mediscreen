@@ -22,21 +22,12 @@ public class HistoryServiceImpl implements HistoryService{
     }
 
     public History getHistoryById(Integer id) {
-        return historyRepository.findById(id).orElseThrow(() -> new ResourceNotExistingException("Patient's history with id " + id + " doesn't exist."));
+        return historyRepository.findById(id).orElse(new History(id));
     }
 
     public History addObservation(Integer id, String note) {
-
-        if(historyRepository.findById(id).isPresent()) {
-            History history = getHistoryById(id);
-            history.addObservation(note);
-            return historyRepository.save(history);
-        }
-
-        else {
-            History history = new History(id, new ArrayList<>());
-            history.addObservation(note);
-            return historyRepository.save(history);
-        }
+        History history = getHistoryById(id);
+        history.addObservation(note);
+        return historyRepository.save(history);
     }
 }
