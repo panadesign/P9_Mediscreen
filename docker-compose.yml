@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   mysqldb:
@@ -6,24 +6,34 @@ services:
     networks:
       - patientNetwork-mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=patientLocale
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD= root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: patientLocale
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    restart: unless-stopped
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      interval: 5s
+      timeout: 5s
+      retries: 55
     ports:
       - "3308:3306"
 
   ms_patient:
-    image: ms_patient:latest
+    build: ms_patient
+    restart: on-failure
     ports:
       - "8081:8081"
     networks:
       - patientNetwork-mysql
     depends_on:
-      - mysqldb
+      mysqldb:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/patientLocale?useSSL=false
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: user
 
 networks:
   patientNetwork-mysql:
     driver: bridge
-
-
