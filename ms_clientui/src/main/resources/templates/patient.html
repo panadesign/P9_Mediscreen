@@ -35,8 +35,8 @@
                 <strong>Phone number</strong>
                 <span th:text="${patient.phone}"></span>
             </p>
-            <a th:href="@{/patHistory?id={id}(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Accéder aux notes</a>
-            <a th:href="@{/patHistory/add?id={id}(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Ajouter une note</a>
+            <a th:href="@{/patients/{id}/history(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Accéder aux notes</a>
+            <a th:href="@{/patients/{id}/history/add(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Ajouter une note</a>
             <a th:href="@{/patients}" th:method="get" class="btn btn-secondary">Retour</a>
         </div>
     </div>

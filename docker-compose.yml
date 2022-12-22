@@ -34,6 +34,29 @@ services:
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: user
 
+  mongodb:
+    image: mongo:4.2.2
+    networks:
+      - patientNetwork-mysql
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=history
+      - MONGO_INITDB_ROOT_USERNAME=
+      - MONGO_INITDB_ROOT_PASSWORD=
+    ports:
+      - "27017:27017"
+
+  ms_history:
+    build: ms_history
+    restart: on-failure
+    ports:
+      - "8082:8082"
+    networks:
+      - patientNetwork-mysql
+    depends_on:
+      - mongodb
+      - ms_patient
+
 networks:
   patientNetwork-mysql:
     driver: bridge
