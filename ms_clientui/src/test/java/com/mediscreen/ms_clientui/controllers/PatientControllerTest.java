@@ -21,60 +21,60 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class PatientControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    WebApplicationContext webApplicationContext;
-
-    protected void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
-
-    protected String mapToJson(Object obj) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(obj);
-    }
-
-    @Test
-    void home() throws Exception {
-        mockMvc.perform(get("/")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void getAllPatients() throws Exception {
-        mockMvc.perform(get("/patients")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void getPatientById() throws Exception {
-        PatientBean patientBean = new PatientBean(1, "lastnameTest", "firstnameTest", "M", new Date(), "AddressTest", "phoneTest");;
-        mockMvc.perform(get("/patients/{id}", patientBean.getId())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void formUpdatePatient() throws Exception {
-        PatientBean patientBean = new PatientBean(1, "lastnameTest", "firstnameTest", "M", new Date(), "AddressTest", "phoneTest");;
-        mockMvc.perform(get("/patients/{id}/edit", patientBean.getId())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void updatePatient() {
-    }
-
-    @Test
-    void formAddPatient() {
-    }
-
-    @Test
-    void addPatient() {
-    }
+//    @Autowired
+//    private MockMvc mockMvc;
+//
+//    @Autowired
+//    WebApplicationContext webApplicationContext;
+//
+//    protected void setUp() {
+//        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+//    }
+//
+//    protected String mapToJson(Object obj) throws JsonProcessingException {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        return objectMapper.writeValueAsString(obj);
+//    }
+//
+//    @Test
+//    void home() throws Exception {
+//        mockMvc.perform(get("/")
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+//    }
+//
+//    @Test
+//    void getAllPatients() throws Exception {
+//        mockMvc.perform(get("/patients")
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+//    }
+//
+//    @Test
+//    void getPatientById() throws Exception {
+//        PatientBean patientBean = new PatientBean(1, "lastnameTest", "firstnameTest", "M", new Date(), "AddressTest", "phoneTest");;
+//        mockMvc.perform(get("/patients/{id}", patientBean.getId())
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+//    }
+//
+//    @Test
+//    void formUpdatePatient() throws Exception {
+//        PatientBean patientBean = new PatientBean(1, "lastnameTest", "firstnameTest", "M", new Date(), "AddressTest", "phoneTest");;
+//        mockMvc.perform(get("/patients/{id}/edit", patientBean.getId())
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+//    }
+//
+//    @Test
+//    void updatePatient() {
+//    }
+//
+//    @Test
+//    void formAddPatient() {
+//    }
+//
+//    @Test
+//    void addPatient() {
+//    }
 }

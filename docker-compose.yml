@@ -5,7 +5,11 @@ services:
     image: mysql/mysql-server:latest
     networks:
       - patientNetwork-mysql
+#    command: --init-file /data/application/init.sql
+#    volumes:
+#      - ./init.sql:/data/application/init.sql
     environment:
+      MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: patientLocale
       MYSQL_USER: user
@@ -19,21 +23,6 @@ services:
     ports:
       - "3308:3306"
 
-  ms_patient:
-    build: ms_patient
-    restart: on-failure
-    ports:
-      - "8081:8081"
-    networks:
-      - patientNetwork-mysql
-    depends_on:
-      mysqldb:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/patientLocale?useSSL=false
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: user
-
   mongodb:
     image: mongo:4.2.2
     networks:
@@ -46,6 +35,23 @@ services:
     ports:
       - "27017:27017"
 
+  ms_patient:
+    build: ms_patient
+    restart: on-failure
+    ports:
+      - "8081:8081"
+    networks:
+      - patientNetwork-mysql
+    volumes:
+      - my-datavolume:/var/lib/mysql
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/patientLocale?useSSL=false
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: user
+
   ms_history:
     build: ms_history
     restart: on-failure
@@ -57,6 +63,20 @@ services:
       - mongodb
       - ms_patient
 
+  ms_clientui:
+    build: ms_clientui
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    networks:
+      - patientNetwork-mysql
+    depends_on:
+      - ms_patient
+      - ms_history
+
 networks:
   patientNetwork-mysql:
     driver: bridge
+
+volumes:
+  my-datavolume:
