@@ -2,31 +2,30 @@ version: '3.8'
 
 services:
   mysqldb:
-    image: mysql/mysql-server:latest
-    networks:
-      - patientNetwork-mysql
+    image: mysql
 #    command: --init-file /data/application/init.sql
 #    volumes:
 #      - ./init.sql:/data/application/init.sql
     environment:
-      MYSQL_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: patientLocale
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=patientLocale
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+      - MYSQL_TCP_PORT=3308
     restart: unless-stopped
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
       interval: 5s
       timeout: 5s
       retries: 55
+    expose:
+      - 3308
     ports:
-      - "3308:3306"
+      - "3308:3308"
 
   mongodb:
     image: mongo:4.2.2
-    networks:
-      - patientNetwork-mysql
     restart: unless-stopped
     environment:
       - MONGO_INITDB_DATABASE=history
@@ -40,15 +39,13 @@ services:
     restart: on-failure
     ports:
       - "8081:8081"
-    networks:
-      - patientNetwork-mysql
-    volumes:
-      - my-datavolume:/var/lib/mysql
+#    volumes:
+#      - my-datavolume:/var/lib/mysql
     depends_on:
       mysqldb:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/patientLocale?useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3308/patientLocale?useSSL=false
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: user
 
@@ -57,8 +54,6 @@ services:
     restart: on-failure
     ports:
       - "8082:8082"
-    networks:
-      - patientNetwork-mysql
     depends_on:
       - mongodb
       - ms_patient
@@ -68,15 +63,10 @@ services:
     restart: on-failure
     ports:
       - "8080:8080"
-    networks:
-      - patientNetwork-mysql
     depends_on:
       - ms_patient
       - ms_history
 
-networks:
-  patientNetwork-mysql:
-    driver: bridge
 
 volumes:
   my-datavolume:
