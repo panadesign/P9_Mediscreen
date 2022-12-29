@@ -2,11 +2,41 @@
   {
     "_class": "com.mediScreen.ms_patient.model.Patient",
     "id": 1,
-    "lastname": "Charpentier",
-    "firstname": "Jeremy",
-    "birth": "1984-05-01",
+    "lastname": "TestNone",
+    "firstname": "Test",
+    "birth": "1966-12-31",
+    "gender": "F",
+    "address": "1 Brookside St",
+    "phone": "100-222-3333"
+  },
+  {
+    "_class": "com.mediScreen.ms_patient.model.Patient",
+    "id": 2,
+    "lastname": "TestBorderline",
+    "firstname": "Test",
+    "birth": "1945-06-24",
     "gender": "M",
-    "address": "4 rue de la rue",
-    "phone": "0011"
+    "address": "2 High St",
+    "phone": "200-333-4444"
+  },
+  {
+    "_class": "com.mediScreen.ms_patient.model.Patient",
+    "id": 3,
+    "lastname": "TestInDanger",
+    "firstname": "Test",
+    "birth": "2004-06-18",
+    "gender": "M",
+    "address": "3 Club Road",
+    "phone": "300-444-5555"
+  },
+  {
+    "_class": "com.mediScreen.ms_patient.model.Patient",
+    "id": 4,
+    "lastname": "TestEarlyOnset",
+    "firstname": "Test",
+    "birth": "2002-06-28",
+    "gender": "F",
+    "address": "4 Valley Dr",
+    "phone": "400-555-6666"
   }
 ]

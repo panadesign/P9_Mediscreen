@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ class PatientServiceImplTest {
     void getPatients() {
         //GIVEN
         List<Patient> allPatients = new ArrayList<>();
-        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+        Date dateTime = new Date();
 
         allPatients.add(new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345"));
         allPatients.add(new Patient(2, "Lastname2", "Firstname2", dateTime, "F", "Address2", "67890"));
@@ -50,8 +51,7 @@ class PatientServiceImplTest {
     @Test
     void getPatientById() {
         List<Patient> allPatients = new ArrayList<>();
-        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
-
+        Date dateTime = new Date();
         Patient patient1 = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
         allPatients.add(patient1);
 
@@ -65,7 +65,7 @@ class PatientServiceImplTest {
     @Test
     void updatePatient() {
         //GIVEN
-        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+        Date dateTime = new Date();
         Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN
@@ -82,7 +82,7 @@ class PatientServiceImplTest {
     @Test
     void addNewPatient() {
         //GIVEN
-        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+        Date dateTime = new Date();
         Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN

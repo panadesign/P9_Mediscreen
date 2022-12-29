@@ -27,7 +27,7 @@ public class Patient {
     @NotEmpty(message = "Firstname cannot be empty")
     private String firstname;
     @NotNull
-    private ZonedDateTime birth;
+    private Date birth;
     @NotEmpty(message = "Gender cannot be empty")
     private String gender;
     @NotEmpty(message = "Address cannot be empty")
