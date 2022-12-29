@@ -1,0 +1,12 @@
+[
+  {
+    "_class": "com.mediScreen.ms_patient.model.Patient",
+    "id": 1,
+    "lastname": "Charpentier",
+    "firstname": "Jeremy",
+    "birth": "1984-05-01",
+    "gender": "M",
+    "address": "4 rue de la rue",
+    "phone": "0011"
+  }
+]

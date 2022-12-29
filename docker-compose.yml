@@ -23,6 +23,8 @@ services:
       - 3308
     ports:
       - "3308:3308"
+    volumes:
+    - dbdata:/var/lib/mysql
 
   mongodb:
     image: mongo:4.2.2
@@ -39,8 +41,8 @@ services:
     restart: on-failure
     ports:
       - "8081:8081"
-#    volumes:
-#      - my-datavolume:/var/lib/mysql
+    volumes:
+      - dbdata:/var/lib/mysql
     depends_on:
       mysqldb:
         condition: service_healthy
@@ -65,8 +67,8 @@ services:
       - "8080:8080"
     depends_on:
       - ms_patient
-      - ms_history
+#      - ms_history
 
 
 volumes:
-  my-datavolume:
+  dbdata:
