@@ -1,0 +1,11 @@
+[
+	{
+		"_class": "com.mediscreen.ms_history.domain.History",
+		"patientId": 1,
+		"observation" : [
+			{
+				"note": "Patient: TestNone Practitioner's notes/recommendations: Patient states that they are 'feeling terrific' Weight at or below recommended level"
+			}
+		]
+	}
+]

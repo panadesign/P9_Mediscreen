@@ -1,5 +1,7 @@
 package com.mediscreen.ms_history;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -10,6 +12,8 @@ public class MsHistoryApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MsHistoryApplication.class, args);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
     }
 
 }

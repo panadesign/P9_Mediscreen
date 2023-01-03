@@ -7,7 +7,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mediScreen.ms_patient.model.Patient;
+import com.mediScreen.ms_patient.repository.PatientRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,9 +23,12 @@ import org.springframework.web.context.WebApplicationContext;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,6 +38,9 @@ class PatientControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Mock
+    private PatientRepository patientRepository;
 
     @Autowired
     WebApplicationContext webApplicationContext;
@@ -54,18 +62,17 @@ class PatientControllerTest {
 //                        .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(status().isOk());
 //    }
-//
-//
+
 //    @Test
 //    void patientById() throws Exception {
-//        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+//        Date dateTime = new Date();
 //        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 //
 //        mockMvc.perform(get("/patients/{id}", patient.getId())
 //                .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(status().isOk());
 //    }
-//
+
 //    @Test
 //    void updatePatient() throws Exception {
 //        String uri = "/patients/3";
@@ -81,7 +88,7 @@ class PatientControllerTest {
 //        assertEquals(200, status);
 //        assertEquals("0000", patient.getPhone());
 //    }
-//
+
 //    @Test
 //    void addPatient() throws Exception {
 //        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());

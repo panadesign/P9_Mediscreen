@@ -3,9 +3,6 @@ version: '3.8'
 services:
   mysqldb:
     image: mysql
-#    command: --init-file /data/application/init.sql
-#    volumes:
-#      - ./init.sql:/data/application/init.sql
     environment:
       - MYSQL_ROOT_USER=root
       - MYSQL_ROOT_PASSWORD=root
@@ -37,6 +34,7 @@ services:
       - "27017:27017"
 
   ms_patient:
+    container_name: ms_patient
     build: ms_patient
     restart: on-failure
     ports:
@@ -52,6 +50,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: user
 
   ms_history:
+    container_name: ms_history
     build: ms_history
     restart: on-failure
     ports:
@@ -61,13 +60,14 @@ services:
       - ms_patient
 
   ms_clientui:
+    container_name: ms_clientui
     build: ms_clientui
     restart: on-failure
     ports:
       - "8080:8080"
     depends_on:
       - ms_patient
-#      - ms_history
+      - ms_history
 
 
 volumes:

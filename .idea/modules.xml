@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/P9_Mediscreen.iml" filepath="$PROJECT_DIR$/.idea/P9_Mediscreen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms_eureka/eureka.iml" filepath="$PROJECT_DIR$/ms_eureka/eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms_clientui/ms_clientui.iml" filepath="$PROJECT_DIR$/ms_clientui/ms_clientui.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms_history/ms_history.iml" filepath="$PROJECT_DIR$/ms_history/ms_history.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms_patient/ms_patient.iml" filepath="$PROJECT_DIR$/ms_patient/ms_patient.iml" />
