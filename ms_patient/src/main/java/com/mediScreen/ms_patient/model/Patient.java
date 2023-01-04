@@ -1,17 +1,17 @@
 package com.mediScreen.ms_patient.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.type.ZonedDateTimeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "patient")
@@ -27,7 +27,7 @@ public class Patient {
     @NotEmpty(message = "Firstname cannot be empty")
     private String firstname;
     @NotNull
-    private Date birth;
+    private ZonedDateTime birth;
     @NotEmpty(message = "Gender cannot be empty")
     private String gender;
     @NotEmpty(message = "Address cannot be empty")

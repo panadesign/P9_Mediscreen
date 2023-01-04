@@ -1,6 +1,5 @@
 package com.mediScreen.ms_patient.service;
 
-import com.mediScreen.ms_patient.exceptions.ResourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
 import com.mediScreen.ms_patient.repository.PatientRepository;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +11,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +33,7 @@ class PatientServiceImplTest {
     void getPatients() {
         //GIVEN
         List<Patient> allPatients = new ArrayList<>();
-        Date dateTime = new Date();
+        ZonedDateTime dateTime = ZonedDateTime.now();
 
         allPatients.add(new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345"));
         allPatients.add(new Patient(2, "Lastname2", "Firstname2", dateTime, "F", "Address2", "67890"));
@@ -51,7 +49,7 @@ class PatientServiceImplTest {
     @Test
     void getPatientById() {
         List<Patient> allPatients = new ArrayList<>();
-        Date dateTime = new Date();
+        ZonedDateTime dateTime = ZonedDateTime.now();
         Patient patient1 = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
         allPatients.add(patient1);
 
@@ -65,7 +63,7 @@ class PatientServiceImplTest {
     @Test
     void updatePatient() {
         //GIVEN
-        Date dateTime = new Date();
+        ZonedDateTime dateTime = ZonedDateTime.now();
         Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN
@@ -82,7 +80,7 @@ class PatientServiceImplTest {
     @Test
     void addNewPatient() {
         //GIVEN
-        Date dateTime = new Date();
+        ZonedDateTime dateTime = ZonedDateTime.now();
         Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN

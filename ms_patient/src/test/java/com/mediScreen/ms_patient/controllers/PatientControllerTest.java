@@ -1,82 +1,74 @@
 package com.mediScreen.ms_patient.controllers;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.mediScreen.ms_patient.model.Patient;
-import com.mediScreen.ms_patient.repository.PatientRepository;
+import com.mediScreen.ms_patient.service.PatientServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.IOException;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+//@SpringBootTest
+//@AutoConfigureMockMvc
+@RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.MOCK,
+        classes = PatientController.class)
 class PatientControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
-
-    @Mock
-    private PatientRepository patientRepository;
-
     @Autowired
-    WebApplicationContext webApplicationContext;
+    private WebApplicationContext webApplicationContext;
 
-    protected void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
-
-    protected String mapToJson(Object obj) throws JsonProcessingException {
-        ObjectMapper objectMapper = JsonMapper.builder()
-                .addModule(new JavaTimeModule())
+    @BeforeEach
+    public void init() {
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(webApplicationContext)
                 .build();
-        return objectMapper.writeValueAsString(obj);
     }
+
+    @MockBean
+    private PatientServiceImpl patientService;
+
+//    protected String mapToJson(Object obj) throws JsonProcessingException {
+//        ObjectMapper objectMapper = JsonMapper.builder()
+//                .addModule(new JavaTimeModule())
+//                .build();
+//        return objectMapper.writeValueAsString(obj);
+//    }
 
 //    @Test
 //    void allPatients() throws Exception {
-//        mockMvc.perform(get("/patients")
+//        mockMvc.perform(get("/patients"))
 //                        .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(status().isOk());
 //    }
 
 //    @Test
 //    void patientById() throws Exception {
-//        Date dateTime = new Date();
+//        ZonedDateTime dateTime = ZonedDateTime.now();
 //        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 //
 //        mockMvc.perform(get("/patients/{id}", patient.getId())
 //                .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(status().isOk());
 //    }
-
+//
 //    @Test
 //    void updatePatient() throws Exception {
 //        String uri = "/patients/3";
-//        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+//        ZonedDateTime dateTime = ZonedDateTime.now();
 //        Patient patient = new Patient(3, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 //
 //        patient.setPhone("0000");
@@ -88,10 +80,10 @@ class PatientControllerTest {
 //        assertEquals(200, status);
 //        assertEquals("0000", patient.getPhone());
 //    }
-
+//
 //    @Test
 //    void addPatient() throws Exception {
-//        ZonedDateTime dateTime = ZonedDateTime.from(ZonedDateTime.now());
+//        ZonedDateTime dateTime = ZonedDateTime.now();
 //        String uri = "/patients";
 //        Patient patient = new Patient();
 //        patient.setId(2);
