@@ -1,6 +1,9 @@
 package com.mediScreen.ms_patient.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,4 +38,21 @@ public class Patient {
     @NotEmpty(message = "Phone number cannot be empty")
     private String phone;
 
+    ObjectMapper mapper = JsonMapper.builder()
+            .addModule(new JavaTimeModule())
+            .build();
+
+    public Patient(Integer id, String lastname, String firstname, ZonedDateTime birth, String gender, String address, String phone) {
+        this.id = id;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.birth = birth;
+        this.gender = gender;
+        this.address = address;
+        this.phone = phone;
+    }
+
+    public Patient(ObjectMapper mapper) {
+        this.mapper = mapper;
+    }
 }
