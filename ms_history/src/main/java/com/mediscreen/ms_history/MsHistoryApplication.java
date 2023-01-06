@@ -12,8 +12,6 @@ public class MsHistoryApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MsHistoryApplication.class, args);
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
     }
 
 }

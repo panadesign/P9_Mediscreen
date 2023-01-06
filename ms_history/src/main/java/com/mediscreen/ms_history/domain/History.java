@@ -30,13 +30,14 @@ public class History {
     }
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     static class Observation {
         private String note;
-        private LocalDateTime dateTime;
+        private LocalDateTime dateTime = LocalDateTime.now() ;
 
         public Observation(String note) {
             this.note = note;
-            dateTime = LocalDateTime.now();
         }
     }
 }
