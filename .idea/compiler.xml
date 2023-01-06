@@ -11,12 +11,14 @@
         <module name="ms_history" />
         <module name="cloudConfig" />
         <module name="ms_patient" />
+        <module name="ms_eureka" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cloudConfig" target="11" />
       <module name="eureka" target="11" />
       <module name="ms_clientui" target="11" />
+      <module name="ms_eureka" target="11" />
       <module name="ms_history" target="11" />
       <module name="ms_observation" target="11" />
       <module name="ms_patient" target="11" />
@@ -27,6 +29,7 @@
       <module name="cloudConfig" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="ms_clientui" options="-parameters" />
+      <module name="ms_eureka" options="-parameters" />
       <module name="ms_history" options="-parameters" />
       <module name="ms_observation" options="-parameters" />
       <module name="ms_patient" options="-parameters" />
