@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/ms_clientui/pom.xml" />
         <option value="$PROJECT_DIR$/ms_history/pom.xml" />
         <option value="$PROJECT_DIR$/ms_observation/pom.xml" />
+        <option value="$PROJECT_DIR$/config-server-repo/cloudConfig/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudConfig/pom.xml" />
       </list>
     </option>
   </component>

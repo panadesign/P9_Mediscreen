@@ -9,10 +9,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ms_clientui" />
         <module name="ms_history" />
+        <module name="cloudConfig" />
         <module name="ms_patient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="cloudConfig" target="11" />
       <module name="eureka" target="11" />
       <module name="ms_clientui" target="11" />
       <module name="ms_history" target="11" />
@@ -22,6 +24,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloudConfig" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="ms_clientui" options="-parameters" />
       <module name="ms_history" options="-parameters" />
