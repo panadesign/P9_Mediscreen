@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +22,7 @@ public class PatientBean {
     private String gender;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
-    private ZonedDateTime birth;
+    private Date birth;
     @NotBlank(message = "Address cannot be empty")
     private String address;
     @NotBlank(message = "Phone number cannot be empty")

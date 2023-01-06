@@ -40,21 +40,4 @@ public class Patient {
     @NotEmpty(message = "Phone number cannot be empty")
     private String phone;
 
-    ObjectMapper mapper = JsonMapper.builder()
-            .addModule(new JavaTimeModule())
-            .build();
-
-    public Patient(Integer id, String lastname, String firstname, ZonedDateTime birth, String gender, String address, String phone) {
-        this.id = id;
-        this.lastname = lastname;
-        this.firstname = firstname;
-        this.birth = birth;
-        this.gender = gender;
-        this.address = address;
-        this.phone = phone;
-    }
-
-    public Patient(ObjectMapper mapper) {
-        this.mapper = mapper;
-    }
 }
