@@ -2,9 +2,6 @@ package com.mediScreen.ms_patient.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;

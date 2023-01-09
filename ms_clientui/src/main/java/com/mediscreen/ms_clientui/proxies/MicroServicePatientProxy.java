@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Service
-@FeignClient(name = "microservice-patients", url = "${feign.ms_patient.url}")
+@FeignClient(name = "microservice-patients", url = "${feign.ms-patient.url}")
 public interface MicroServicePatientProxy {
 
     @GetMapping(value = "/patients")

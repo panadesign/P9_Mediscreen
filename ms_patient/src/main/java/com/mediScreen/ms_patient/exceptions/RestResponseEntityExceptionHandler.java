@@ -15,11 +15,4 @@ public class RestResponseEntityExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
-
-    /*
-    @ExceptionHandler(value = {ProutException.class})
-    protected ResponseEntity<Object> resourceNotExistingException(RuntimeException ex, WebRequest request) {
-        return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
-    }
-    */
 }

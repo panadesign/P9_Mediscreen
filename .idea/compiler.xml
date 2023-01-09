@@ -9,9 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ms_clientui" />
         <module name="ms_history" />
-        <module name="cloudConfig" />
         <module name="ms_patient" />
-        <module name="ms_eureka" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

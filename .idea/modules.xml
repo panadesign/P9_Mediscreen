@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/P9_Mediscreen.iml" filepath="$PROJECT_DIR$/.idea/P9_Mediscreen.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cloudConfig/cloudConfig.iml" filepath="$PROJECT_DIR$/cloudConfig/cloudConfig.iml" />
-      <module fileurl="file://$PROJECT_DIR$/config-server-repo/config-server-repo.iml" filepath="$PROJECT_DIR$/config-server-repo/config-server-repo.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms_eureka/eureka.iml" filepath="$PROJECT_DIR$/ms_eureka/eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms_clientui/ms_clientui.iml" filepath="$PROJECT_DIR$/ms_clientui/ms_clientui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ms_eureka/ms_eureka.iml" filepath="$PROJECT_DIR$/ms_eureka/ms_eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms_history/ms_history.iml" filepath="$PROJECT_DIR$/ms_history/ms_history.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms_patient/ms_patient.iml" filepath="$PROJECT_DIR$/ms_patient/ms_patient.iml" />
     </modules>

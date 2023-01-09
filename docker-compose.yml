@@ -33,10 +33,10 @@ services:
     ports:
       - "27017:27017"
 
-  ms_patient:
-    container_name: ms_patient
-    build: ms_patient
-    image: ms_patient:latest
+  ms-patient:
+    container_name: ms-patient
+    build: ms-patient
+    image: ms-patient:latest
     ports:
       - "8081:8081"
     volumes:
@@ -49,27 +49,27 @@ services:
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: user
 
-  ms_history:
-    container_name: ms_history
-    build: ms_history
+  ms-history:
+    container_name: ms-history
+    build: ms-history
+    image: ms-history:latest
     ports:
       - "8082:8082"
     depends_on:
       - mongodb
-      - ms_patient
+      - ms-patient
 
-  ms_clientui:
-    container_name: ms_clientui
-    build: ms_clientui
-    image: clientui:latest
+  ms-clientui:
+    container_name: ms-clientui
+    build: ms-clientui
+    image: ms-clientui:latest
     ports:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
-      - ms_patient
-      - ms_history
-
+      - ms-patient
+      - ms-history
 
 volumes:
   dbdata:

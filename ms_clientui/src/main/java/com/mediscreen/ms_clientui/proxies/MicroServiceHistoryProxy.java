@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "microservice-history", url = "${feign.ms_history.url}")
+@FeignClient(name = "microservice-history", url = "${feign.ms-history.url}")
 public interface MicroServiceHistoryProxy {
 
     @GetMapping("/patients/{id}/history")
