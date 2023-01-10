@@ -10,5 +10,4 @@ public interface PatientService {
     Optional<Patient> findById(Integer id);
     Patient update(Integer id, Patient patient);
     Patient add(Patient patient);
-    boolean patientExist(Integer id);
 }

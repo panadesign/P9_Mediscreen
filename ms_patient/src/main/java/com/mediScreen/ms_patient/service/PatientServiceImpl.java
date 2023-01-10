@@ -44,8 +44,4 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.save(patient);
     }
 
-    public boolean patientExist(Integer id) {
-        return patientRepository.existsById(id);
-    }
-
 }

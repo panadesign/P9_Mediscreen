@@ -5,15 +5,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mediScreen.ms_patient.model.Patient;
+import com.mediScreen.ms_patient.repository.PatientRepository;
 import com.mediScreen.ms_patient.service.PatientServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -29,12 +34,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 //@SpringBootTest
 //@AutoConfigureMockMvc
-@RunWith(SpringRunner.class)
-@AutoConfigureMockMvc
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
+@WebMvcTest(controllers = PatientController.class)
+
 class PatientControllerTest {
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private PatientRepository patientRepository;
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -88,26 +97,19 @@ class PatientControllerTest {
         assertEquals("0000", patient.getPhone());
     }
 
-//    @Test
-//    void addPatient() throws Exception {
-//        String uri = "/patients";
-//
-//        Patient patient = new Patient();
-//        Date dateTime = new Date();
-//
-//        patient.setId(2);
-//        patient.setLastname("lastNameTest");
-//        patient.setFirstname("firstNameTest");
-//        patient.setBirth(dateTime);
-//        patient.setGender("F");
-//        patient.setAddress("addressTest");
-//        patient.setPhone("phoneTest");
-//
-//        String inputJson = mapToJson(patient);
-//        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri)
-//                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-//
-//        int status = mvcResult.getResponse().getStatus();
-//        assertEquals(201, status);
-//    }
+    @Test
+    void addPatient() throws Exception {
+        String uri = "/patients";
+
+        Patient patient = new Patient(2, "lastNameTest", "firstNameTest", new Date(), "F", "Address Test", "Phone Test");
+
+        patientRepository.save(patient);
+
+        String inputJson = mapToJson(patient);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri)
+                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(201, status);
+    }
 }
