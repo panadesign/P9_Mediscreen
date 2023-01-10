@@ -24,27 +24,27 @@
         <div th:each="patient : ${patients}" class="col-md-12 my-1 blocPatient">
             <div class="patient">
                 <p>
-                    <strong>Lastname: </strong>
+                    <strong>Nom : </strong>
                     <span th:text="${patient.lastname}"></span>
                 </p>
                 <p>
-                    <strong>Firstname: </strong>
+                    <strong>Prénom: </strong>
                     <span th:text="${patient.firstname}"></span>
                 </p>
                 <p>
-                    <strong>Birthdate: </strong>
+                    <strong>Date de naissance: </strong>
                     <span th:text="${#dates.format(patient.birth, 'dd/MM/yyyy')}"></span>
                 </p>
                 <p>
-                    <strong>Gender: </strong>
+                    <strong>Sexe : </strong>
                     <span th:text="${patient.gender}"></span>
                 </p>
                 <p>
-                    <strong>Address</strong>
+                    <strong>Adresse : </strong>
                     <span th:text="${patient.address}"></span>
                 </p>
                 <p>
-                    <strong>Phone number</strong>
+                    <strong>Numéro de téléphone : </strong>
                     <span th:text="${patient.phone}"></span>
                 </p>
                 <a th:href="@{/patients/{id}/edit(id=${patient.getId})}" th:method="get" class="btn btn-primary">Mettre à jour</a>
