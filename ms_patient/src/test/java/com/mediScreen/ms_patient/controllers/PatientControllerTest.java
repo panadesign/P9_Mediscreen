@@ -32,9 +32,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@SpringBootTest
-//@AutoConfigureMockMvc
-//@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = PatientController.class)
 

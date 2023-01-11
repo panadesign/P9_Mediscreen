@@ -41,7 +41,7 @@ public class PatientController {
     }
 
     @GetMapping("/patients/{id}/edit")
-    public String formUpdatePatient(Model model, @RequestParam("id") Integer id) {
+    public String formUpdatePatient(Model model, @PathVariable("id") Integer id) {
 
         log.debug("Access update form to patient with id = " + id);
 
@@ -51,7 +51,7 @@ public class PatientController {
     }
 
     @PostMapping("/patients/{id}/edit")
-    public String updatePatient(Model model, @RequestParam("id") Integer id, @Valid PatientBean patientBean, BindingResult result) {
+    public String updatePatient(Model model, @PathVariable("id") Integer id, @Valid PatientBean patientBean, BindingResult result) {
 
         if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());

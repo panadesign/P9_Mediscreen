@@ -53,7 +53,7 @@ public class HistoryController {
         HistoryBean history = microServiceHistoryProxy.add(id, note.getNote());
         model.addAttribute("history", history);
 
-        return "redirect:/patHistory?id=" + id;
+        return "redirect:/patients/{id}/history";
     }
 }
 
