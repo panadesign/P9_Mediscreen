@@ -56,4 +56,3 @@ public class HistoryController {
         return "redirect:/patients/{id}/history";
     }
 }
-
