@@ -1,5 +1,6 @@
 package com.mediscreen.ms_history.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,8 @@ public class History {
     static class Observation {
         @NotEmpty(message = "Note cannot be empty")
         private String note;
+
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime dateTime = LocalDateTime.now() ;
 
         public Observation(String note) {

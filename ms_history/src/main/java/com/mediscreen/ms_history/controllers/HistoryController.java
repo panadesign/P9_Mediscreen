@@ -18,11 +18,13 @@ public class HistoryController {
     }
 
     @GetMapping("/patients/{id}/history")
+    @ResponseStatus(HttpStatus.OK)
     public History get(@PathVariable Integer id) {
         return historyService.getHistoryById(id);
     }
 
     @PostMapping("/patients/{id}/history/add")
+    @ResponseStatus(HttpStatus.CREATED)
     public History add(@PathVariable("id") Integer patId,
                        @RequestParam("e") String note) {
 
