@@ -34,7 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = PatientController.class)
-
 class PatientControllerTest {
     @Autowired
     private MockMvc mockMvc;

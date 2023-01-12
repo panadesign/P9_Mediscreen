@@ -148,7 +148,9 @@
                 <configuration>
                     <excludes>
                         <exclude>com/mediscreen/ms_history/domain/*</exclude>
-                        <exclude>com/mediscreen/ms_history/MsHistoryApplication.java</exclude>
+                        <exclude>com/mediscreen/ms_history/beans/*</exclude>
+                        <exclude>com/mediscreen/ms_history/config/*</exclude>
+                        <exclude>com/mediscreen/ms_history/MsHistoryApplication.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>

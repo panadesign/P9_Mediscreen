@@ -3,6 +3,7 @@ package com.mediscreen.ms_history.controllers;
 import com.mediscreen.ms_history.domain.History;
 import com.mediscreen.ms_history.service.HistoryService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @Log4j2

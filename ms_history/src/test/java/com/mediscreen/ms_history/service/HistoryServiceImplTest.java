@@ -10,9 +10,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -48,5 +51,19 @@ class HistoryServiceImplTest {
 
     @Test
     void addObservation() {
+        //GIVEN
+        History history = new History(1, new ArrayList<>());
+
+        //WHEN
+        when(historyRepository.save(history)).thenAnswer(h -> h.getArguments()[0]);
+        History noteToAdd = historyServiceImpl.addObservation(1, "new note");
+
+        //THEN
+        assertThat(noteToAdd)
+                .satisfies(p -> {
+                            assertThat(history.getPatientId()).hasToString("1");
+                            assertThat(history.getObservations().size()).isNotNull();
+                        }
+                );
     }
 }
