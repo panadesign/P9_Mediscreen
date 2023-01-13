@@ -1,6 +1,9 @@
 package com.mediscreen.ms_history.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -19,12 +22,12 @@ public class ObjectMapperConfig {
     private static final String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
-        return builder -> {
-            builder.simpleDateFormat(dateTimeFormat);
-            builder.serializers(new LocalDateSerializer(DateTimeFormatter.ofPattern(dateFormat)));
-            builder.serializers(new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(dateTimeFormat)));
-        };
+    public JsonMapper objectMapper() {
+        JsonMapper mapper = new JsonMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, true);
+
+        return mapper;
     }
 
 

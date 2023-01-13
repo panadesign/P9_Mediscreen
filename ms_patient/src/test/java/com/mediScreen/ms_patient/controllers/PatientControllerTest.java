@@ -7,38 +7,41 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mediScreen.ms_patient.model.Patient;
 import com.mediScreen.ms_patient.repository.PatientRepository;
 import com.mediScreen.ms_patient.service.PatientServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = PatientController.class)
+@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Slf4j
+@ActiveProfiles("test")
 class PatientControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Autowired
     private PatientRepository patientRepository;
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -50,7 +53,7 @@ class PatientControllerTest {
                 .build();
     }
 
-    @MockBean
+    @Autowired
     private PatientServiceImpl patientService;
 
     protected String mapToJson(Object obj) throws JsonProcessingException {
@@ -62,9 +65,12 @@ class PatientControllerTest {
 
     @Test
     void allPatients() throws Exception {
-        mockMvc.perform(get("/patients")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+        List<Patient> patientList = patientRepository.findAll();
+
+        ResultActions resultActions = mockMvc.perform(get("/patients")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        resultActions.andExpect(status().isOk());
     }
 
     @Test
@@ -73,7 +79,7 @@ class PatientControllerTest {
         Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         mockMvc.perform(get("/patients/{id}", patient.getId())
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
@@ -107,5 +113,9 @@ class PatientControllerTest {
 
         int status = mvcResult.getResponse().getStatus();
         assertEquals(201, status);
+    }
+
+    private <T> T responseToObject(ResultActions resultAction, Class<T> objectClass) throws Exception {
+        return new ObjectMapper().readValue(resultAction.andReturn().getResponse().getContentAsString(), objectClass);
     }
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
@@ -38,7 +39,7 @@ public class History {
         @NotEmpty(message = "Note cannot be empty")
         private String note;
 
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime dateTime = LocalDateTime.now() ;
 
         public Observation(String note) {
