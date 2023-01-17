@@ -1,5 +1,6 @@
 package com.mediScreen.ms_patient.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
@@ -12,16 +13,20 @@ import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFacto
 @Configuration
 public class MapperConfiguration {
 
+    @Primary
     @Bean
-    public Jackson2RepositoryPopulatorFactoryBean getRespositoryPopulator() {
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+    }
+
+    @Bean
+    public Jackson2RepositoryPopulatorFactoryBean getRespositoryPopulator(ObjectMapper objectMapper) {
         Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
+        factory.setMapper(objectMapper);
         factory.setResources(new Resource[]{new ClassPathResource("patient-data.json")});
         return factory;
     }
 
-    @Primary
-    @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper().registerModule(new JavaTimeModule());
-    }
 }
