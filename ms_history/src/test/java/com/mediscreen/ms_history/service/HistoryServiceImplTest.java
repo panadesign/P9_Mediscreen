@@ -1,6 +1,6 @@
 package com.mediscreen.ms_history.service;
 
-import com.mediscreen.ms_history.domain.History;
+import com.mediscreen.ms_history.model.History;
 import com.mediscreen.ms_history.proxies.MicroServicePatientProxy;
 import com.mediscreen.ms_history.repository.HistoryRepository;
 import org.junit.jupiter.api.Assertions;
@@ -10,13 +10,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 

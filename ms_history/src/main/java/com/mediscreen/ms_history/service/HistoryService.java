@@ -1,9 +1,7 @@
 package com.mediscreen.ms_history.service;
 
 
-import com.mediscreen.ms_history.domain.History;
-
-import java.security.SecureRandom;
+import com.mediscreen.ms_history.model.History;
 
 public interface HistoryService {
     History getHistoryById(Integer id);

@@ -1,6 +1,6 @@
 package com.mediscreen.ms_history.controllers;
 
-import com.mediscreen.ms_history.domain.History;
+import com.mediscreen.ms_history.model.History;
 import com.mediscreen.ms_history.service.HistoryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;

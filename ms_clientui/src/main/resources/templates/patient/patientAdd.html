@@ -25,6 +25,7 @@
                         <p class="text-danger" th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}"></p>
                     </label>
                     <label for="gender">
+                        <input type="select" th:field="*{gender}" name="gender" placeholder="Sexe">
                         <input id="gender" class="form-control" th:field="*{gender}" type="text" name="gender" placeholder="Patient's gender">
                         <p class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
                     </label>

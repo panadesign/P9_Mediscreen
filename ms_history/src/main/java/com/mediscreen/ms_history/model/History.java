@@ -1,19 +1,14 @@
-package com.mediscreen.ms_history.domain;
+package com.mediscreen.ms_history.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +39,7 @@ public class History {
         private String note;
 
         @DateTimeFormat(pattern = "yyyy-MM-dd")
-        private LocalDateTime dateTime = LocalDateTime.now() ;
+        private ZonedDateTime dateTime = ZonedDateTime.now();
 
         public Observation(String note) {
             this.note = note;

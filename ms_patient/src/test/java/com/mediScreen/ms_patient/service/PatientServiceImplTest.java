@@ -2,6 +2,7 @@ package com.mediScreen.ms_patient.service;
 
 import com.mediScreen.ms_patient.model.Patient;
 import com.mediScreen.ms_patient.repository.PatientRepository;
+import org.joda.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,10 +34,10 @@ class PatientServiceImplTest {
     void getPatients() {
         //GIVEN
         List<Patient> allPatients = new ArrayList<>();
-        Date date = new Date();
+        LocalDate dateTime = LocalDate.now();
 
-        allPatients.add(new Patient(1, "Lastname", "Firstname", date, "M", "Address", "12345"));
-        allPatients.add(new Patient(2, "Lastname2", "Firstname2", date, "F", "Address2", "67890"));
+        allPatients.add(new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345"));
+        allPatients.add(new Patient(2, "Lastname2", "Firstname2", dateTime, "F", "Address2", "67890"));
 
         //WHEN
         when(mockPatientRepository.findAll()).thenReturn(allPatients);
@@ -48,8 +49,8 @@ class PatientServiceImplTest {
 
     @Test
     void getPatientById() {
-        Date date = new Date();
-        Patient patient1 = new Patient(1, "Lastname", "Firstname", date, "M", "Address", "12345");
+        LocalDate dateTime = LocalDate.now();
+        Patient patient1 = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         when(mockPatientRepository.findById(1)).thenReturn(Optional.of(patient1));
 
@@ -64,8 +65,8 @@ class PatientServiceImplTest {
     @Test
     void updatePatient() {
         //GIVEN
-        Date date = new Date();
-        Patient patient = new Patient(1, "Lastname", "Firstname", date, "M", "Address", "12345");
+        LocalDate dateTime = LocalDate.now();
+        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN
         when(mockPatientRepository.findById(patient.getId())).thenReturn(Optional.of(patient));
@@ -81,8 +82,8 @@ class PatientServiceImplTest {
     @Test
     void addNewPatient() {
         //GIVEN
-        Date date = new Date();
-        Patient patient = new Patient(1, "Lastname", "Firstname", date, "M", "Address", "12345");
+        LocalDate dateTime = LocalDate.now();
+        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
         //WHEN
         when(mockPatientRepository.save(patient)).thenAnswer(p -> p.getArguments()[0]);

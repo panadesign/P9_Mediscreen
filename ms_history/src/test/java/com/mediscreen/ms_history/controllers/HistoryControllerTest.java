@@ -16,14 +16,12 @@
 //import org.springframework.boot.test.util.TestPropertyValues;
 //import org.springframework.context.ApplicationContextInitializer;
 //import org.springframework.context.ConfigurableApplicationContext;
-//import org.springframework.context.annotation.Bean;
 //import org.springframework.http.MediaType;
 //import org.springframework.test.context.ContextConfiguration;
 //import org.springframework.test.context.junit.jupiter.SpringExtension;
 //import org.springframework.test.web.servlet.MockMvc;
 //import org.springframework.test.web.servlet.ResultActions;
 //
-//import java.io.UnsupportedEncodingException;
 //import java.util.ArrayList;
 //
 //import static org.assertj.core.api.Assertions.assertThat;
@@ -39,9 +37,6 @@
 //class HistoryControllerTest {
 //
 //    private static MongoDbContainer mongoDbContainer;
-//
-////    @MockBean
-////    ObjectMapperConfig objectMapperConfig;
 //
 //    @Autowired
 //    private MockMvc mockMvc;
@@ -63,9 +58,7 @@
 //        //GIVEN
 //        History history = new History(1, new ArrayList<>());
 //
-//
 //        // WHEN
-//
 //        ResultActions resultAction = mockMvc.perform(get("/patients/{id}/history", history.getPatientId())
 //                        .contentType(MediaType.APPLICATION_JSON));
 //

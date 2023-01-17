@@ -1,8 +1,11 @@
 package com.mediScreen.ms_patient.service;
 
+import com.mediScreen.ms_patient.exceptions.ResourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
 import com.mediScreen.ms_patient.repository.PatientRepository;
 import lombok.extern.log4j.Log4j2;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +45,16 @@ public class PatientServiceImpl implements PatientService {
     public Patient add(Patient patient) {
         log.debug("Create a new patient with id: " + patient.getId());
         return patientRepository.save(patient);
+    }
+
+    public Integer calculatePatientAge(Integer id) {
+        Optional<Patient> patient = patientRepository.findById(id);
+
+            LocalDate birthdate = patient.get().getBirth();
+            LocalDate currentDate = new LocalDate();
+
+            Years age = Years.yearsBetween(birthdate, currentDate);
+            return age.getYears();
     }
 
 }
