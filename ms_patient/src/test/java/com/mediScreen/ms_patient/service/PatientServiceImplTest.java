@@ -2,7 +2,6 @@ package com.mediScreen.ms_patient.service;
 
 import com.mediScreen.ms_patient.model.Patient;
 import com.mediScreen.ms_patient.repository.PatientRepository;
-import org.joda.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
