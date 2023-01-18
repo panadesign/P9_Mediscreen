@@ -1,6 +1,6 @@
 package com.mediscreen.ms_history.service;
 
-import com.mediscreen.ms_history.model.History;
+import com.mediscreen.ms_history.domain.History;
 import com.mediscreen.ms_history.proxies.MicroServicePatientProxy;
 import com.mediscreen.ms_history.repository.HistoryRepository;
 import lombok.extern.log4j.Log4j2;

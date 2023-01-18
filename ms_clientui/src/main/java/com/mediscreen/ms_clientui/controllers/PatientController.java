@@ -14,6 +14,7 @@ import java.util.List;
 
 @Log4j2
 @Controller
+@RequestMapping(value = "/patients")
 public class PatientController {
 
     private final MicroServicePatientProxy microServicePatientProxy;
@@ -22,14 +23,14 @@ public class PatientController {
         this.microServicePatientProxy = microServicePatientProxy;
     }
 
-    @GetMapping("/patients")
+    @GetMapping()
     public String getAllPatients(Model model) {
         List<PatientBean> patients = microServicePatientProxy.getAllPatients();
         model.addAttribute("patients", patients);
-        return "patients";
+        return "patient/patients";
     }
 
-    @GetMapping("/patients/{id}")
+    @GetMapping("/{id}")
     public String getPatientById(Model model, @PathVariable("id") Integer id) {
 
         log.debug("Access update form to patient with id = " + id);
@@ -37,20 +38,20 @@ public class PatientController {
         PatientBean patient = microServicePatientProxy.getPatientById(id);
         model.addAttribute("patient", patient);
 
-        return "patient";
+        return "patient/patient";
     }
 
-    @GetMapping("/patients/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String formUpdatePatient(Model model, @PathVariable("id") Integer id) {
 
         log.debug("Access update form to patient with id = " + id);
 
         PatientBean patient = microServicePatientProxy.getPatientById(id);
         model.addAttribute("patient", patient);
-        return "patientUpdate";
+        return "patient/patientUpdate";
     }
 
-    @PostMapping("/patients/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String updatePatient(Model model, @PathVariable("id") Integer id, @Valid PatientBean patientBean, BindingResult result) {
 
         if(result.hasErrors()) {
@@ -65,17 +66,17 @@ public class PatientController {
         return "redirect:/patients";
     }
 
-    @GetMapping("/patients/add")
+    @GetMapping("/add")
     public String formAddPatient(Model model, PatientBean patientBean) {
         log.debug("Access to patient add form");
-        return "patientAdd";
+        return "patient/patientAdd";
     }
 
-    @PostMapping("/patients/validate")
+    @PostMapping("/validate")
     public String addPatient(Model model, @Valid PatientBean patientBean, BindingResult result) {
         if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());
-            return "patientAdd";
+            return "patient/patientAdd";
         }
 
         microServicePatientProxy.addPatient(patientBean);
@@ -84,6 +85,4 @@ public class PatientController {
         log.debug("Patient : " + patientBean.getLastname() + patientBean.getFirstname() + " is created.");
         return "redirect:/patients";
     }
-
-
 }

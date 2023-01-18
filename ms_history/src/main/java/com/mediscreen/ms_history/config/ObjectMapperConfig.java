@@ -22,7 +22,7 @@ public class ObjectMapperConfig {
         }
 
         @Bean
-        public Jackson2RepositoryPopulatorFactoryBean getRespositoryPopulatorMongo(ObjectMapper objectMapper) {
+        public Jackson2RepositoryPopulatorFactoryBean getRepositoryPopulator(ObjectMapper objectMapper) {
             Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
             factory.setMapper(objectMapper);
             factory.setResources(new Resource[]{new ClassPathResource("history-data.json")});

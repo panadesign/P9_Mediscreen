@@ -1,6 +1,6 @@
 package com.mediscreen.ms_history.repository;
 
-import com.mediscreen.ms_history.model.History;
+import com.mediscreen.ms_history.domain.History;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

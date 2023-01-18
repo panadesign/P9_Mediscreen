@@ -1,4 +1,4 @@
-package com.mediscreen.ms_history.model;
+package com.mediscreen.ms_history.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,7 @@ public class History {
         private String note;
 
         @DateTimeFormat(pattern = "yyyy-MM-dd")
-        private ZonedDateTime dateTime = ZonedDateTime.now();
+        private LocalDate dateTime = LocalDate.now();
 
         public Observation(String note) {
             this.note = note;

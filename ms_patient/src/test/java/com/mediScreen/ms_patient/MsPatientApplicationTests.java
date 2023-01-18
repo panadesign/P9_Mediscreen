@@ -7,8 +7,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootTest
 class MsPatientApplicationTests {
-//	@Test
-//	void contextLoads() {
-//	}
+	@Test
+	void contextLoads() {
+	}
 
 }
