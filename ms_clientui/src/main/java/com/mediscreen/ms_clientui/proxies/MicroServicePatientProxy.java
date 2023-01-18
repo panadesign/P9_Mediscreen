@@ -5,7 +5,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @FeignClient(name = "microservice-patients", url = "${feign.ms-patient.url}")
 public interface MicroServicePatientProxy {

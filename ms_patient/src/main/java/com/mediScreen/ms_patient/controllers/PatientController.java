@@ -1,5 +1,6 @@
 package com.mediScreen.ms_patient.controllers;
 
+import com.mediScreen.ms_patient.exceptions.ResourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
 import com.mediScreen.ms_patient.service.PatientService;
 import lombok.extern.log4j.Log4j2;
@@ -28,9 +29,9 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Patient> getPatientById(@PathVariable("id") Integer id) {
+    public Patient getPatientById(@PathVariable("id") Integer id) {
         log.debug("Access to patient with id: " + id);
-        return patientService.findById(id);
+        return patientService.findById(id).orElseThrow(() -> new ResourceNotExistingException("Patient not found"));
     }
 
     @PutMapping("/{id}")
