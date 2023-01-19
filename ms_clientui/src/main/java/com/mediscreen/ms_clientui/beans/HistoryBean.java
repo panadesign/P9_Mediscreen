@@ -3,6 +3,7 @@ package com.mediscreen.ms_clientui.beans;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,6 +20,6 @@ public class HistoryBean {
     static class Observation {
         @NotNull
         private String note;
-        private LocalDateTime dateTime;
+        private LocalDate dateTime;
     }
 }

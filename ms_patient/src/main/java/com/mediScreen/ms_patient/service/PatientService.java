@@ -10,5 +10,5 @@ public interface PatientService {
     Optional<Patient> findById(Integer id);
     Patient update(Integer id, Patient patient);
     Patient add(Patient patient);
-//    Integer calculatePatientAge(Integer id);
+    List<Patient> findByLastname(String lastname);
 }

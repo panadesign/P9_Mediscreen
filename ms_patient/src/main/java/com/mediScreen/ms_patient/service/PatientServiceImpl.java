@@ -5,7 +5,6 @@ import com.mediScreen.ms_patient.repository.PatientRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +26,10 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findById(id);
     }
 
+    public List<Patient> findByLastname(String lastname) {
+        return patientRepository.findByLastname(lastname);
+    }
+
     public Patient update(Integer id, Patient patient) {
         Optional<Patient> patientToUpdate = findById(id);
 
@@ -44,15 +47,5 @@ public class PatientServiceImpl implements PatientService {
         log.debug("Create a new patient with id: " + patient.getId());
         return patientRepository.save(patient);
     }
-
-//    public Integer calculatePatientAge(Integer id) {
-//        Optional<Patient> patient = patientRepository.findById(id);
-//
-//            LocalDate birthdate = patient.get().getBirth();
-//            LocalDate currentDate = new LocalDate();
-//
-//            Years age = Years.yearsBetween(birthdate, currentDate);
-//            return age.getYears();
-//    }
 
 }

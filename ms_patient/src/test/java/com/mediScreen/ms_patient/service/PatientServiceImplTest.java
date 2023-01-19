@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +59,21 @@ class PatientServiceImplTest {
                 .isNotEmpty()
                 .get()
                 .satisfies(p -> assertThat(p.getLastname()).isEqualTo(patient1.getLastname()));
+    }
+
+    @Test
+    void getPatientByLastname() {
+        LocalDate dateTime = LocalDate.now();
+        Patient patient1 = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
+
+        when(mockPatientRepository.findByLastname("Lastname")).thenReturn(List.of(patient1));
+
+        List<Patient> patient = patientServiceImpl.findByLastname(patient1.getLastname());
+
+        assertThat(patient)
+                .isNotEmpty()
+                .satisfies(p -> assertThat(p.contains(patient1)).isTrue());
+
     }
 
     @Test

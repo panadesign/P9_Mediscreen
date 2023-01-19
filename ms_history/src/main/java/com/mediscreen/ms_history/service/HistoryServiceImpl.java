@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 public class HistoryServiceImpl implements HistoryService{
 
     private final HistoryRepository historyRepository;
-    private final MicroServicePatientProxy microServicePatientProxy;
 
-    public HistoryServiceImpl(HistoryRepository historyRepository, MicroServicePatientProxy microServicePatientProxy) {
+
+    public HistoryServiceImpl(HistoryRepository historyRepository) {
         this.historyRepository = historyRepository;
-        this.microServicePatientProxy = microServicePatientProxy;
+
     }
 
     public History getHistoryById(Integer id) {

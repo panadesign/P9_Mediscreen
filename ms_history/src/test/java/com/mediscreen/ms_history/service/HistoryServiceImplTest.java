@@ -25,12 +25,9 @@ class HistoryServiceImplTest {
     @Mock
     HistoryRepository historyRepository;
 
-    @Mock
-    MicroServicePatientProxy microServicePatientProxy;
-
     @BeforeEach
     void init() {
-        historyServiceImpl = new HistoryServiceImpl(historyRepository, microServicePatientProxy);
+        historyServiceImpl = new HistoryServiceImpl(historyRepository);
     }
 
     @Test

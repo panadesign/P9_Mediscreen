@@ -4,7 +4,13 @@
 		"patientId": 1,
 		"observations" : [
 			{
-				"note": "Patient: TestNone Practitioner's notes/recommendations: Patient states that they are 'feeling terrific' Weight at or below recommended level"
+				"note": "Le patient déclare qu'il « se sent très bien ». Poids égal ou inférieur au poids recommandé"
+			},
+			{
+				"note": "Le patient déclare qu'il se sent fatigué pendant la journée. Il se plaint également de douleurs musculaires. Tests de laboratoire indiquant une microalbumine élevée"
+			},
+			{
+				"note": "Le patient déclare qu'il ne se sent pas si fatigué que ça. Fumeur, il a arrêté dans les 12 mois précédents. Tests de laboratoire indiquant que les anticorps sont élevés"
 			}
 		]
 	},
@@ -13,10 +19,16 @@
 		"patientId": 2,
 		"observations" : [
 			{
-				"note": "Patient: TestBorderline Practitioner's notes/recommendations: Patient states that they are feeling a great deal of stress at work Patient also complains that their hearing seems Abnormal as of late"
+				"note": "Le patient déclare qu'il ressent beaucoup de stress au travail. Il se plaint également que son audition est anormale dernièrement"
 			},
 			{
-				"note": "Patient: TestBorderline Practitioner's notes/recommendations: Patient states that they have had a Reaction to medication within last 3 months Patient also complains that their hearing continues to be problematic"
+				"note": "Le patient déclare avoir fait une réaction aux médicaments au cours des 3 derniers mois. Il remarque également que son audition continue d'être anormale"
+			},
+			{
+				"note": "Tests de laboratoire indiquant une microalbumine élevée"
+			},
+			{
+				"note": "Le patient déclare que tout semble aller bien. Le laboratoire rapporte que l'hémoglobine A1C dépasse le niveau recommandé. Le patient déclare qu’il fume depuis longtemps"
 			}
 		]
 	},
@@ -25,10 +37,16 @@
 		"patientId": 3,
 		"observations" : [
 			{
-				"note": "Patient: TestInDanger Practitioner's notes/recommendations: Patient states that they are short term Smoker"
+				"note": "Le patient déclare qu'il fume depuis peu"
 			},
 			{
-				"note": "Patient: TestInDanger Practitioner's notes/recommendations: Patient states that they quit within last year Patient also complains that of Abnormal breathing spells Lab reports Cholesterol LDL high"
+				"note": "Tests de laboratoire indiquant une microalbumine élevée"
+			},
+			{
+				"note": "Le patient déclare qu'il est fumeur et qu'il a cessé de fumer l'année dernière. Il se plaint également de crises d’apnée respiratoire anormales. Tests de laboratoire indiquant un taux de cholestérol LDL élevé"
+			},
+			{
+				"note": "Tests de laboratoire indiquant un taux de cholestérol LDL élevé"
 			}
 		]
 	},
@@ -37,16 +55,94 @@
 		"patientId": 4,
 		"observations" : [
 			{
-				"note": "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that walking up stairs has become difficult Patient also complains that they are having shortness of breath Lab results indicate Antibodies present elevated Reaction to medication"
+				"note": "Le patient déclare qu'il lui est devenu difficile de monter les escaliers. Il se plaint également d’être essoufflé. Tests de laboratoire indiquant que les anticorps sont élevés. Réaction aux médicaments"
 			},
 			{
-				"note": "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that they are experiencing back pain when seated for a long time"
+				"note": "Le patient déclare qu'il a mal au dos lorsqu'il reste assis pendant longtemps"
 			},
 			{
-				"note": "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that they are a short term Smoker Hemoglobin A1C above recommended level"
+				"note": "Le patient déclare avoir commencé à fumer depuis peu. Hémoglobine A1C supérieure au niveau recommandé"
+			}
+		]
+	},
+	{
+		"_class": "com.mediscreen.ms_history.domain.History",
+		"patientId": 5,
+		"observations" : [
+			{
+				"note": "Le patient déclare avoir des douleurs au cou occasionnellement. Le patient remarque également que certains aliments ont un goût différent. Réaction apparente aux médicaments. Poids corporel supérieur au poids recommandé"
 			},
 			{
-				"note": "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that Body Height, Body Weight, Cholesterol, Dizziness and Reaction"
+				"note": "Le patient déclare avoir eu plusieurs épisodes de vertige depuis la dernière visite.. Taille incluse dans la fourchette concernée"
+			},
+			{
+				"note": "Le patient déclare qu'il souffre encore de douleurs cervicales occasionnelles. Tests de laboratoire indiquant une microalbumine élevée. Fumeur, il a arrêté dans les 12 mois précédents"
+			},
+			{
+				"note": "Le patient déclare avoir eu plusieurs épisodes de vertige depuis la dernière visite.. Tests de laboratoire indiquant que les anticorps sont élevés"
+			}
+		]
+	},
+	{
+		"_class": "com.mediscreen.ms_history.domain.History",
+		"patientId": 6,
+		"observations" : [
+			{
+				"note": "Le patient déclare qu'il se sent bien. Poids corporel supérieur au poids recommandé"
+			},
+			{
+				"note": "Le patient déclare qu'il se sent bien"
+			}
+		]
+	},
+	{
+		"_class": "com.mediscreen.ms_history.domain.History",
+		"patientId": 7,
+		"observations" : [
+			{
+				"note": "Le patient déclare qu'il se réveille souvent avec une raideur articulaire. Il se plaint également de difficultés pour s’endormir. Poids corporel supérieur au poids recommandé. Tests de laboratoire indiquant un taux de cholestérol LDL élevé"
+			}
+		]
+	},
+	{
+		"_class": "com.mediscreen.ms_history.domain.History",
+		"patientId": 8,
+		"observations" : [
+			{
+				"note": "Les tests de laboratoire indiquent que les anticorps sont élevés. Hémoglobine A1C supérieure au niveau recommandé"
+			}
+		]
+	},
+	{
+		"_class": "com.mediscreen.ms_history.domain.History",
+		"patientId": 9,
+		"observations" : [
+			{
+				"note": "Le patient déclare avoir de la difficulté à se concentrer sur ses devoirs scolaires. Hémoglobine A1C supérieure au niveau recommandé"
+			},
+			{
+				"note": "Le patient déclare qu'il s’impatiente facilement en cas d’attente prolongée. Il signale également que les produits du distributeur automatique ne sont pas bons. Tests de laboratoire signalant des taux anormaux de cellules sanguines"
+			},
+			{
+				"note": "Le patient signale qu'il est facilement irrité par des broutilles. Il déclare également que l'aspirateur des voisins fait trop de bruit. Tests de laboratoire indiquant que les anticorps sont élevés"
+			}
+		]
+	},
+	{
+		"_class": "com.mediscreen.ms_history.domain.History",
+		"patientId": 10,
+		"observations" : [
+			{
+				"note": "Le patient déclare qu'il n'a aucun problème"
+			},
+			{
+				"note": "Le patient déclare qu'il n'a aucun problème. Taille incluse dans la fourchette concernée. Hémoglobine A1C supérieure au niveau recommandé"
+			},
+			{
+				"note": "Le patient déclare qu'il n'a aucun problème. Poids corporel supérieur au poids recommandé. Le patient a signalé plusieurs épisodes de vertige depuis sa dernière visite"
+			},
+			{
+				"note": "Le patient déclare qu'il n'a aucun problème. Tests de laboratoire indiquant une microalbumine élevée"
 			}
 		]
 	}
