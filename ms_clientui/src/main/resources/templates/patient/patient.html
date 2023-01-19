@@ -21,7 +21,7 @@
             </p>
             <p>
                 <strong>Birthdate: </strong>
-                <span th:text="${#dates.format(patient.birth, 'yyyy/MM/dd')}"></span>
+                <span th:text="${#temporals.format(patient.birth, 'yyyy/MM/dd')}"></span>
             </p>
             <p>
                 <strong>Gender: </strong>

@@ -72,7 +72,7 @@ public class PatientController {
         return "patient/patientAdd";
     }
 
-    @PostMapping("/validate")
+    @PostMapping("/add")
     public String addPatient(Model model, @Valid PatientBean patientBean, BindingResult result) {
         if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());

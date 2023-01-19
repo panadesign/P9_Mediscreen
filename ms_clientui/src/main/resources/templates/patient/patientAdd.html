@@ -11,7 +11,7 @@
         <h1>Ajouter un patient</h1>
         <div class="row">
             <div class="row">
-                <form action="#" th:action="@{/patients/validate}" th:object="${patientBean}" method="POST" class="form-horizontal" style="width: 100%">
+                <form action="#" th:action="@{/patients/add}" th:object="${patientBean}" method="POST" class="form-horizontal" style="width: 100%">
                     <label for="lastname">
                         <input id="lastname" class="form-control" th:field="*{lastname}" type="text" name="lastname" placeholder="Patient's lastname">
                         <p class="text-danger" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></p>
@@ -25,8 +25,15 @@
                         <p class="text-danger" th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}"></p>
                     </label>
                     <label for="gender">
-                        <input id="gender" class="form-control" th:field="*{gender}" type="text" name="gender" placeholder="Patient's gender">
+                        <select id="gender" class="dropdown-toggle" th:field="*{gender}" type="select" name="gender" placeholder="Gender">
+                            <option th:value="M" th:text="Male"></option>
+                            <option th:value="F" th:text="Female"></option>
+                        </select>
                         <p class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
+
+
+<!--                        <input id="gender" class="form-control" th:field="*{gender}" type="text" name="gender" placeholder="Patient's gender">-->
+<!--                        <p class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>-->
                     </label>
                     <label for="address">
                         <input id="address" class="form-control" th:field="*{address}" type="text" name="address" placeholder="Patient's address">
