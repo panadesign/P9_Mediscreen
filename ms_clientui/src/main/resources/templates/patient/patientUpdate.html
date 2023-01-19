@@ -25,7 +25,10 @@
                         <p class="text-danger" th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}"></p>
                     </label>
                     <label for="gender">
-                        <input id="gender" class="form-control" th:field="*{gender}" type="text" name="gender" placeholder="Patient's gender">
+                        <select id="gender" class="dropdown-toggle" th:field="*{gender}" type="select" name="gender" placeholder="Gender">
+                            <option th:value="M" th:text="Male"></option>
+                            <option th:value="F" th:text="Female"></option>
+                        </select>
                         <p class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
                     </label>
                     <label for="address">

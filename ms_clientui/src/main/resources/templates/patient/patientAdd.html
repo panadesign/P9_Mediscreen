@@ -30,10 +30,6 @@
                             <option th:value="F" th:text="Female"></option>
                         </select>
                         <p class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
-
-
-<!--                        <input id="gender" class="form-control" th:field="*{gender}" type="text" name="gender" placeholder="Patient's gender">-->
-<!--                        <p class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>-->
                     </label>
                     <label for="address">
                         <input id="address" class="form-control" th:field="*{address}" type="text" name="address" placeholder="Patient's address">
