@@ -2,6 +2,7 @@ package com.mediscreen.ms_assessment.beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class HistoryBean {
     private Integer patientId;
     private List<Observation> observations;
@@ -18,6 +20,7 @@ public class HistoryBean {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
+    @Getter
     static class Observation {
         @NotNull
         private String note;

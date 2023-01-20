@@ -1,8 +1,6 @@
 package com.mediscreen.ms_history.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,6 +16,7 @@ import java.util.List;
 @Document("history")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class History {
 
     @Id
@@ -36,7 +35,8 @@ public class History {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    static class Observation {
+    @Getter
+    class Observation {
         @NotEmpty(message = "Note cannot be empty")
         private String note;
 
