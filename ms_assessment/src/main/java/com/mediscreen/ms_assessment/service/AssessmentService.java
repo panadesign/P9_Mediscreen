@@ -7,4 +7,5 @@ public interface AssessmentService {
     public Boolean patientOlderThan30(Integer id);
     String getGender(Integer id);
     List<String> getTriggerWords() throws FileNotFoundException;
+    List<String> getNotes(Integer id);
 }

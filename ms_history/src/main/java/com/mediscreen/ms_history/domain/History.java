@@ -36,7 +36,7 @@ public class History {
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
-    class Observation {
+    static class Observation {
         @NotEmpty(message = "Note cannot be empty")
         private String note;
 

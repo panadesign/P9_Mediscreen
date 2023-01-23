@@ -64,7 +64,6 @@ public class AssessmentServiceImpl implements AssessmentService {
             while (line != null) {
                 triggerWordsList.add(line);
                 line = reader.readLine();
-                System.out.println(line);
             }
             reader.close();
         } catch (IOException e) {
@@ -76,15 +75,25 @@ public class AssessmentServiceImpl implements AssessmentService {
         return triggerWordsList;
     }
 
+
+
     public List<String> getNotes(Integer id) {
-       return microServiceHistoryProxy.get(id).getObservations()
-                .stream()
-                .map()
-                .collect(Collectors.toList());
+        HistoryBean historyBean = microServiceHistoryProxy.get(id);
+        historyBean.getObservations()
+                .stream().collect(Collectors.toList());
+
+    //        return historyBean.getObservations()
+//                .stream()
+//                .map(n -> n.note())
+//                .collect(Collectors.toList());
+
     }
 
-    public Integer getNumberOfTrigger() {
+    public Integer getNumberOfTrigger() throws FileNotFoundException {
 //        boucler mots dans les notes
+        for (String triggerWord : getTriggerWords()) {
+
+        }
         return null;
     }
 

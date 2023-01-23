@@ -6,13 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 public class HistoryBean {
     private Integer patientId;
     private List<Observation> observations;
@@ -20,10 +20,9 @@ public class HistoryBean {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    @Getter
     static class Observation {
         @NotNull
         private String note;
-        private LocalDateTime dateTime;
+        private LocalDate dateTime;
     }
 }
