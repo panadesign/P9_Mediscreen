@@ -1,14 +1,15 @@
 package com.mediscreen.ms_assessment.service;
 
 import com.mediscreen.ms_assessment.beans.HistoryBean;
-import com.mediscreen.ms_assessment.beans.NoteBean;
 import com.mediscreen.ms_assessment.beans.PatientBean;
+import com.mediscreen.ms_assessment.model.RiskLevel;
 import com.mediscreen.ms_assessment.proxies.MicroServiceHistoryProxy;
 import com.mediscreen.ms_assessment.proxies.MicroServicePatientProxy;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Log4j2
@@ -50,10 +50,10 @@ public class AssessmentServiceImpl implements AssessmentService {
     }
 
 
-    public List<String> getTriggerWords() throws FileNotFoundException {
+    public List<String> getTriggerWords() throws IOException {
         File triggerFile = new File("src/main/resources/triggerWords.txt");
 
-        BufferedReader filepath = new BufferedReader(new FileReader(triggerFile));
+        BufferedReader filepath = new BufferedReader(new FileReader(triggerFile,  StandardCharsets.UTF_8));
 
         ArrayList<String> triggerWordsList = new ArrayList<>();
 
@@ -75,37 +75,48 @@ public class AssessmentServiceImpl implements AssessmentService {
         return triggerWordsList;
     }
 
-
-
-    public List<String> getNotes(Integer id) {
+    public RiskLevel getStatus(Integer id) throws IOException {
         HistoryBean historyBean = microServiceHistoryProxy.get(id);
-        historyBean.getObservations()
-                .stream().collect(Collectors.toList());
 
-    //        return historyBean.getObservations()
-//                .stream()
-//                .map(n -> n.note())
-//                .collect(Collectors.toList());
+        int countTriggerWord = 0;
 
-    }
+        List<String> observations =
+                historyBean.getObservations()
+                        .stream()
+                        .map(HistoryBean.Observation::getNote)
+                        .collect(Collectors.toList());
 
-    public Integer getNumberOfTrigger() throws FileNotFoundException {
-//        boucler mots dans les notes
-        for (String triggerWord : getTriggerWords()) {
+        for (String observation : observations) {
+            for (String triggerWord : getTriggerWords()) {
+                if (observation.contains(triggerWord)) {
+                    countTriggerWord++;
+                }
+            }
+        }
 
+        if (countTriggerWord < 2 && patientOlderThan30(id)) {
+            return RiskLevel.NONE;
+        } else if (patientOlderThan30(id) && countTriggerWord >= 2 && countTriggerWord < 6) {
+            return RiskLevel.BORDERLINE;
+        } else if (patientOlderThan30(id) && countTriggerWord >= 6 && countTriggerWord < 8) {
+            return RiskLevel.IN_DANGER;
+        } else if (patientOlderThan30(id) && countTriggerWord >= 8) {
+            return RiskLevel.BORDERLINE;
+        } else if (!patientOlderThan30(id) && countTriggerWord < 4 && (Objects.equals(getGender(id), "FEMALE"))) {
+            return RiskLevel.NONE;
+        } else if (!patientOlderThan30(id) && countTriggerWord >= 4 && countTriggerWord < 7 && (Objects.equals(getGender(id), "FEMALE"))) {
+            return RiskLevel.IN_DANGER;
+        } else if (!patientOlderThan30(id) && countTriggerWord >= 7 && (Objects.equals(getGender(id), "FEMALE"))) {
+            return RiskLevel.EARLY_ONSET;
+        } else if (!patientOlderThan30(id) && countTriggerWord < 3 && (Objects.equals(getGender(id), "MALE"))) {
+            return RiskLevel.NONE;
+        } else if (!patientOlderThan30(id) && countTriggerWord >= 3 && countTriggerWord < 5 && (Objects.equals(getGender(id), "MALE"))) {
+            return RiskLevel.IN_DANGER;
+        } else if (!patientOlderThan30(id) && countTriggerWord >= 5 && (Objects.equals(getGender(id), "MALE"))) {
+            return RiskLevel.EARLY_ONSET;
         }
         return null;
     }
 
-
-//    public String level(Integer id) throws FileNotFoundException {
-//
-//        String gender = getGender(id);
-//        Boolean age = patientOlderThan30(id);
-//         totalTriggerWords = getTriggerWords();
-//        if(gender.equals("MALE") && age && nombre de declencheurs) {
-//            return "none";
-//        }
-//    }
 
 }

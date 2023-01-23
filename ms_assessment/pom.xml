@@ -137,7 +137,6 @@
 				</executions>
 				<configuration>
 					<excludes>
-						<exclude>com/mediscreen/ms_assessment/model/*</exclude>
 						<exclude>com/mediscreen/ms_assessment/beans/*</exclude>
 						<exclude>com/mediscreen/ms_assessment/config/*</exclude>
 						<exclude>com/mediscreen/ms_assessment/MsAssessmentApplication.class</exclude>

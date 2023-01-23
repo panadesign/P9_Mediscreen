@@ -20,7 +20,7 @@ public class HistoryBean {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    static class Observation {
+    public static class Observation {
         @NotNull
         private String note;
         private LocalDate dateTime;
