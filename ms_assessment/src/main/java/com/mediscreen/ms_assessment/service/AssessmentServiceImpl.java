@@ -2,6 +2,7 @@ package com.mediscreen.ms_assessment.service;
 
 import com.mediscreen.ms_assessment.beans.HistoryBean;
 import com.mediscreen.ms_assessment.beans.PatientBean;
+import com.mediscreen.ms_assessment.model.Assessment;
 import com.mediscreen.ms_assessment.model.RiskLevel;
 import com.mediscreen.ms_assessment.proxies.MicroServiceHistoryProxy;
 import com.mediscreen.ms_assessment.proxies.MicroServicePatientProxy;
@@ -29,12 +30,25 @@ public class AssessmentServiceImpl implements AssessmentService {
         this.microServiceHistoryProxy = microServiceHistoryProxy;
     }
 
-    public Boolean patientOlderThan30(Integer id) {
+    public Assessment generateAssessment(Integer id) throws IOException {
+        Optional<PatientBean> patientBean = microServicePatientProxy.getPatientById(id);
+        Integer age = ageOfPatient(id);
+        RiskLevel status = getStatus(id);
+        String gender = getGender(id);
+
+        return new Assessment(status.name(), patientBean.get().getLastname(), patientBean.get().getFirstname(), gender, age);
+    }
+
+    public Integer ageOfPatient(Integer id) {
         Optional<PatientBean> patientBean = microServicePatientProxy.getPatientById(id);
         LocalDate birthdate = patientBean.get().getBirth();
 
         Period age = Period.between(birthdate, LocalDate.now());
-        int numberOfYears = age.getYears();
+        return age.getYears();
+    }
+
+    public Boolean patientOlderThan30(Integer id) {
+        Integer numberOfYears = ageOfPatient(id);
         log.debug("Verify if patient with id " + id + "is older than 30 years");
         return numberOfYears > 30;
     }
@@ -53,7 +67,7 @@ public class AssessmentServiceImpl implements AssessmentService {
     public List<String> getTriggerWords() throws IOException {
         File triggerFile = new File("src/main/resources/triggerWords.txt");
 
-        BufferedReader filepath = new BufferedReader(new FileReader(triggerFile,  StandardCharsets.UTF_8));
+        BufferedReader filepath = new BufferedReader(new FileReader(triggerFile, StandardCharsets.UTF_8));
 
         ArrayList<String> triggerWordsList = new ArrayList<>();
 

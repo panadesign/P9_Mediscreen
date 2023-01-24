@@ -12,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
@@ -298,5 +297,26 @@ class AssessmentServiceImplTest {
 
         //THEN
         Assertions.assertEquals("EARLY_ONSET", riskLevel.name());
+    }
+
+    @Test
+    void ageOfPatient() {
+        //GIVEN
+        PatientBean patientBean = new PatientBean(1, "Bob", "bob","M", LocalDate.of(2000, Month.JANUARY, 1), "address", "phone");
+
+        //WHEN
+        when(microServicePatientProxy.getPatientById(patientBean.getId())).thenReturn(Optional.of(patientBean));
+        Integer age = assessmentServiceImpl.ageOfPatient(patientBean.getId());
+
+        //THEN
+        Assertions.assertEquals(23, age);
+
+    }
+
+    @Test
+    void generateAssessment() {
+        //GIVEN
+        PatientBean patientBean = new PatientBean(1, "Bob", "bob","M", LocalDate.of(2000, Month.JANUARY, 1), "address", "phone");
+
     }
 }

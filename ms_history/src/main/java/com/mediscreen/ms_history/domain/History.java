@@ -1,14 +1,15 @@
 package com.mediscreen.ms_history.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class History {
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
-    public class Observation {
+    public static class Observation {
         @NotEmpty(message = "Note cannot be empty")
         private String note;
 
