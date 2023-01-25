@@ -14,7 +14,6 @@ import java.io.IOException;
 public class AssessmentController {
     private final AssessmentService assessmentService;
 
-
     public AssessmentController(AssessmentService assessmentService) {
         this.assessmentService = assessmentService;
     }

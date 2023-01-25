@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mediscreen | Diagnostique du patient</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Diagnostique du patient</h1>
+    <div class="row">
+        <div class="col-md-12 my-1">
+
+                <div>
+                    <p>Niveau de risque : <span class="risk" th:text="${assessmentBean.riskLevel}"></span></p>
+                    <p>Nom : <span th:text="${assessmentBean.lastname}"></span></p>
+                    <p>Prénom : <span th:text="${assessmentBean.firstname}"></span></p>
+                    <p>Genre : <span th:text="${assessmentBean.gender}"></span></p>
+                    <p>Age : <span th:text="${assessmentBean.age}"></span></p>
+                </div>
+            <button class="btn btn-danger" value="Cancel"><a th:href="@{/patients/{id}(id=${id})}" th:method="get">Fiche patient</a></button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

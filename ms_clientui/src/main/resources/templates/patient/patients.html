@@ -48,6 +48,7 @@
                     <span th:text="${patient.phone}"></span>
                 </p>
                 <a th:href="@{/patients/{id}(id=${patient.getId})}" th:method="get" class="btn btn-primary">Fiche patient</a>
+                <a th:href="@{/patients/{id}/assessment(id=${patient.getId})}" th:method="get" class="btn btn-primary">Diagnostique</a>
             </div>
         </div>
     </div>

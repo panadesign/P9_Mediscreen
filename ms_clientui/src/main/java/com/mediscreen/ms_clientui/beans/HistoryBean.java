@@ -17,7 +17,7 @@ public class HistoryBean {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public class Observation {
+    static class Observation {
         @NotNull
         private String note;
         private LocalDate dateTime;

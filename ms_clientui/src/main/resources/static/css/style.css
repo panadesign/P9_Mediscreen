@@ -20,3 +20,8 @@ header ul li {
 .date {
     font-weight: 700;
 }
+
+.risk {
+    font-weight: 700;
+    color: red;
+}

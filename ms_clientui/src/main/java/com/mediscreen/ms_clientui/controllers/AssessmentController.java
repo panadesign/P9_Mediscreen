@@ -33,11 +33,11 @@ public class AssessmentController {
     public String get(Model model, @PathVariable("id") Integer id) {
         log.debug("Access to patient's assessment");
         PatientBean patientBean = microServicePatientProxy.getPatientById(id);
-        HistoryBean assessmentBean = microServiceAssessmentProxy.get(patientBean.getId());
+        AssessmentBean assessmentBean = microServiceAssessmentProxy.get(patientBean.getId());
 
         model.addAttribute("assessmentBean", assessmentBean);
 
-        return "history/patientHistory";
+        return "assessment/assessment";
     }
 
 

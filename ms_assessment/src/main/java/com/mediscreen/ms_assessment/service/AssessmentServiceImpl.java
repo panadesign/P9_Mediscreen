@@ -65,7 +65,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 
     public List<String> getTriggerWords() throws IOException {
-        File triggerFile = new File("src/main/resources/triggerWords.txt");
+        File triggerFile = new File("C:\\Users\\elbar\\git\\P9_Mediscreen\\ms_assessment\\src\\main\\resources\\triggerWords.txt");
 
         BufferedReader filepath = new BufferedReader(new FileReader(triggerFile, StandardCharsets.UTF_8));
 
