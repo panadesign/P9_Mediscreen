@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
+import static java.lang.Integer.parseInt;
+
 @Log4j2
 @RestController
 public class AssessmentController {
@@ -18,10 +20,12 @@ public class AssessmentController {
         this.assessmentService = assessmentService;
     }
 
-    @GetMapping("/patients/{id}/assessment")
-    public Assessment getAssessmentById(@PathVariable Integer id) throws IOException {
-        return assessmentService.generateAssessment(id);
+    @GetMapping("patients/{param}/assessment")
+    public Assessment getPatientByParam(@PathVariable String param) throws IOException {
+        if(param.matches(("-?\\d+"))) {
+            return assessmentService.getAssessmentById(parseInt(param));
+        }
+        return assessmentService.getAssessmentByLastname(param);
     }
-
 }
 

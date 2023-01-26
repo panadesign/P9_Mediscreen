@@ -13,4 +13,6 @@ public interface MicroServicePatientProxy {
     @GetMapping("/patients/{id}")
     Optional<PatientBean> getPatientById(@PathVariable("id") Integer id);
 
+    @GetMapping("/patients/{lastname}")
+    Optional<PatientBean> getPatientByLastname(@PathVariable("lastname") String lastname);
 }

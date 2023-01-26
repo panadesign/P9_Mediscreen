@@ -30,12 +30,22 @@ public class AssessmentServiceImpl implements AssessmentService {
         this.microServiceHistoryProxy = microServiceHistoryProxy;
     }
 
+    public Assessment getAssessmentById(Integer id) throws IOException {
+        return generateAssessment(id);
+    }
+
+    public Assessment getAssessmentByLastname(String lastname) throws IOException {
+        Optional<PatientBean> patientBean = microServicePatientProxy.getPatientByLastname(lastname);
+        Integer patientsId = patientBean.get().getId();
+        return generateAssessment(patientsId);
+    }
+
     public Assessment generateAssessment(Integer id) throws IOException {
         Optional<PatientBean> patientBean = microServicePatientProxy.getPatientById(id);
         Integer age = ageOfPatient(id);
         RiskLevel status = getStatus(id);
         String gender = getGender(id);
-
+        log.debug("Create an assessment for patient with id:" + id);
         return new Assessment(status.name(), patientBean.get().getLastname(), patientBean.get().getFirstname(), gender, age);
     }
 
@@ -65,19 +75,19 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 
     public List<String> getTriggerWords() throws IOException {
-        File triggerFile = new File("C:\\Users\\elbar\\git\\P9_Mediscreen\\ms_assessment\\src\\main\\resources\\triggerWords.txt");
 
-        BufferedReader filepath = new BufferedReader(new FileReader(triggerFile, StandardCharsets.UTF_8));
+        InputStream is = getClass().getResourceAsStream("/triggerWords.txt");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
         ArrayList<String> triggerWordsList = new ArrayList<>();
 
         try {
-            BufferedReader reader = new BufferedReader(filepath);
-            String line = reader.readLine();
+            BufferedReader br = new BufferedReader(reader);
+            String line = br.readLine();
 
             while (line != null) {
                 triggerWordsList.add(line);
-                line = reader.readLine();
+                line = br.readLine();
             }
             reader.close();
         } catch (IOException e) {

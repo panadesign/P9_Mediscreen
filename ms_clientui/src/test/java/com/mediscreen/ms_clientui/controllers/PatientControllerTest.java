@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.mockito.Mockito.when;
@@ -66,7 +67,7 @@ class PatientControllerTest {
 
     @Test
     void getPatientById() throws Exception {
-        PatientBean patientBean = new PatientBean(1, "lastnameTest", "firstnameTest", "M", new Date(), "AddressTest", "phoneTest");;
+        PatientBean patientBean = new PatientBean(1, "lastnameTest", "firstnameTest", "M", LocalDate.now(), "AddressTest", "phoneTest");;
 
         when(patientProxy.getPatientById(patientBean.getId())).thenReturn(patientBean);
 
@@ -78,7 +79,7 @@ class PatientControllerTest {
 
     @Test
     void formUpdatePatient() throws Exception {
-        PatientBean patientBean = new PatientBean(1, "lastnameTest", "firstnameTest", "M", new Date(), "AddressTest", "phoneTest");;
+        PatientBean patientBean = new PatientBean(1, "lastnameTest", "firstnameTest", "M", LocalDate.now(), "AddressTest", "phoneTest");;
         when(patientProxy.getPatientById(patientBean.getId())).thenReturn(patientBean);
         mockMvc.perform(get("/patients/{id}/edit", patientBean.getId())
                 .contentType(MediaType.APPLICATION_JSON))

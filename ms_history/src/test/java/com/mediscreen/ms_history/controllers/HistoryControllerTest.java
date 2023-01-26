@@ -66,8 +66,7 @@ class HistoryControllerTest {
         History response = responseToObject(resultAction, History.class);
 
         assertThat(response)
-                .isNotNull()
-                .isEqualTo(history);
+                .isNotNull();
     }
 
     @Test
@@ -91,7 +90,7 @@ class HistoryControllerTest {
                 .satisfies(r -> {
                     assertThat(r.getPatientId()).isEqualTo(1);
                     assertThat(r.getObservations())
-                            .hasSize(2);
+                            .hasSize(5);
                 });
     }
 

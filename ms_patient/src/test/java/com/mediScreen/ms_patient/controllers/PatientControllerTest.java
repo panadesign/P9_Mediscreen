@@ -83,6 +83,16 @@ class PatientControllerTest {
     }
 
     @Test
+    void patientByLastname() throws Exception {
+        LocalDate dateTime = LocalDate.now();
+        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
+
+        mockMvc.perform(get("/patients/{lastname}", patient.getLastname())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     void updatePatient() throws Exception {
         String uri = "/patients/3";
         LocalDate dateTime = LocalDate.now();

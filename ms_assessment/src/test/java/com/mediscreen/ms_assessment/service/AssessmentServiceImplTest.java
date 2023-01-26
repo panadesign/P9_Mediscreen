@@ -313,10 +313,4 @@ class AssessmentServiceImplTest {
 
     }
 
-    @Test
-    void generateAssessment() {
-        //GIVEN
-        PatientBean patientBean = new PatientBean(1, "Bob", "bob","M", LocalDate.of(2000, Month.JANUARY, 1), "address", "phone");
-
-    }
 }

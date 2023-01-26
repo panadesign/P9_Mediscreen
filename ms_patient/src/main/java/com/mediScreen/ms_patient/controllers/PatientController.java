@@ -11,6 +11,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Integer.parseInt;
+
 @RestController
 @RequestMapping(value = "/patients")
 @Log4j2
@@ -28,10 +30,12 @@ public class PatientController {
         return patientService.getPatients();
     }
 
-    @GetMapping("/{id}")
-    public Patient getPatientById(@PathVariable("id") Integer id) {
-        log.debug("Access to patient with id: " + id);
-        return patientService.findById(id).orElseThrow(() -> new ResourceNotExistingException("Patient not found"));
+    @GetMapping("/{param}")
+    public Patient getPatientByParam(@PathVariable String param) {
+        if(param.matches(("-?\\d+"))) {
+            return patientService.findById(parseInt(param)).orElseThrow(() -> new  ResourceNotExistingException("test"));
+        }
+        return patientService.findByLastname(param);
     }
 
     @PutMapping("/{id}")

@@ -26,7 +26,7 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findById(id);
     }
 
-    public List<Patient> findByLastname(String lastname) {
+    public Patient findByLastname(String lastname) {
         return patientRepository.findByLastname(lastname);
     }
 

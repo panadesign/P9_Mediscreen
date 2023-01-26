@@ -66,6 +66,17 @@ services:
       - mongodb
       - ms-patient
     restart: always
+
+  ms-assessment:
+    container_name: ms-assessment
+    build: ms-assessment
+    image: ms-assessment:latest
+    ports:
+      - "8083:8083"
+    depends_on:
+      - ms-patient
+      - ms-history
+    restart: always
     
   ms-clientui:
     container_name: ms-clientui
