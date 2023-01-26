@@ -20,7 +20,7 @@ public class PatientBean {
     @NotBlank(message = "Firstname cannot be empty")
     private String firstname;
     @NotBlank(message = "Gender cannot be empty")
-    private String gender;
+    private GenderEnum gender;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     private LocalDate birth;
@@ -28,6 +28,14 @@ public class PatientBean {
     private String address;
     @NotBlank(message = "Phone number cannot be empty")
     private String phone;
+
+    public Integer getAge(){
+        return birth.getYear() - LocalDate.now().getYear();
+    }
+
+    public boolean isOlderThan30(){
+        return getAge() > 30;
+    }
 
 }
 
