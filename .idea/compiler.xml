@@ -22,10 +22,12 @@
       <module name="ms_history" target="11" />
       <module name="ms_observation" target="11" />
       <module name="ms_patient" target="11" />
+      <module name="P9_Mediscreen" target="1.6" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="P9_Mediscreen" options="" />
       <module name="cloudConfig" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="ms_assessment" options="-parameters" />

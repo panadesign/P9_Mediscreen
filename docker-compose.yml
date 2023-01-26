@@ -89,6 +89,7 @@ services:
     depends_on:
       - ms-patient
       - ms-history
+      - ms-assessment
 
 volumes:
   dbdata:
