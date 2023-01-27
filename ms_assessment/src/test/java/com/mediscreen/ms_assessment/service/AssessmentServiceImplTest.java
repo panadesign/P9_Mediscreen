@@ -114,20 +114,4 @@ class AssessmentServiceImplTest {
         //THEN
         Assertions.assertEquals("EARLY_ONSET", assessment.getRiskLevel());
     }
-
-//    @Test
-//    void getAssessmentByLastname() throws IOException {
-//        List<HistoryBean.Observation> observations = new ArrayList<>();
-//        PatientBean patientBean = new PatientBean(1, "lastname", "firstname", GenderEnum.F, LocalDate.now(), "address", "phone");
-//        HistoryBean historyBean = new HistoryBean(1, observations);
-//
-//        observations.add(new HistoryBean.Observation("Aucun mot clé", LocalDate.now()));
-//
-//        when(microServicePatientProxy.getPatientById(1)).thenReturn(Optional.of(patientBean));
-//        when(microServiceHistoryProxy.get(1)).thenReturn(historyBean);
-//
-//        Assessment assessment = assessmentServiceImpl.getAssessmentByLastname("lastname");
-//
-//        Assertions.assertEquals("NONE", assessment.getRiskLevel());
-//    }
 }
