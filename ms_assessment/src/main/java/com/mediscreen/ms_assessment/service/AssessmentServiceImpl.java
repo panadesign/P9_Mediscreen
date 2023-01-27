@@ -77,7 +77,7 @@ public class AssessmentServiceImpl implements AssessmentService {
                         .collect(Collectors.toList());
 
 
-        var words = getTriggerWords();
+        List<String> words = getTriggerWords();
         countTriggerWord = observations.stream().mapToInt(observation -> (int) words.stream().filter(observation::contains).count()).sum();
 
         if (isNone(patient, countTriggerWord)) {
@@ -107,8 +107,7 @@ public class AssessmentServiceImpl implements AssessmentService {
     }
 
     private static boolean isBorderline(PatientBean patient, Integer countTriggerWord) {
-        return (patient.isOlderThan30() && countTriggerWord >= 2 && countTriggerWord < 6
-                || (patient.isOlderThan30() && countTriggerWord >= 8));
+        return (patient.isOlderThan30() && countTriggerWord >= 2 && countTriggerWord < 6);
 
     }
 
@@ -120,6 +119,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 
     private static boolean isEarlyOnset(PatientBean patient, Integer countTriggerWord) {
         return (!patient.isOlderThan30() && countTriggerWord >= 7 && patient.getGender().equals(GenderEnum.F))
-                || (!patient.isOlderThan30() && countTriggerWord >= 5 && patient.getGender().equals(GenderEnum.M));
+                || (!patient.isOlderThan30() && countTriggerWord >= 5 && patient.getGender().equals(GenderEnum.M))
+                || (patient.isOlderThan30() && countTriggerWord >= 8);
     }
 }
