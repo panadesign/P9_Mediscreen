@@ -10,14 +10,12 @@ import com.mediscreen.ms_assessment.proxies.MicroServicePatientProxy;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,6 +48,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 
         RiskLevel status = getStatus(patientBean, historyBean);
         log.debug("Create an assessment for patient with id:" + id);
+        assert status != null;
         return new Assessment(status.name(), patientBean.getLastname(), patientBean.getFirstname(), patientBean.getGender(), patientBean.getAge());
     }
 
@@ -57,6 +56,7 @@ public class AssessmentServiceImpl implements AssessmentService {
     private List<String> getTriggerWords() throws IOException {
 
         InputStream is = getClass().getResourceAsStream("/triggerWords.txt");
+        assert is != null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
         BufferedReader br = new BufferedReader(reader);
 

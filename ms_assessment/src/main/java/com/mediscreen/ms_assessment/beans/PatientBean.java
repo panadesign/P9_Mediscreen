@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -30,7 +29,7 @@ public class PatientBean {
     private String phone;
 
     public Integer getAge(){
-        return birth.getYear() - LocalDate.now().getYear();
+        return LocalDate.now().getYear() - birth.getYear();
     }
 
     public boolean isOlderThan30(){
