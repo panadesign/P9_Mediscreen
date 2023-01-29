@@ -19,14 +19,17 @@ public class PatientServiceImpl implements PatientService {
     }
 
     public List<Patient> getPatients() {
+        log.debug("Get all patients");
         return patientRepository.findAll();
     }
 
     public Optional<Patient> findById(Integer id) {
+        log.debug("Get patient with id: " + id);
         return patientRepository.findById(id);
     }
 
     public Patient findByLastname(String lastname) {
+        log.debug("Get patient with lastname: " + lastname);
         return patientRepository.findByLastname(lastname);
     }
 
@@ -40,6 +43,7 @@ public class PatientServiceImpl implements PatientService {
         patientToUpdate.get().setAddress(patient.getAddress());
         patientToUpdate.get().setPhone(patient.getPhone());
 
+        log.debug("Update patient with id: " + id);
         return patientRepository.save(patientToUpdate.get());
     }
 
