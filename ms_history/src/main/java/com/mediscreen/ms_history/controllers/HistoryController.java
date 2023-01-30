@@ -26,7 +26,7 @@ public class HistoryController {
     @PostMapping("/patients/{id}/history/add")
     @ResponseStatus(HttpStatus.CREATED)
     public History add(@PathVariable("id") Integer patId,
-                       @RequestParam("e") String note) {
+                       @RequestParam("note") String note) {
 
         return historyService.addObservation(patId, note);
     }

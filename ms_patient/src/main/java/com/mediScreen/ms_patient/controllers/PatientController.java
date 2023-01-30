@@ -39,14 +39,14 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public Patient updatePatient(@PathVariable("id")  Integer id, @RequestBody Patient patient) {
+    public Patient updatePatient(@PathVariable("id")  Integer id, Patient patient) {
         log.debug("Patient : " + patient.getLastname() + " " + patient.getFirstname() + " is updated.");
         return patientService.update(id, patient);
     }
 
     @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED, reason = "OK")
-    public Patient addPatient(@RequestBody @Valid Patient patient) {
+    public Patient addPatient(@Valid Patient patient) {
         return patientService.add(patient);
     }
 }
