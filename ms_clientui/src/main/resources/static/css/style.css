@@ -4,6 +4,19 @@
     margin : 10px 10px 0 0;
 }
 
+.error h1 {
+    text-align: center;
+}
+
+.returnError {
+    color: white;
+}
+
+.errorCta {
+    display: block;
+    margin: 0 auto;
+}
+
 header ul {
     margin: 0;
     padding: 0;

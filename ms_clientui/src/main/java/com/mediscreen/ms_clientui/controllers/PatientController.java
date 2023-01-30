@@ -51,7 +51,7 @@ public class PatientController {
         return "patient/patientUpdate";
     }
 
-    @PostMapping("/{id}/edit")
+    @PutMapping("/{id}/edit")
     public String updatePatient(Model model, @PathVariable("id") Integer id, @Valid PatientBean patientBean, BindingResult result) {
 
         if(result.hasErrors()) {

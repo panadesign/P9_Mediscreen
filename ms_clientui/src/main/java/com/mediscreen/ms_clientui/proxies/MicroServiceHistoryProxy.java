@@ -14,5 +14,5 @@ public interface MicroServiceHistoryProxy {
     public HistoryBean get(@PathVariable Integer id);
 
     @PostMapping("/patients/{id}/history/add")
-    public HistoryBean add(@PathVariable("id") Integer patId, @RequestParam("e") String note);
+    public HistoryBean add(@PathVariable("id") Integer patId, @RequestParam("note") String note);
 }

@@ -28,7 +28,7 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findById(id);
     }
 
-    public Patient findByLastname(String lastname) {
+    public Optional<Patient> findByLastname(String lastname) {
         log.debug("Get patient with lastname: " + lastname);
         return patientRepository.findByLastname(lastname);
     }
@@ -48,7 +48,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     public Patient add(Patient patient) {
-        log.debug("Create a new patient with id: " + patient.getId());
+        log.debug("Create a new patient");
+
         return patientRepository.save(patient);
     }
 

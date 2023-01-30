@@ -20,8 +20,8 @@ public class PatientBean {
     private String firstname;
     @NotBlank(message = "Gender cannot be empty")
     private GenderEnum gender;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth;
     @NotBlank(message = "Address cannot be empty")
     private String address;

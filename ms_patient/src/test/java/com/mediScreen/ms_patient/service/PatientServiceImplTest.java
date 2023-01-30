@@ -66,11 +66,14 @@ class PatientServiceImplTest {
         LocalDate dateTime = LocalDate.now();
         Patient patient1 = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
-        when(mockPatientRepository.findByLastname("Lastname")).thenReturn(patient1);
+        when(mockPatientRepository.findByLastname(patient1.getLastname())).thenReturn(Optional.of(patient1));
 
-        Patient patient = patientServiceImpl.findByLastname(patient1.getLastname());
+        Optional<Patient> patient = patientServiceImpl.findByLastname(patient1.getLastname());
 
-        Assertions.assertEquals("Lastname", patient.getLastname());
+        assertThat(patient)
+                .isNotEmpty()
+                .get()
+                .satisfies(p -> assertThat(p.getLastname()).isEqualTo(patient1.getLastname()));
 
     }
 

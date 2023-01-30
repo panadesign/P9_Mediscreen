@@ -20,7 +20,7 @@ public interface MicroServicePatientProxy {
     PatientBean getPatientById(@PathVariable("id") Integer id);
 
     @PutMapping("/patients/{id}")
-    PatientBean updatePatient(@PathVariable("id") Integer id, @RequestBody PatientBean patientBean);
+    PatientBean updatePatient(@PathVariable("id") Integer id, PatientBean patientBean);
 
     @PostMapping("/patients")
     void addPatient(PatientBean patientBean);

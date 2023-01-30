@@ -29,7 +29,7 @@ public class Patient {
     private String firstname;
 
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth;
 
     @NotEmpty(message = "Gender cannot be empty")
