@@ -36,8 +36,8 @@ public class AssessmentServiceImpl implements AssessmentService {
     public Assessment getAssessmentByLastname(String lastname) throws IOException {
         PatientBean patientBean = microServicePatientProxy.getPatientByLastname(lastname)
                 .orElseThrow();
-        Integer patientsId = patientBean.getId();
-        return generateAssessment(patientsId);
+        Integer patientId = patientBean.getId();
+        return generateAssessment(patientId);
     }
 
 
@@ -106,7 +106,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 
     }
 
-    private static boolean isBorderline(PatientBean patient, Integer countTriggerWord) {
+    private boolean isBorderline(PatientBean patient, Integer countTriggerWord) {
         return (patient.isOlderThan30() && countTriggerWord >= 2 && countTriggerWord < 6);
 
     }

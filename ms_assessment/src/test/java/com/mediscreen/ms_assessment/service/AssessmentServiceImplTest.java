@@ -40,10 +40,71 @@ class AssessmentServiceImplTest {
     void getAssessmentById() throws IOException {
         //GIVEN
         List<HistoryBean.Observation> observations = new ArrayList<>();
+        LocalDate birthdate = LocalDate.parse("1980-12-12");
+        PatientBean patientBean = new PatientBean(1, "lastname", "firstname", GenderEnum.F, birthdate, "address", "phone");
+        HistoryBean historyBean = new HistoryBean(1, observations);
+
+        observations.add(new HistoryBean.Observation("Aucun mot clé", LocalDate.now()));
+
+        //WHEN
+        when(microServicePatientProxy.getPatientById(1)).thenReturn(Optional.of(patientBean));
+        when(microServiceHistoryProxy.get(1)).thenReturn(historyBean);
+
+        Assessment assessment = assessmentServiceImpl.getAssessmentById(1);
+
+        //THEN
+        Assertions.assertEquals("NONE", assessment.getRiskLevel());
+    }
+
+    @Test
+    void getAssessmentByLastname() throws IOException {
+        //GIVEN
+        List<HistoryBean.Observation> observations = new ArrayList<>();
         PatientBean patientBean = new PatientBean(1, "lastname", "firstname", GenderEnum.F, LocalDate.now(), "address", "phone");
         HistoryBean historyBean = new HistoryBean(1, observations);
 
         observations.add(new HistoryBean.Observation("Aucun mot clé", LocalDate.now()));
+
+        //WHEN
+        when(microServicePatientProxy.getPatientByLastname(patientBean.getLastname())).thenReturn(Optional.of(patientBean));
+        when(microServiceHistoryProxy.get(1)).thenReturn(historyBean);
+        when(microServicePatientProxy.getPatientById(patientBean.getId())).thenReturn(Optional.of(patientBean));
+
+        Assessment assessment = assessmentServiceImpl.getAssessmentByLastname(patientBean.getLastname());
+
+        //THEN
+        Assertions.assertEquals("NONE", assessment.getRiskLevel());
+    }
+
+    @Test
+    void getAssessmentNoneForFemaleLessThan30() throws IOException {
+        //GIVEN
+        List<HistoryBean.Observation> observations = new ArrayList<>();
+        LocalDate birthdate = LocalDate.parse("2000-12-12");
+        PatientBean patientBean = new PatientBean(1, "lastname", "firstname", GenderEnum.F, birthdate, "address", "phone");
+        HistoryBean historyBean = new HistoryBean(1, observations);
+
+        observations.add(new HistoryBean.Observation("Poids Cholestérol Vertige", LocalDate.now()));
+
+        //WHEN
+        when(microServicePatientProxy.getPatientById(1)).thenReturn(Optional.of(patientBean));
+        when(microServiceHistoryProxy.get(1)).thenReturn(historyBean);
+
+        Assessment assessment = assessmentServiceImpl.getAssessmentById(1);
+
+        //THEN
+        Assertions.assertEquals("NONE", assessment.getRiskLevel());
+    }
+
+    @Test
+    void getAssessmentNoneForMaleLessThan30() throws IOException {
+        //GIVEN
+        List<HistoryBean.Observation> observations = new ArrayList<>();
+        LocalDate birthdate = LocalDate.parse("2000-12-12");
+        PatientBean patientBean = new PatientBean(1, "lastname", "firstname", GenderEnum.M, birthdate, "address", "phone");
+        HistoryBean historyBean = new HistoryBean(1, observations);
+
+        observations.add(new HistoryBean.Observation("Poids Cholestérol", LocalDate.now()));
 
         //WHEN
         when(microServicePatientProxy.getPatientById(1)).thenReturn(Optional.of(patientBean));
@@ -64,6 +125,26 @@ class AssessmentServiceImplTest {
         HistoryBean historyBean = new HistoryBean(1, observations);
 
         observations.add(new HistoryBean.Observation("Poids Cholestérol Vertige", LocalDate.now()));
+
+        //WHEN
+        when(microServicePatientProxy.getPatientById(1)).thenReturn(Optional.of(patientBean));
+        when(microServiceHistoryProxy.get(1)).thenReturn(historyBean);
+
+        Assessment assessment = assessmentServiceImpl.getAssessmentById(1);
+
+        //THEN
+        Assertions.assertEquals("BORDERLINE", assessment.getRiskLevel());
+    }
+
+    @Test
+    void getAssessmentBorderlineForMale() throws IOException {
+        //GIVEN
+        LocalDate birthdate = LocalDate.parse("1980-12-12");
+        List<HistoryBean.Observation> observations = new ArrayList<>();
+        PatientBean patientBean = new PatientBean(1, "lastname", "firstname", GenderEnum.M, birthdate, "address", "phone");
+        HistoryBean historyBean = new HistoryBean(1, observations);
+
+        observations.add(new HistoryBean.Observation("Poids Cholestérol", LocalDate.now()));
 
         //WHEN
         when(microServicePatientProxy.getPatientById(1)).thenReturn(Optional.of(patientBean));
