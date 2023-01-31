@@ -14,7 +14,7 @@
             <div class="blocPatient" th:each="history: ${history.observations}">
                 <div>
                     <h4>Date : </h4>
-                    <span th:text="${#temporals.format(history.dateTime, 'yyyy/MM/dd HH:mm:ss')}"></span>
+                    <span th:text="${#temporals.format(history.dateTime, 'yyyy/MM/dd')}"></span>
 
                     <h4>Note : </h4>
                     <span th:text="${history.note}"></span>

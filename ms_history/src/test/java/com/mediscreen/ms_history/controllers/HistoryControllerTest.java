@@ -78,7 +78,7 @@ class HistoryControllerTest {
         // WHEN
         ResultActions resultAction = mockMvc.perform(post("/patients/{id}/history/add", history.getPatientId())
                 .contentType(MediaType.APPLICATION_JSON)
-                .param("e", "blablabla"));
+                .param("note", "blablabla"));
 
         //THEN
         resultAction.andExpect(status().isCreated());

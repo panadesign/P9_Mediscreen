@@ -57,7 +57,7 @@ public class HistoryController {
 
         HistoryBean history = microServiceHistoryProxy.add(id, note.getNote());
         model.addAttribute("history", history);
-
+        log.debug("A new note for patient with id " + id + " has been added");
         return "redirect:/patients/{id}/history";
     }
 }

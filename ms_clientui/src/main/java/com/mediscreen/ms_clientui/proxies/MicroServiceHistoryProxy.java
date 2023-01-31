@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MicroServiceHistoryProxy {
 
     @GetMapping("/patients/{id}/history")
-    public HistoryBean get(@PathVariable Integer id);
+    HistoryBean get(@PathVariable Integer id);
 
     @PostMapping("/patients/{id}/history/add")
-    public HistoryBean add(@PathVariable("id") Integer patId, @RequestParam("note") String note);
+    HistoryBean add(@PathVariable("id") Integer patId, @RequestParam("note") String note);
 }

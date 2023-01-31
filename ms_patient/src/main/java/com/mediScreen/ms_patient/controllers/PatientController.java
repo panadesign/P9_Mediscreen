@@ -12,9 +12,9 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
+@Log4j2
 @RestController
 @RequestMapping(value = "/patients")
-@Log4j2
 public class PatientController {
 
     private final PatientService patientService;
@@ -32,8 +32,10 @@ public class PatientController {
     @GetMapping("/{param}")
     public Patient getPatientByParam(@PathVariable String param) {
         if (param.matches(("-?\\d+"))) {
+            log.info("Get patient with id " + param);
             return patientService.findById(parseInt(param)).orElseThrow(() -> new ResourceNotExistingException("Patient with id " + param + " doesn't exist"));
         }
+        log.info("Get patient with lastname " + param);
         return patientService.findByLastname(param).orElseThrow(() -> new ResourceNotExistingException("Patient with lastname " + param + " doesn't exist"));
     }
 
@@ -43,7 +45,7 @@ public class PatientController {
         return patientService.update(id, patient);
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED, reason = "OK")
     public Patient addPatient(@Valid Patient patient) {
         log.debug("Add a new patient");

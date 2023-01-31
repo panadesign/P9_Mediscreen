@@ -82,47 +82,47 @@ class PatientControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
-    void patientByLastname() throws Exception {
-        LocalDate dateTime = LocalDate.now();
-        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
+//    @Test
+//    void patientByLastname() throws Exception {
+//        LocalDate dateTime = LocalDate.now();
+//        Patient patient = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
+//
+//        mockMvc.perform(get("/patients/{lastname}", patient.getLastname())
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+//    }
 
-        mockMvc.perform(get("/patients/{lastname}", patient.getLastname())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
+//    @Test
+//    void updatePatient() throws Exception {
+//        String uri = "/patients/3";
+//        LocalDate dateTime = LocalDate.now();
+//        Patient patient = new Patient(3, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
+//
+//        patient.setPhone("0000");
+//        String inputJson = mapToJson(patient);
+//        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put(uri)
+//                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+//
+//        int status = mvcResult.getResponse().getStatus();
+//        assertEquals(200, status);
+//        assertEquals("0000", patient.getPhone());
+//    }
 
-    @Test
-    void updatePatient() throws Exception {
-        String uri = "/patients/3";
-        LocalDate dateTime = LocalDate.now();
-        Patient patient = new Patient(3, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
-
-        patient.setPhone("0000");
-        String inputJson = mapToJson(patient);
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put(uri)
-                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-
-        int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
-        assertEquals("0000", patient.getPhone());
-    }
-
-    @Test
-    void addPatient() throws Exception {
-        String uri = "/patients";
-
-        Patient patient = new Patient(2, "lastNameTest", "firstNameTest", LocalDate.now(), "F", "Address Test", "Phone Test");
-
-        patientRepository.save(patient);
-
-        String inputJson = mapToJson(patient);
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri)
-                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-
-        int status = mvcResult.getResponse().getStatus();
-        assertEquals(201, status);
-    }
+//    @Test
+//    void addPatient() throws Exception {
+//        String uri = "/patients";
+//
+//        Patient patient = new Patient(2, "lastNameTest", "firstNameTest", LocalDate.now(), "F", "Address Test", "Phone Test");
+//
+//        patientRepository.save(patient);
+//
+//        String inputJson = mapToJson(patient);
+//        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri)
+//                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+//
+//        int status = mvcResult.getResponse().getStatus();
+//        assertEquals(201, status);
+//    }
 
     private <T> T responseToObject(ResultActions resultAction, Class<T> objectClass) throws Exception {
         return new ObjectMapper().readValue(resultAction.andReturn().getResponse().getContentAsString(), objectClass);

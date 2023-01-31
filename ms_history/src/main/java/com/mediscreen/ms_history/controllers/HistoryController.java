@@ -27,7 +27,7 @@ public class HistoryController {
     @ResponseStatus(HttpStatus.CREATED)
     public History add(@PathVariable("id") Integer patId,
                        @RequestParam("note") String note) {
-
+        log.debug("Add a new note to patient with id " + patId);
         return historyService.addObservation(patId, note);
     }
 

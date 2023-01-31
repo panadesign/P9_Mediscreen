@@ -11,7 +11,7 @@
         <h1>Ajouter un patient</h1>
         <div class="row">
             <div class="row">
-                <form action="#" th:action="@{/patients/add}" th:object="${patientBean}" method="POST" class="form-horizontal" style="width: 100%">
+                <form action="#" th:action="@{/patients}" th:object="${patientBean}" method="POST" class="form-horizontal" style="width: 100%">
                     <label for="lastname">
                         <input id="lastname" class="form-control" th:field="*{lastname}" type="text" name="lastname" placeholder="Patient's lastname">
                         <p class="text-danger" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></p>
