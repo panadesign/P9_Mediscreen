@@ -39,15 +39,15 @@ public class PatientController {
         return patientService.findByLastname(param).orElseThrow(() -> new ResourceNotExistingException("Patient with lastname " + param + " doesn't exist"));
     }
 
-    @PutMapping("/{id}")
-    public Patient updatePatient(@PathVariable("id") Integer id, Patient patient) {
+    @PostMapping("/{id}")
+    public Patient updatePatient(@PathVariable("id") Integer id, @RequestBody Patient patient) {
         log.debug("Patient : " + patient.getLastname() + " " + patient.getFirstname() + " is updated.");
         return patientService.update(id, patient);
     }
 
     @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED, reason = "OK")
-    public Patient addPatient(@Valid Patient patient) {
+    public Patient addPatient(@RequestBody @Valid Patient patient) {
         log.debug("Add a new patient");
         return patientService.add(patient);
     }
