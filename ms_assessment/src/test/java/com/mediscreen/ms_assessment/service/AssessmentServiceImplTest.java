@@ -134,6 +134,7 @@ class AssessmentServiceImplTest {
 
         //THEN
         Assertions.assertEquals("BORDERLINE", assessment.getRiskLevel());
+
     }
 
     @Test
