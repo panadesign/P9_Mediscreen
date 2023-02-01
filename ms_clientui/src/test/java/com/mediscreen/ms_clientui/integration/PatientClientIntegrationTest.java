@@ -3,27 +3,22 @@ package com.mediscreen.ms_clientui.integration;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.mediscreen.ms_clientui.config.PatientMocks;
 import com.mediscreen.ms_clientui.config.WireMockConfig;
-import com.mediscreen.ms_clientui.proxies.MicroServiceHistoryProxy;
 import com.mediscreen.ms_clientui.proxies.MicroServicePatientProxy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -44,7 +39,17 @@ class PatientClientIntegrationTest {
     }
 
     @Test
-    public void whenGetBooks_thenBooksShouldBeReturned() {
+    public void whenGetPatient_thenPatientsShouldBeReturned() {
         assertFalse(microServicePatientProxy.getAllPatients().isEmpty());
+    }
+
+    @Test
+    public void whenGetPatients_thenTheCorrectPatientsShouldBeReturned() {
+        LocalDate birthdateJeremy = LocalDate.of(1968, 6, 22);
+        LocalDate birthdateRomelie = LocalDate.of(1952, 9, 27);
+        assertTrue(microServicePatientProxy.getAllPatients()
+                .stream()
+                .map(p -> p.getLastname())
+                .count() == 2);
     }
 }
