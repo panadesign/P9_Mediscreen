@@ -75,7 +75,6 @@ public class PatientController {
     }
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
     public String add(Model model, @Valid PatientBean patientBean, BindingResult result) {
         log.info("Add an new patient");
         if(result.hasErrors()) {

@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
-@ActiveProfiles("test")
+@ActiveProfiles("dev")
 class PatientControllerTest {
     @Autowired
     private MockMvc mockMvc;
