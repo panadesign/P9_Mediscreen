@@ -1,10 +1,10 @@
 package com.mediScreen.ms_patient.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.mediScreen.ms_patient.exceptions.ResourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
 import com.mediScreen.ms_patient.repository.PatientRepository;
 import com.mediScreen.ms_patient.service.PatientServiceImpl;
@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -26,7 +27,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -131,8 +131,15 @@ class PatientControllerTest {
     }
 
     private <T> T responseToObject(ResultActions resultAction, Class<T> objectClass) throws Exception {
-        return new ObjectMapper().readValue(resultAction.andReturn().getResponse().getContentAsString(), objectClass);
+        return objectMapper().readValue(resultAction.andReturn().getResponse().getContentAsString(), objectClass);
     }
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+    }
+
 
 
 }

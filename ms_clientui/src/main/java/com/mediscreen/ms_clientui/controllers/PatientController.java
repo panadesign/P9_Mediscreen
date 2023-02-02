@@ -4,6 +4,7 @@ import com.mediscreen.ms_clientui.beans.PatientBean;
 import com.mediscreen.ms_clientui.proxies.MicroServicePatientProxy;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -74,6 +75,7 @@ public class PatientController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     public String add(Model model, @Valid PatientBean patientBean, BindingResult result) {
         log.info("Add an new patient");
         if(result.hasErrors()) {

@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import java.io.IOException;
+
 import org.springframework.stereotype.Component;
 
 import static java.nio.charset.Charset.defaultCharset;
@@ -48,6 +49,17 @@ public class PatientMocks {
         );
     }
 
+    @SneakyThrows
+    public void mappingPost(String url, int status, Object body) {
+        mockService.stubFor(
+                WireMock
+                        .post(WireMock.urlEqualTo(url))
+                        .willReturn(getResponse(status)
+                                .withBody(objectToString(body))
+                        )
+        );
+    }
+
     private static ResponseDefinitionBuilder getResponse(int status) {
         return WireMock.aResponse()
                 .withStatus(status)
@@ -60,6 +72,15 @@ public class PatientMocks {
 
     public static void setupMockPatientsResponse(WireMockServer mockService) throws IOException {
         mockService.stubFor(WireMock.get(WireMock.urlEqualTo("/patients"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK.value())
+                        .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+                        .withBody(
+                                copyToString(
+                                        PatientMocks.class.getClassLoader().getResourceAsStream("payload/get-patient-response.json"),
+                                        defaultCharset()))));
+
+        mockService.stubFor(WireMock.post(WireMock.urlEqualTo("/patients"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.OK.value())
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
