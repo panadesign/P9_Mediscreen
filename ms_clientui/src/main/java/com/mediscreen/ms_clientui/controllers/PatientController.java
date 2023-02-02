@@ -86,7 +86,7 @@ public class PatientController {
         microServicePatientProxy.addPatient(patientBean);
         model.addAttribute("patients", microServicePatientProxy.getAllPatients());
 
-        log.info("Patient : " + patientBean.getLastname() + patientBean.getFirstname() + " is created.");
+        log.info("Patient : " + patientBean.getLastname() + " " +  patientBean.getFirstname() + " is created.");
         return "redirect:/patients";
     }
 }

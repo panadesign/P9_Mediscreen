@@ -3,6 +3,8 @@ package com.mediscreen.ms_clientui.beans;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -15,18 +17,18 @@ import java.util.Date;
 @Setter
 public class PatientBean {
     private Integer id;
-    @NotBlank(message = "Lastname cannot be empty")
+    @NotBlank(message = "Ce champ est obligatoire")
     private String lastname;
-    @NotBlank(message = "Firstname cannot be empty")
+    @NotBlank(message = "Ce champ est obligatoire")
     private String firstname;
     @NotBlank(message = "Gender cannot be empty")
     private String gender;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     private LocalDate birth;
-    @NotBlank(message = "Address cannot be empty")
+    @NotBlank(message = "Ce champ est obligatoire")
     private String address;
-    @NotBlank(message = "Phone number cannot be empty")
+    @NotBlank(message = "Ce champ est obligatoire")
     private String phone;
 
 }

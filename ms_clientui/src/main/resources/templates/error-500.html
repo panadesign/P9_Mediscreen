@@ -9,7 +9,7 @@
     <body>
     <div class="container error">
         <h1>Une erreur est apparue !<br/> Nous en sommes désolés.</h1>
-        <p class="error" th:text="${status}"></p>
+        <p class="error" th:text="${statusCode}"></p>
         <p class="error_message" th:text="${message}"></p>
         <button class="errorCta btn btn-primary" value="Return"><a class="returnError" th:href="@{/}" th:method="get">Retour</a></button>
     </div>
