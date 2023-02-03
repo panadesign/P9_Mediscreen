@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MicroServiceAssessmentProxy {
 
     @GetMapping("/patients/{id}/assessment")
-    public AssessmentBean get(@PathVariable Integer id);
+    AssessmentBean get(@PathVariable Integer id);
 }

@@ -20,11 +20,9 @@ import javax.validation.Valid;
 public class HistoryController {
 
     private final MicroServiceHistoryProxy microServiceHistoryProxy;
-    private final MicroServicePatientProxy microServicePatientProxy;
 
-    public HistoryController(MicroServiceHistoryProxy microServiceHistoryProxy, MicroServicePatientProxy microServicePatientProxy) {
+    public HistoryController(MicroServiceHistoryProxy microServiceHistoryProxy) {
         this.microServiceHistoryProxy = microServiceHistoryProxy;
-        this.microServicePatientProxy = microServicePatientProxy;
     }
 
     @GetMapping("/patients/{id}/history")
