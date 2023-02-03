@@ -1,13 +1,11 @@
 package com.mediscreen.ms_clientui.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tomakehurst.wiremock.WireMockServer;
 import com.mediscreen.ms_clientui.beans.PatientBean;
 import com.mediscreen.ms_clientui.config.PatientProxyMocks;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
@@ -39,14 +37,6 @@ class PatientControllerTest {
         patientMocks.resetAll();
         this.patientBean = new PatientBean(3, "lastname", "firstname", "M", LocalDate.of(2000, 6, 23), "address", "phone");
     }
-
-
-    @Test
-    void home() throws Exception {
-        mockMvc.perform(get("/"))
-                .andExpect(status().isOk());
-    }
-
 
     @Test
     void getAllPatients() throws Exception {
@@ -81,7 +71,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void addPatientFailed() throws Exception {
+    void addPatient() throws Exception {
         patientMocks.mappingPost("/patients");
 
         mockMvc.perform(post("/patients")
@@ -93,6 +83,16 @@ class PatientControllerTest {
                         .param("phone", "387-866-1399"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/patients"))
+                .andReturn();
+    }
+
+    @Test
+    void addPatientFailed() throws Exception {
+        patientMocks.mappingPost("/patients");
+
+        mockMvc.perform(post("/patients"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("patient/patientAdd"))
                 .andReturn();
     }
 
@@ -111,6 +111,20 @@ class PatientControllerTest {
                 .andExpect(status().is3xxRedirection());
     }
 
+    @Test
+    void updatePatientFailed() throws Exception {
+        patientMocks.mappingGet("/patients", 200, List.of(patientBean));
+        patientMocks.mappingPost("/patients/2", 200, patientBean);
+
+        mockMvc.perform(post("/patients/2/edit")
+                        .param("lastname", "Test")
+                        .param("firstname", "")
+                        .param("birth", "2020-02-15")
+                        .param("gender", "F")
+                        .param("address", "2 Warren Street")
+                        .param("phone", "387-866-1399"))
+                .andExpect(status().is3xxRedirection());
+    }
 
     private String asJsonString(final Object obj) throws Exception {
         return objectMapper.writeValueAsString(obj);

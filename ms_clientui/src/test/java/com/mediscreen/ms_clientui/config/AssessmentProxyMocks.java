@@ -12,22 +12,22 @@ import org.springframework.stereotype.Component;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 @Component
-public class PatientProxyMocks {
+public class AssessmentProxyMocks {
 
     @Autowired
-    @Qualifier("mockPatientProxy")
-    private WireMockServer mockPatientProxy;
+    @Qualifier("mockAssessmentProxy")
+    private WireMockServer mockAssessmentProxy;
 
     @Autowired
     private ObjectMapper objectMapper;
 
 
     public void resetAll() {
-        mockPatientProxy.resetAll();
+        mockAssessmentProxy.resetAll();
     }
 
     public void mappingGet(String url, int status, Object body) {
-        mockPatientProxy.stubFor(
+        mockAssessmentProxy.stubFor(
                 get(urlEqualTo(url))
                         .willReturn(getResponse(status)
                                 .withBody(objectToString(body))
@@ -35,20 +35,20 @@ public class PatientProxyMocks {
         );
     }
 
-    public void mappingPost(String url) {
-        mockPatientProxy.stubFor(
-                any(urlEqualTo(url)).willReturn(aResponse())
-        );
-    }
-
-    public void mappingPost(String url, int status, Object body) {
-        mockPatientProxy.stubFor(
-                any(urlEqualTo(url))
-                        .willReturn(getResponse(status)
-                                .withBody(objectToString(body))
-                        )
-        );
-    }
+//    public void mappingPost(String url) {
+//        mockAssessmentProxy.stubFor(
+//                any(urlEqualTo(url)).willReturn(aResponse())
+//        );
+//    }
+//
+//    public void mappingPost(String url, int status, Object body) {
+//        mockAssessmentProxy.stubFor(
+//                any(urlEqualTo(url))
+//                        .willReturn(getResponse(status)
+//                                .withBody(objectToString(body))
+//                        )
+//        );
+//    }
 
 
     private static ResponseDefinitionBuilder getResponse(int status) {

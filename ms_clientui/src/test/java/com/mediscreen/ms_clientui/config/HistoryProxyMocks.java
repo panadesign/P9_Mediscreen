@@ -12,22 +12,30 @@ import org.springframework.stereotype.Component;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 @Component
-public class PatientProxyMocks {
+public class HistoryProxyMocks {
 
     @Autowired
-    @Qualifier("mockPatientProxy")
-    private WireMockServer mockPatientProxy;
+    @Qualifier("mockHistoryProxy")
+    private WireMockServer mockHistoryProxy;
 
     @Autowired
     private ObjectMapper objectMapper;
 
 
     public void resetAll() {
-        mockPatientProxy.resetAll();
+        mockHistoryProxy.resetAll();
+    }
+
+    public void mappingGet(String url, int status) {
+        mockHistoryProxy.stubFor(
+                get(urlEqualTo(url))
+                        .willReturn(getResponse(status)
+                        )
+        );
     }
 
     public void mappingGet(String url, int status, Object body) {
-        mockPatientProxy.stubFor(
+        mockHistoryProxy.stubFor(
                 get(urlEqualTo(url))
                         .willReturn(getResponse(status)
                                 .withBody(objectToString(body))
@@ -36,17 +44,8 @@ public class PatientProxyMocks {
     }
 
     public void mappingPost(String url) {
-        mockPatientProxy.stubFor(
-                any(urlEqualTo(url)).willReturn(aResponse())
-        );
-    }
-
-    public void mappingPost(String url, int status, Object body) {
-        mockPatientProxy.stubFor(
-                any(urlEqualTo(url))
-                        .willReturn(getResponse(status)
-                                .withBody(objectToString(body))
-                        )
+        mockHistoryProxy.stubFor(
+                post(urlEqualTo(url)).willReturn(aResponse())
         );
     }
 

@@ -1,10 +1,8 @@
 package com.mediscreen.ms_clientui.config;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ActiveProfiles;
 
 @Configuration
 public class WireMockConfig {
@@ -18,6 +16,11 @@ public class WireMockConfig {
     @Bean(name = "mockHistoryProxy", initMethod = "start", destroyMethod = "stop")
     public WireMockServer mockHistoryProxy() {
         return new WireMockServer(8082);
+    }
+
+    @Bean(name = "mockAssessmentProxy", initMethod = "start", destroyMethod = "stop")
+    public WireMockServer mockAssessmentProxy() {
+        return new WireMockServer(8083);
     }
 
 
