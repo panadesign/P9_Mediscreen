@@ -142,6 +142,7 @@
                 <configuration>
                     <excludes>
                         <exclude>com/mediScreen/ms_patient/model/*</exclude>
+                        <exclude>com/mediScreen/ms_patient/dto/*</exclude>
                         <exclude>com/mediScreen/ms_patient/config/*</exclude>
                         <exclude>com/mediScreen/ms_patient/controllers/RequestInterceptor.class</exclude>
                         <exclude>com/mediScreen/ms_patient/MsPatientApplication.class</exclude>

@@ -44,8 +44,12 @@ class PatientControllerTest {
 
     @Autowired
     private PatientRepository patientRepository;
+
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     public void init() {
@@ -58,7 +62,7 @@ class PatientControllerTest {
     private PatientServiceImpl patientService;
 
     protected String mapToJson(Object obj) throws JsonProcessingException {
-        ObjectMapper objectMapper = JsonMapper.builder()
+        objectMapper = JsonMapper.builder()
                 .addModule(new JavaTimeModule())
                 .build();
         return objectMapper.writeValueAsString(obj);
@@ -129,17 +133,5 @@ class PatientControllerTest {
         int status = mvcResult.getResponse().getStatus();
         assertEquals(201, status);
     }
-
-    private <T> T responseToObject(ResultActions resultAction, Class<T> objectClass) throws Exception {
-        return objectMapper().readValue(resultAction.andReturn().getResponse().getContentAsString(), objectClass);
-    }
-    @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper()
-                .registerModule(new JavaTimeModule())
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-    }
-
-
 
 }
