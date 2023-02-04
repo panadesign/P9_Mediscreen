@@ -1,5 +1,6 @@
 package com.mediScreen.ms_patient.service;
 
+import com.mediScreen.ms_patient.exceptions.ResourceNotExistingException;
 import com.mediScreen.ms_patient.model.Patient;
 import com.mediScreen.ms_patient.repository.PatientRepository;
 import lombok.extern.log4j.Log4j2;
@@ -19,18 +20,22 @@ public class PatientServiceImpl implements PatientService {
     }
 
     public List<Patient> getPatients() {
-        log.debug("Get all patients");
+        log.info("Get all patients");
         return patientRepository.findAll();
     }
 
     public Optional<Patient> findById(Integer id) {
-        log.debug("Get patient with id: " + id);
-        return patientRepository.findById(id);
+        log.info("Get patient with id: " + id);
+        Optional<Patient> patient = patientRepository.findById(id);
+
+        return Optional.ofNullable(patient.orElseThrow(() -> new ResourceNotExistingException("Patient with id " + id + " doesn't exist")));
     }
 
     public Optional<Patient> findByLastname(String lastname) {
-        log.debug("Get patient with lastname: " + lastname);
-        return patientRepository.findByLastname(lastname);
+        log.info("Get patient with lastname: " + lastname);
+        Optional<Patient> patient = patientRepository.findByLastname(lastname);
+
+        return Optional.ofNullable(patient.orElseThrow(() -> new ResourceNotExistingException("Patient with lastname " + lastname + " doesn't exist")));
     }
 
     public Patient update(Integer id, Patient patient) {
@@ -43,13 +48,12 @@ public class PatientServiceImpl implements PatientService {
         patientToUpdate.get().setAddress(patient.getAddress());
         patientToUpdate.get().setPhone(patient.getPhone());
 
-        log.debug("Update patient with id: " + id);
+        log.info("Update patient with id: " + id);
         return patientRepository.save(patientToUpdate.get());
     }
 
     public Patient add(Patient patient) {
-        log.debug("Create a new patient");
-
+        log.info("Create a new patient");
         return patientRepository.save(patient);
     }
 
