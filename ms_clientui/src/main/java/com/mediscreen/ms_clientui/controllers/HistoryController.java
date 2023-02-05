@@ -13,16 +13,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
+/**
+ * The type History controller.
+ */
 @Log4j2
 @Controller
 public class HistoryController {
 
     private final MicroServiceHistoryProxy microServiceHistoryProxy;
 
+    /**
+     * Instantiates a new History controller.
+     *
+     * @param microServiceHistoryProxy the micro service history proxy
+     */
     public HistoryController(MicroServiceHistoryProxy microServiceHistoryProxy) {
         this.microServiceHistoryProxy = microServiceHistoryProxy;
     }
 
+    /**
+     * Get patient history.
+     *
+     * @param model the model
+     * @param id    the id
+     * @return the patient history
+     */
     @GetMapping("/patients/{id}/history")
     public String get(Model model, @PathVariable("id") Integer id) {
         log.debug("Access to patient's all notes");
@@ -33,6 +48,13 @@ public class HistoryController {
         return "history/patientHistory";
     }
 
+    /**
+     * Get history add form
+     *
+     * @param model the model
+     * @param id    the id
+     * @return the form to add a new history
+     */
     @GetMapping("/patients/{id}/history/add")
     public String addForm(Model model, @PathVariable("id") Integer id) {
         log.debug("Access to adding form for a new note");
@@ -42,6 +64,15 @@ public class HistoryController {
     }
 
 
+    /**
+     * Add a new note
+     *
+     * @param model  the model
+     * @param id     the id
+     * @param note   the note
+     * @param result the result
+     * @return history of patient
+     */
     @PostMapping("/patients/{id}/history/add")
     public String add(Model model, @PathVariable("id") Integer id, @Valid NoteBean note, BindingResult result) {
         log.debug("Add note for patient with id " + id);

@@ -8,9 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type My error controller.
+ */
 @Controller
 public class MyErrorController implements ErrorController {
 
+    /**
+     * Handle error string.
+     *
+     * @param request the request
+     * @return error page
+     */
     @GetMapping("/error")
     public String handleError(HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);

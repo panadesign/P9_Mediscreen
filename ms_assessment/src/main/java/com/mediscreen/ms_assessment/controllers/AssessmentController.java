@@ -11,15 +11,30 @@ import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * The type Assessment controller.
+ */
 @Log4j2
 @RestController
 public class AssessmentController {
     private final AssessmentService assessmentService;
 
+    /**
+     * Instantiates a new Assessment controller.
+     *
+     * @param assessmentService the assessment service
+     */
     public AssessmentController(AssessmentService assessmentService) {
         this.assessmentService = assessmentService;
     }
 
+    /**
+     * Gets assessment by param. Param can be id or lastname
+     *
+     * @param param the param
+     * @return the assessment by param
+     * @throws IOException the io exception
+     */
     @GetMapping("patients/{param}/assessment")
     public Assessment getAssessmentByParam(@PathVariable String param) throws IOException {
         if(param.matches(("-?\\d+"))) {

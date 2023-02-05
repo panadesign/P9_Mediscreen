@@ -10,10 +10,18 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
 
+/**
+ * The type Object mapper config.
+ */
 @Configuration
 public class ObjectMapperConfig {
 
-        @Primary
+    /**
+     * Object mapper object mapper.
+     *
+     * @return the object mapper
+     */
+    @Primary
         @Bean
         public ObjectMapper objectMapper() {
             return new ObjectMapper()
@@ -21,7 +29,13 @@ public class ObjectMapperConfig {
                     .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         }
 
-        @Bean
+    /**
+     * Gets repository populator.
+     *
+     * @param objectMapper the object mapper
+     * @return the repository populated by history-data-json
+     */
+    @Bean
         public Jackson2RepositoryPopulatorFactoryBean getRepositoryPopulator(ObjectMapper objectMapper) {
             Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
             factory.setMapper(objectMapper);

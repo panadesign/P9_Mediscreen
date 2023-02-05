@@ -2,7 +2,6 @@ package com.mediscreen.ms_history.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mediscreen.ms_history.domain.History;
-import com.mediscreen.ms_history.repository.HistoryRepository;
 import com.mediscreen.ms_history.service.HistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;

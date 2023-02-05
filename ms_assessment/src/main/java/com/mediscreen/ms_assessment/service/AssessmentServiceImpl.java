@@ -18,22 +18,43 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Assessment service.
+ */
 @Service
 @Log4j2
 public class AssessmentServiceImpl implements AssessmentService {
     private final MicroServicePatientProxy microServicePatientProxy;
     private final MicroServiceHistoryProxy microServiceHistoryProxy;
 
+    /**
+     * Instantiates a new Assessment service.
+     *
+     * @param microServicePatientProxy the micro service patient proxy
+     * @param microServiceHistoryProxy the micro service history proxy
+     */
     public AssessmentServiceImpl(MicroServicePatientProxy microServicePatientProxy, MicroServiceHistoryProxy microServiceHistoryProxy) {
         this.microServicePatientProxy = microServicePatientProxy;
         this.microServiceHistoryProxy = microServiceHistoryProxy;
     }
 
+    /**
+     * Get assessment by id
+     * @param id patient id
+     * @return assessment for patient id
+     * @throws IOException
+     */
     public Assessment getAssessmentById(Integer id) throws IOException {
         log.info("Get assessment by id with id: " + id);
         return generateAssessment(id);
     }
 
+    /**
+     * Get assessment by lastname
+     * @param lastname patient lastname
+     * @return assessment for patient lastname
+     * @throws IOException
+     */
     public Assessment getAssessmentByLastname(String lastname) throws IOException {
         PatientBean patientBean = microServicePatientProxy.getPatientByLastname(lastname)
                 .orElseThrow();
