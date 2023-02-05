@@ -12,6 +12,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+/**
+ * The type Patient.
+ */
 @Entity
 @Table(name = "patient")
 @Data
@@ -43,6 +46,11 @@ public class Patient {
     @NotEmpty(message = "Phone number cannot be empty")
     private String phone;
 
+    /**
+     * Sets lastname to lowercase
+     *
+     * @param lastname the lastname
+     */
     public void setLastname(String lastname) {
         this.lastname = lastname.toLowerCase();
     }

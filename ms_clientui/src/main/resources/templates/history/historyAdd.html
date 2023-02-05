@@ -12,13 +12,12 @@
     <div class="row">
         <div class="row">
             <form action="#" th:action="@{/patients/{id}/history/add(id=${id})}"  th:object="${noteBean}"  method="POST" class="form-horizontal" style="width: 100%">
-                <label for="note">
+                <label for="note" class="note">
                     <input id="note" class="form-control" type="text" th:field="*{note}" name="note" placeholder="note">
                     <p class="text-danger" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p>
                 </label>
-
-                <button class="btn btn-danger" value="Cancel"><a th:href="@{/patients/{id}(id=${id})}" th:method="get">Annuler</a></button>
                 <button class="btn btn-primary" type="submit" value="Create">Valider</button>
+                <button class="btn btn-danger" value="Cancel"><a th:href="@{/patients/{id}(id=${id})}" th:method="get">Annuler</a></button>
             </form>
         </div>
     </div>

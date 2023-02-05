@@ -6,7 +6,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * The interface Patient repository.
+ */
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Integer> {
+    /**
+     * Find by lastname optional.
+     *
+     * @param lastname the lastname
+     * @return the optional
+     */
     Optional<Patient> findByLastname(String lastname);
 }

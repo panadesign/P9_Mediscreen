@@ -14,6 +14,9 @@ import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * The type Patient controller.
+ */
 @Log4j2
 @RestController
 @RequestMapping(value = "/patients")
@@ -21,10 +24,20 @@ public class PatientController {
 
     private final PatientService patientService;
 
+    /**
+     * Instantiates a new Patient controller.
+     *
+     * @param patientService the patient service
+     */
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
 
+    /**
+     * Gets all patients.
+     *
+     * @return the all patients
+     */
     @GetMapping()
     public List<PatientDto> getAllPatients() {
         log.info("Get all patients");
@@ -33,6 +46,12 @@ public class PatientController {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Gets patient by param.
+     *
+     * @param param the param
+     * @return the patient by id or lastname
+     */
     @GetMapping("/{param}")
     public PatientDto getPatientByParam(@PathVariable String param) {
         if (param.matches(("-?\\d+"))) {
@@ -50,6 +69,13 @@ public class PatientController {
         return new PatientDto(patient);
     }
 
+    /**
+     * Update patient dto.
+     *
+     * @param id      the id
+     * @param patient the patient
+     * @return updated patient dto
+     */
     @PostMapping("/{id}")
     public PatientDto updatePatient(@PathVariable("id") Integer id, @RequestBody Patient patient) {
         log.info("Patient : " + patient.getLastname() + " " + patient.getFirstname() + " is updated.");
@@ -58,6 +84,12 @@ public class PatientController {
         return new PatientDto(patientToUpdate);
     }
 
+    /**
+     * Add patient dto.
+     *
+     * @param patient the patient
+     * @return a new patient dto
+     */
     @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED, reason = "OK")
     public PatientDto addPatient(@RequestBody @Valid Patient patient) {

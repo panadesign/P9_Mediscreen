@@ -38,7 +38,7 @@
             <a th:href="@{/patients/{id}/edit(id=${patient.getId})}" th:method="get" class="btn btn-primary">Mettre à jour</a>
             <a th:href="@{/patients/{id}/assessment(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Diagnotique du patient</a>
             <a th:href="@{/patients/{id}/history(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Accéder aux notes</a>
-            <a th:href="@{/patients/{id}/history/add(id=${patient.getId})}" th:method="get" class="btn btn-secondary">Ajouter une note</a>
+            <a th:href="@{/patients/{id}/history/add(id=${patient.getId})}" th:method="get" class="btn btn-primary">Ajouter une note</a>
             <a th:href="@{/patients}" th:method="get" class="btn btn-secondary">Tous les patients</a>
         </div>
     </div>

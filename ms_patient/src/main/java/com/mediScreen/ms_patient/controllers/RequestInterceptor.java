@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
+/**
+ * The type Request interceptor.
+ */
 @Slf4j
 public class RequestInterceptor implements HandlerInterceptor {
 
