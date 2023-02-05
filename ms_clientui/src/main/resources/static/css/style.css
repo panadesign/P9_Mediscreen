@@ -7,6 +7,10 @@
 
 }
 
+.capitalize {
+    text-transform: capitalize;
+}
+
 .blocPatient {
     background-color: #e9ecef;
     padding: 20px;

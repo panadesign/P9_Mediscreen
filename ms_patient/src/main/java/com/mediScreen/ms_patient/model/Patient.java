@@ -25,6 +25,8 @@ public class Patient {
     @NotEmpty(message = "Lastname cannot be empty")
     private String lastname;
 
+
+
     @NotEmpty(message = "Firstname cannot be empty")
     private String firstname;
 
@@ -40,5 +42,9 @@ public class Patient {
 
     @NotEmpty(message = "Phone number cannot be empty")
     private String phone;
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname.toLowerCase();
+    }
 
 }

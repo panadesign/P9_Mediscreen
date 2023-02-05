@@ -33,7 +33,7 @@ public class PatientServiceImpl implements PatientService {
 
     public Optional<Patient> findByLastname(String lastname) {
         log.info("Get patient with lastname: " + lastname);
-        Optional<Patient> patient = patientRepository.findByLastname(lastname);
+        Optional<Patient> patient = patientRepository.findByLastname(lastname.toLowerCase());
 
         return Optional.ofNullable(patient.orElseThrow(() -> new ResourceNotExistingException("Patient with lastname " + lastname + " doesn't exist")));
     }
