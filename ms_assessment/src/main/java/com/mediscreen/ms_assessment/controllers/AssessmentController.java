@@ -21,10 +21,12 @@ public class AssessmentController {
     }
 
     @GetMapping("patients/{param}/assessment")
-    public Assessment getPatientByParam(@PathVariable String param) throws IOException {
+    public Assessment getAssessmentByParam(@PathVariable String param) throws IOException {
         if(param.matches(("-?\\d+"))) {
+            log.info("Get assessment by id: " + param);
             return assessmentService.getAssessmentById(parseInt(param));
         }
+        log.info("Get assessment by lastname: " + param);
         return assessmentService.getAssessmentByLastname(param);
     }
 }

@@ -30,6 +30,7 @@ public class AssessmentServiceImpl implements AssessmentService {
     }
 
     public Assessment getAssessmentById(Integer id) throws IOException {
+        log.info("Get assessment by id with id: " + id);
         return generateAssessment(id);
     }
 
@@ -37,6 +38,7 @@ public class AssessmentServiceImpl implements AssessmentService {
         PatientBean patientBean = microServicePatientProxy.getPatientByLastname(lastname)
                 .orElseThrow();
         Integer patientId = patientBean.getId();
+        log.info("Get assessment by lastname with lastname " + lastname);
         return generateAssessment(patientId);
     }
 
@@ -47,7 +49,7 @@ public class AssessmentServiceImpl implements AssessmentService {
         HistoryBean historyBean = microServiceHistoryProxy.get(id);
 
         RiskLevel status = getStatus(patientBean, historyBean);
-        log.debug("Create an assessment for patient with id:" + id);
+        log.info("Create an assessment for patient with id:" + id);
         assert status != null;
         return new Assessment(status.name(), patientBean.getLastname(), patientBean.getFirstname(), patientBean.getGender(), patientBean.getAge());
     }
@@ -63,7 +65,7 @@ public class AssessmentServiceImpl implements AssessmentService {
         List<String> triggerWordsList = br.lines().collect(Collectors.toList());
 
         reader.close();
-
+        log.info("Get trigger words in list");
         return triggerWordsList;
     }
 
@@ -79,6 +81,8 @@ public class AssessmentServiceImpl implements AssessmentService {
 
         List<String> words = getTriggerWords();
         countTriggerWord = observations.stream().mapToInt(observation -> (int) words.stream().filter(observation::contains).count()).sum();
+
+        log.info("Get status");
 
         if (isNone(patient, countTriggerWord)) {
             return RiskLevel.NONE;
