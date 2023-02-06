@@ -70,21 +70,6 @@ public class PatientController {
     }
 
     /**
-     * Update patient dto.
-     *
-     * @param id      the id
-     * @param patient the patient
-     * @return updated patient dto
-     */
-    @PostMapping("/{id}")
-    public PatientDto updatePatient(@PathVariable("id") Integer id, @RequestBody Patient patient) {
-        log.info("Patient : " + patient.getLastname() + " " + patient.getFirstname() + " is updated.");
-        Patient patientToUpdate = patientService.update(id, patient);
-
-        return new PatientDto(patientToUpdate);
-    }
-
-    /**
      * Add patient dto.
      *
      * @param patient the patient
@@ -97,5 +82,20 @@ public class PatientController {
         Patient patientToAdd =  patientService.add(patient);
 
         return new PatientDto(patientToAdd);
+    }
+
+    /**
+     * Update patient dto.
+     *
+     * @param id      the id
+     * @param patient the patient
+     * @return updated patient dto
+     */
+    @PostMapping("/{id}")
+    public PatientDto updatePatient(@PathVariable("id") Integer id, @RequestBody Patient patient) {
+        log.info("Patient : " + patient.getLastname() + " " + patient.getFirstname() + " is updated.");
+        Patient patientToUpdate = patientService.update(id, patient);
+
+        return new PatientDto(patientToUpdate);
     }
 }

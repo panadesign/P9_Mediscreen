@@ -47,6 +47,15 @@ public class History {
         return this;
     }
 
+    public History updateObservation(Long noteId, String note) {
+        observations
+                .stream()
+                .filter(o -> o.getNoteId().equals(noteId))
+                .findFirst()
+                .ifPresent(observation -> observation.setNote(note));
+        return this;
+    }
+
     /**
      * The type Observation.
      */
@@ -55,6 +64,9 @@ public class History {
     @NoArgsConstructor
     @Getter
     public static class Observation {
+        @Id
+        private Long noteId;
+
         @NotEmpty(message = "Note cannot be empty")
         private String note;
 

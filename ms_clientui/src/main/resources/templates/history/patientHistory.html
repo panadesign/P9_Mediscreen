@@ -17,7 +17,8 @@
                     <span th:text="${#temporals.format(history.dateTime, 'yyyy/MM/dd')}"></span>
 
                     <h4>Note : </h4>
-                    <span th:text="${history.note}"></span>
+                    <p th:text="${history.note}"></p>
+                    <button class="btn btn-primary" value="Update"><a th:href="@{/patients/{id}/history/{noteId}(id=${id}, noteId=${history.noteId})}" th:method="get">Mettre à jour</a></button>
                 </div>
             </div>
         </div>

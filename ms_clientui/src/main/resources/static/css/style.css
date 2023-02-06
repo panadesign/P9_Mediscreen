@@ -56,3 +56,7 @@ header ul li {
     font-weight: 700;
     color: red;
 }
+button a {
+    color: #fff;
+    text-decoration: none;
+}

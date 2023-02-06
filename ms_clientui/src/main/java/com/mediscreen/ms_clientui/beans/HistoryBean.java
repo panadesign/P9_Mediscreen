@@ -3,6 +3,7 @@ package com.mediscreen.ms_clientui.beans;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import nonapi.io.github.classgraph.json.Id;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -18,7 +19,9 @@ public class HistoryBean {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    static class Observation {
+    public static class Observation {
+        @Id
+        private Long noteId;
         @NotNull
         private String note;
         private LocalDate dateTime;

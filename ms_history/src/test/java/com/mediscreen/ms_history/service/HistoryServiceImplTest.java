@@ -9,7 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,5 +60,24 @@ class HistoryServiceImplTest {
                             assertThat(history.getObservations().size()).isNotNull();
                         }
                 );
+    }
+
+    @Test
+    void updateHistory() {
+        //GIVEN
+        History.Observation observation = new History.Observation(12L, "test", LocalDate.now());
+
+        List<History.Observation> observations = new ArrayList<>();
+        observations.add(observation);
+
+        History history = new History(1, observations);
+
+        //WHEN
+        when(historyRepository.findById(1)).thenReturn(Optional.of(history));
+        when(historyRepository.save(history)).thenReturn(history);
+        History historyToUpdate = historyServiceImpl.updateObservation(1, 12L, "testUpdated");
+
+        //THEN
+        Assertions.assertTrue(historyToUpdate.getObservations().get(0).getNote().equals(observation.getNote()));
     }
 }
