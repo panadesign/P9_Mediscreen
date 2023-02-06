@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/P9_Mediscreen.iml" filepath="$PROJECT_DIR$/.idea/P9_Mediscreen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms_eureka/eureka.iml" filepath="$PROJECT_DIR$/ms_eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms_assessment/ms_assessment.iml" filepath="$PROJECT_DIR$/ms_assessment/ms_assessment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms_clientui/ms_clientui.iml" filepath="$PROJECT_DIR$/ms_clientui/ms_clientui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms_history/ms_history.iml" filepath="$PROJECT_DIR$/ms_history/ms_history.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms_patient/ms_patient.iml" filepath="$PROJECT_DIR$/ms_patient/ms_patient.iml" />
+    </modules>
+  </component>
+</project>

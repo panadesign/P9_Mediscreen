@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ms_clientui" />
+        <module name="ms_history" />
+        <module name="ms_patient" />
+        <module name="ms_assessment" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cloudConfig" target="11" />
+      <module name="eureka" target="11" />
+      <module name="ms_assessment" target="11" />
+      <module name="ms_clientui" target="11" />
+      <module name="ms_eureka" target="11" />
+      <module name="ms_history" target="11" />
+      <module name="ms_observation" target="11" />
+      <module name="ms_patient" target="11" />
+      <module name="P9_Mediscreen" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="P9_Mediscreen" options="" />
+      <module name="cloudConfig" options="-parameters" />
+      <module name="eureka" options="-parameters" />
+      <module name="ms_assessment" options="-parameters" />
+      <module name="ms_clientui" options="-parameters" />
+      <module name="ms_eureka" options="-parameters" />
+      <module name="ms_history" options="-parameters" />
+      <module name="ms_observation" options="-parameters" />
+      <module name="ms_patient" options="-parameters" />
+    </option>
+  </component>
+</project>

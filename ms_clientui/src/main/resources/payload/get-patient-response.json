@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "lastname": "Charpentier",
+    "firstname": "Jeremy",
+    "birth": "1968-06-22",
+    "gender": "M",
+    "address": "2 Warren Street",
+    "phone": "387-866-1399"
+  },
+  {
+    "id": 2,
+    "lastname": "Legrand",
+    "firstname": "Romelie ",
+    "birth": "1952-09-27",
+    "gender": "F",
+    "address": "745 West Valley Farms Drive",
+    "phone": "628-423-0993"
+  }
+]
