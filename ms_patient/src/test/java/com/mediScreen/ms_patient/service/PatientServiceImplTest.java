@@ -66,9 +66,9 @@ class PatientServiceImplTest {
         LocalDate dateTime = LocalDate.now();
         Patient patient1 = new Patient(1, "Lastname", "Firstname", dateTime, "M", "Address", "12345");
 
-        when(mockPatientRepository.findByLastname(patient1.getLastname())).thenReturn(Optional.of(patient1));
+        when(mockPatientRepository.findByLastname(patient1.getLastname().toLowerCase())).thenReturn(Optional.of(patient1));
 
-        Optional<Patient> patient = patientServiceImpl.findByLastname(patient1.getLastname());
+        Optional<Patient> patient = patientServiceImpl.findByLastname(patient1.getLastname().toLowerCase());
 
         assertThat(patient)
                 .isNotEmpty()

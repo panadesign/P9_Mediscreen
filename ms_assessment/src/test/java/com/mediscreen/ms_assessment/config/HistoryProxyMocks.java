@@ -1,4 +1,4 @@
-package com.mediscreen.ms_clientui.config;
+package com.mediscreen.ms_assessment.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
@@ -12,28 +12,37 @@ import org.springframework.stereotype.Component;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 @Component
-public class AssessmentProxyMocks {
+public class HistoryProxyMocks {
 
     @Autowired
-    @Qualifier("mockAssessmentProxy")
-    private WireMockServer mockAssessmentProxy;
+    @Qualifier("mockHistoryProxy")
+    private WireMockServer mockHistoryProxy;
 
     @Autowired
     private ObjectMapper objectMapper;
 
 
     public void resetAll() {
-        mockAssessmentProxy.resetAll();
+        mockHistoryProxy.resetAll();
+    }
+
+    public void mappingGet(String url, int status) {
+        mockHistoryProxy.stubFor(
+                get(urlEqualTo(url))
+                        .willReturn(getResponse(status)
+                        )
+        );
     }
 
     public void mappingGet(String url, int status, Object body) {
-        mockAssessmentProxy.stubFor(
+        mockHistoryProxy.stubFor(
                 get(urlEqualTo(url))
                         .willReturn(getResponse(status)
                                 .withBody(objectToString(body))
                         )
         );
     }
+
 
     private static ResponseDefinitionBuilder getResponse(int status) {
         return aResponse()

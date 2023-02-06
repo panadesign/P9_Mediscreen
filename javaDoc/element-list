@@ -1,5 +1,6 @@
 com.mediscreen.ms_assessment
 com.mediscreen.ms_assessment.beans
+com.mediscreen.ms_assessment.config
 com.mediscreen.ms_assessment.controllers
 com.mediscreen.ms_assessment.model
 com.mediscreen.ms_assessment.proxies
