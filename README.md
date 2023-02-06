@@ -30,7 +30,11 @@ Jérémy Charpentier
 - Lancer le docker compose pour générer les containers:
   - `docker-compose up -d`
 
-## Accéder aux service
-
+## Accéder aux services
 http://localhost:8080
+
+## Accéder aux requêtes via swagger
+http://localhost:8081/swagger-ui/index.html
+http://localhost:8082/swagger-ui/index.html
+http://localhost:8083/swagger-ui/index.html
 
