@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mediscreen | Mettre à jour un patient</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+    <div class="container">
+        <h1>Mise à jour d'une fiche patient</h1>
+        <div class="row">
+            <div class="row">
+                <form action="#" th:action="@{/patients/{id}/edit(id=${patient.getId})}" th:object="${patient}" method="POST" class="form-horizontal" style="width: 100%">
+                    <label for="lastname">
+                        <input id="lastname" class="form-control" th:field="*{lastname}" type="text" name="lastname" placeholder="Patient's lastname">
+                        <p class="text-danger" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></p>
+                    </label>
+                    <label for="firstname">
+                        <input id="firstname" class="form-control" th:field="*{firstname}" type="text" name="firstname" placeholder="Patient's firstname">
+                        <p class="text-danger" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></p>
+                    </label>
+                    <label for="birth">
+                        <input id="birth" class="form-control" th:field="*{birth}" type="date" name="birth" placeholder="Patient's birthdate">
+                        <p class="text-danger" th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}"></p>
+                    </label>
+                    <label for="gender">
+                        <select id="gender" class="dropdown-toggle" th:field="*{gender}" type="select" name="gender" placeholder="Gender">
+                            <option th:value="M" th:text="Male"></option>
+                            <option th:value="F" th:text="Female"></option>
+                        </select>
+                        <p class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
+                    </label>
+                    <label for="address">
+                        <input id="address" class="form-control" th:field="*{address}" type="text" name="address" placeholder="Patient's address">
+                        <p class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+                    </label>
+                    <label for="phone">
+                        <input id="phone" class="form-control" th:field="*{phone}" type="text" name="phone" placeholder="Patient's phone">
+                        <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+                    </label>
+                    <button class="btn btn-danger" value="Cancel"><a th:href="@{/patients}" th:method="get">Annuler</a></button>
+                    <button class="btn btn-primary" type="submit" value="Update">Mettre à jour</button>
+                    <button class="btn btn-primary" type="reset" value="Reset">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mediscreen | Historique du patient</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Historique du patient</h1>
+    <div class="row">
+        <div class="col-md-12 my-1">
+            <div class="blocPatient" th:each="history: ${history.observations}">
+                <div>
+                    <h4>Date : </h4>
+                    <span th:text="${#temporals.format(history.dateTime, 'yyyy/MM/dd')}"></span>
+
+                    <h4>Note : </h4>
+                    <p th:text="${history.note}"></p>
+                    <button class="btn btn-primary" value="Update"><a th:href="@{/patients/{id}/history/{noteId}(id=${id}, noteId=${history.noteId})}" th:method="get">Mettre à jour</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-danger" value="Cancel"><a th:href="@{/patients/{id}(id=${id})}" th:method="get">Retour</a></button>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

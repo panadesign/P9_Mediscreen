@@ -1,0 +1,62 @@
+.home {
+    background: url("/img/bg.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.blocPatient {
+    background-color: #e9ecef;
+    padding: 20px;
+    margin : 10px 10px 0 0;
+}
+
+.error h1 {
+    text-align: center;
+}
+
+.returnError {
+    color: white;
+}
+
+.errorCta {
+    display: block;
+    margin: 0 auto;
+}
+
+header ul {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+header ul li {
+    padding: 20px;
+    background-color: #e9ecef;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.note {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.date {
+    font-weight: 700;
+}
+
+.risk {
+    font-weight: 700;
+    color: red;
+}
+button a {
+    color: #fff;
+    text-decoration: none;
+}

@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=patientLocale
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+      - MYSQL_TCP_PORT=3308
+    restart: unless-stopped
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      interval: 5s
+      timeout: 5s
+      retries: 55
+    expose:
+      - 3308
+    ports:
+      - "3308:3308"
+    volumes:
+    - dbdata:/var/lib/mysql
+
+  mongodb:
+    image: mongo:4.2.2
+    container_name: mongo
+    restart: unless-stopped
+    
+    environment:
+      - MONGO_INITDB_DATABASE=history
+        
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata:/var/lib/mongo
+
+  ms-patient:
+    container_name: ms-patient
+    build: ms-patient
+    image: ms-patient:latest
+    ports:
+      - "8081:8081"
+    volumes:
+      - dbdata:/var/lib/mysql
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    restart: always
+
+  ms-history:
+    container_name: ms-history
+    build: ms-history
+    image: ms-history:latest
+    links:
+      - mongodb
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mongodb
+      - ms-patient
+    restart: always
+
+  ms-assessment:
+    container_name: ms-assessment
+    build: ms-assessment
+    image: ms-assessment:latest
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - ms-patient
+      - ms-history
+    restart: always
+    
+  ms-clientui:
+    container_name: ms-clientui
+    build: ms-clientui
+    image: ms-clientui:latest
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - ms-patient
+      - ms-history
+      - ms-assessment
+
+volumes:
+  dbdata:

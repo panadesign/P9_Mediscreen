@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mediscreen | Error 404</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    </head>
+    <body>
+    <div class="container error">
+        <h1>La page demandée n'existe pas !</h1>
+        <p class="error" th:text="${statusCode}"></p>
+        <p class="error_message" th:text="${message}"></p>
+        <button class="errorCta btn btn-primary" value="Return"><a class="returnError" th:href="@{/}" th:method="get">Retour</a></button>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
