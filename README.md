@@ -10,7 +10,7 @@ Mediscreen travaille avec les cliniques de santé et les cabinets privés pour d
 - MYSQL
 - MONGO DB
 - DOCKER
-- THYMLEAF
+- THYMELEAF
 
 
 ## Auteur
@@ -23,6 +23,7 @@ Jérémy Charpentier
 
 - Cloner le projet :
   - HTTPS : https://github.com/panadesign/P9_Mediscreen.git
+- Lancer un mvn clean install pour chaque service pour générer les .jar
 - Créer images des différents modules avec :
   - `docker build --tag=ms-patient:latest .`
   - `docker build --tag=ms-history:latest .`
