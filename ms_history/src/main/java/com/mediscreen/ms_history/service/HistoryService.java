@@ -23,4 +23,12 @@ public interface HistoryService {
      * @return the history
      */
     History addObservation(Integer id, String note);
+
+    /**
+     * Update an observation
+     * @param id
+     * @param note
+     * @return observation updated
+     */
+    History updateObservation(Integer id, Long noteId,  String note);
 }

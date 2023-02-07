@@ -52,4 +52,10 @@ public class HistoryController {
         return historyService.addObservation(patId, note);
     }
 
+    @PostMapping("/patients/{id}/history/{noteId}")
+    public History update(@PathVariable("id") Integer id, @PathVariable("noteId") Long noteId, String note) {
+        log.info("History of patient with id " + id + " is updated");
+        return historyService.updateObservation(id, noteId, note);
+    }
+
 }

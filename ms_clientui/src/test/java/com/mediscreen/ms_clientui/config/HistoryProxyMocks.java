@@ -49,6 +49,15 @@ public class HistoryProxyMocks {
         );
     }
 
+    public void mappingPost(String url, int status, Object body) {
+        mockHistoryProxy.stubFor(
+                post(urlEqualTo(url))
+                        .willReturn(getResponse(status)
+                                .withBody(objectToString(body))
+                        )
+        );
+    }
+
 
     private static ResponseDefinitionBuilder getResponse(int status) {
         return aResponse()

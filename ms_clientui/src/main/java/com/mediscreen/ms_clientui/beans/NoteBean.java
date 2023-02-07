@@ -3,6 +3,7 @@ package com.mediscreen.ms_clientui.beans;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import nonapi.io.github.classgraph.json.Id;
 
 import javax.validation.constraints.NotBlank;
 
@@ -11,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class NoteBean {
 
+    @Id
+    private Long noteId;
     @NotBlank(message = "Note cannot be empty")
-    String note;
+    private String note;
 }

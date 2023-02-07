@@ -40,7 +40,7 @@ public class HistoryController {
      */
     @GetMapping("/patients/{id}/history")
     public String get(Model model, @PathVariable("id") Integer id) {
-        log.debug("Access to patient's all notes");
+        log.info("Access to patient's all notes");
         HistoryBean history = microServiceHistoryProxy.get(id);
 
         model.addAttribute("history", history);
@@ -57,7 +57,7 @@ public class HistoryController {
      */
     @GetMapping("/patients/{id}/history/add")
     public String addForm(Model model, @PathVariable("id") Integer id) {
-        log.debug("Access to adding form for a new note");
+        log.info("Access to adding form for a new note");
         model.addAttribute("id", id);
         model.addAttribute("noteBean", new NoteBean());
         return "history/historyAdd";
@@ -75,7 +75,7 @@ public class HistoryController {
      */
     @PostMapping("/patients/{id}/history/add")
     public String add(Model model, @PathVariable("id") Integer id, @Valid NoteBean note, BindingResult result) {
-        log.debug("Add note for patient with id " + id);
+        log.info("Add note for patient with id " + id);
 
         if(result.hasErrors()) {
             log.error("Error: " + result.getFieldError());
@@ -84,7 +84,41 @@ public class HistoryController {
 
         HistoryBean history = microServiceHistoryProxy.add(id, note.getNote());
         model.addAttribute("history", history);
-        log.debug("A new note for patient with id " + id + " has been added");
+        log.info("A new note for patient with id " + id + " has been added");
+        return "redirect:/patients/{id}/history";
+    }
+
+    /**
+     * Get update form for history
+     * @param model
+     * @param id
+     * @return update form for history
+     */
+    @GetMapping("/patients/{id}/history/{noteId}")
+    public String updateForm(Model model, @PathVariable("id") Integer id, @PathVariable("noteId")Long noteId, String note) {
+
+        var observation = microServiceHistoryProxy.get(id).getObservations()
+                .stream()
+                .filter(n -> n.getNoteId().equals(noteId))
+                .findFirst();
+
+        model.addAttribute("observation", observation);
+        log.info("Access to updating form for a note");
+        return "history/historyUpdate";
+    }
+
+    @PostMapping("/patients/{id}/history/{noteId}")
+    public String updateHistory(Model model, @PathVariable("id") Integer id, @PathVariable("noteId")Long noteId, String note, @Valid NoteBean noteBean, BindingResult result) {
+
+        if(result.hasErrors()) {
+            log.error("Error: " + result.getFieldError());
+            return "redirect:/patients/{id}/history/{noteId}";
+        }
+
+        microServiceHistoryProxy.update(id, noteId, note);
+        model.addAttribute("observation", microServiceHistoryProxy.get(id));
+
+        log.info("Note with id " + noteId + " has been updated whit this note " + note);
         return "redirect:/patients/{id}/history";
     }
 }

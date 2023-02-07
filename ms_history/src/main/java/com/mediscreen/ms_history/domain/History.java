@@ -43,7 +43,16 @@ public class History {
      * @return the history
      */
     public History addObservation(String note) {
-        observations.add(new Observation(note));
+        observations.add(new Observation(observations.size()+1, note));
+        return this;
+    }
+
+    public History updateObservation(Long noteId, String note) {
+        observations
+                .stream()
+                .filter(o -> o.getNoteId().equals(noteId))
+                .findFirst()
+                .ifPresent(observation -> observation.setNote(note));
         return this;
     }
 
@@ -55,6 +64,9 @@ public class History {
     @NoArgsConstructor
     @Getter
     public static class Observation {
+        @Id
+        private Long noteId;
+
         @NotEmpty(message = "Note cannot be empty")
         private String note;
 
@@ -66,8 +78,11 @@ public class History {
          *
          * @param note the note
          */
-        public Observation(String note) {
+        public Observation(Integer id, String note) {
+            this.noteId = Long.valueOf(id);
             this.note = note;
         }
+
+
     }
 }
