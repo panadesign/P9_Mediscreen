@@ -43,7 +43,7 @@ public class History {
      * @return the history
      */
     public History addObservation(String note) {
-        observations.add(new Observation(note));
+        observations.add(new Observation(observations.size()+1, note));
         return this;
     }
 
@@ -78,8 +78,11 @@ public class History {
          *
          * @param note the note
          */
-        public Observation(String note) {
+        public Observation(Integer id, String note) {
+            this.noteId = Long.valueOf(id);
             this.note = note;
         }
+
+
     }
 }
