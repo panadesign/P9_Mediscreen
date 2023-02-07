@@ -2,6 +2,7 @@ package com.mediscreen.ms_clientui.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mediscreen.ms_clientui.beans.HistoryBean;
+import com.mediscreen.ms_clientui.beans.NoteBean;
 import com.mediscreen.ms_clientui.config.HistoryProxyMocks;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -29,13 +32,16 @@ class HistoryControllerTest {
     private HistoryProxyMocks historyMocks;
 
     private HistoryBean historyBean;
+    private NoteBean noteBean;
 
     @BeforeEach
     void setUp() {
         historyMocks.resetAll();
         this.historyBean = new HistoryBean(1, new ArrayList<>());
-    }
 
+
+        this.noteBean = new NoteBean(1L, "Note blabla");
+    }
 
     @Test
     void getHistoryById() throws Exception {
@@ -71,6 +77,14 @@ class HistoryControllerTest {
                         .param("note", "Test2"))
                 .andExpect(status().is3xxRedirection())
                 .andReturn();
+    }
+
+    @Test
+    void getHistoryUpdateForm() throws Exception {
+        historyMocks.mappingGet("/patients/1/history/1", 200, noteBean);
+
+        mockMvc.perform(get("/patients/1/history/1"))
+                .andExpect(status().isOk());
     }
 
 

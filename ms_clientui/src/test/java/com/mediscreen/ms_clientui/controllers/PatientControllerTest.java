@@ -35,7 +35,7 @@ class PatientControllerTest {
     @BeforeEach
     void setUp() {
         patientMocks.resetAll();
-        this.patientBean = new PatientBean(3, "lastname", "firstname", "M", LocalDate.of(2000, 6, 23), "address", "phone");
+        this.patientBean = new PatientBean(1, "lastname", "firstname", "M", LocalDate.of(2000, 6, 23), "address", "phone");
     }
 
     @Test

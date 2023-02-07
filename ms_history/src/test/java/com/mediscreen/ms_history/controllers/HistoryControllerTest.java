@@ -19,7 +19,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -91,6 +93,32 @@ class HistoryControllerTest {
                     assertThat(r.getObservations())
                             .hasSize(5);
                 });
+    }
+
+    @Test
+    void updateHistory() throws Exception {
+        List<History.Observation> observations = new ArrayList<>();
+        History.Observation observation = new History.Observation(1L, "text", LocalDate.now());
+        observations.add(observation);
+
+        History history = new History(1, new ArrayList<>());
+        historyService.updateObservation(history.getPatientId(), observation.getNoteId(), "text updated");
+
+        ResultActions resultAction = mockMvc.perform(post("/patients/{id}/history/{noteId}", history.getPatientId(), observation.getNoteId(), observation.getNote())
+                .contentType(MediaType.APPLICATION_JSON));
+
+        History response = responseToObject(resultAction, History.class);
+
+        assertThat(response)
+                .isNotNull()
+                .satisfies(r -> {
+                    assertThat(r.getPatientId()).isEqualTo(1);
+                    assertThat(r.getObservations()
+                            .stream()
+                            .filter(note -> note.getNoteId().equals(observation.getNoteId()))
+                            .findFirst().get().getNoteId()).isEqualTo(1L);
+                });
+
     }
 
     private <T> T responseToObject(ResultActions resultAction, Class<T> objectClass) throws Exception {
