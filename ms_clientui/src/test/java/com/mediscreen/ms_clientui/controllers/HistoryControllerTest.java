@@ -38,8 +38,6 @@ class HistoryControllerTest {
     void setUp() {
         historyMocks.resetAll();
         this.historyBean = new HistoryBean(1, new ArrayList<>());
-
-
         this.noteBean = new NoteBean(1L, "Note blabla");
     }
 
@@ -81,10 +79,30 @@ class HistoryControllerTest {
 
     @Test
     void getHistoryUpdateForm() throws Exception {
-        historyMocks.mappingGet("/patients/1/history/1", 200, noteBean);
+        historyMocks.mappingGet("/patients/1/history", 200, historyBean);
 
         mockMvc.perform(get("/patients/1/history/1"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void updateHistory() throws Exception {
+        historyMocks.mappingGet("/patients/1/history", 200, historyBean);
+        historyMocks.mappingPost("/patients/1/history/1?note=Test2", 200, historyBean);
+
+        mockMvc.perform(post("/patients/1/history/1")
+                        .param("note", "Test2"))
+                .andExpect(status().is3xxRedirection())
+                .andReturn();
+    }
+
+    @Test
+    void updateHistoryFail() throws Exception {
+        historyMocks.mappingPost("/patients/1/history/1");
+
+        mockMvc.perform(post("/patients/1/history/1"))
+                .andExpect(status().is3xxRedirection())
+                .andReturn();
     }
 
 
