@@ -10,6 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.io.IOException;
+
+import static java.lang.Integer.parseInt;
+
 /**
  * The type Assessment controller.
  */
@@ -35,19 +39,25 @@ public class AssessmentController {
      * Get assessment of the patient.
      *
      * @param model the model
-     * @param id    the id
-     * @return assessment of the patient
+     * @param param    string
+     * @return assessment of the patient by id or lastname
      */
-    @GetMapping("/patients/{id}/assessment")
-    public String get(Model model, @PathVariable("id") Integer id) {
+    @GetMapping("/patients/{param}/assessment")
+    public String get(Model model, @PathVariable String param) {
         log.debug("Access to patient's assessment");
-        PatientBean patientBean = microServicePatientProxy.getPatientById(id);
+
+        if(param.matches(("-?\\d+"))) {
+            log.info("Get assessment by id: " + param);
+            PatientBean patientBean = microServicePatientProxy.getPatientById(parseInt(param));
+            AssessmentBean assessmentBean = microServiceAssessmentProxy.get(patientBean.getId());
+            model.addAttribute("assessmentBean", assessmentBean);
+            return "assessment/assessment";
+        }
+
+        log.info("Get assessment by lastname: " + param);
+        PatientBean patientBean = microServicePatientProxy.getPatientByLastname((param));
         AssessmentBean assessmentBean = microServiceAssessmentProxy.get(patientBean.getId());
-
         model.addAttribute("assessmentBean", assessmentBean);
-
         return "assessment/assessment";
     }
-
-
 }

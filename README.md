@@ -10,7 +10,7 @@ Mediscreen travaille avec les cliniques de santé et les cabinets privés pour d
 - MYSQL
 - MONGO DB
 - DOCKER
-- THYMLEAF
+- THYMELEAF
 
 
 ## Auteur
@@ -40,4 +40,3 @@ http://localhost:8081/swagger-ui/index.html
 http://localhost:8082/swagger-ui/index.html
 
 http://localhost:8083/swagger-ui/index.html
-

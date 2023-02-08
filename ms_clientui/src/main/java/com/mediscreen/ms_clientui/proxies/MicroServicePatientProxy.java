@@ -32,7 +32,16 @@ public interface MicroServicePatientProxy {
     PatientBean getPatientById(@PathVariable("id") Integer id);
 
     /**
-     * Update patient patient bean.
+     * Gets patient by id.
+     *
+     * @param lastname is the patient lastname
+     * @return the patient by lastname
+     */
+    @GetMapping("/patients/{lastname}")
+    PatientBean getPatientByLastname(@PathVariable("lastname") String lastname);
+
+    /**
+     * Update patient bean.
      *
      * @param id          the id
      * @param patientBean the patient bean
