@@ -53,6 +53,15 @@ class AssessmentControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    void getAssessmentByLastname() throws Exception {
+        patientMocks.mappingGet("/patients/Ferguson", 200, patientBean);
+        assessmentMocks.mappingGet("/patients/1/assessment", 200, assessmentBean);
+
+        mockMvc.perform(get("/patients/Ferguson/assessment"))
+                .andExpect(status().isOk());
+    }
+
     private String asJsonString(final Object obj) throws Exception {
         return objectMapper.writeValueAsString(obj);
     }
